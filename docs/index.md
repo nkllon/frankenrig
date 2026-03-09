@@ -1,12 +1,11 @@
 # frankenrig
 
+<video controls autoplay muted loop playsinline preload="metadata" width="100%">
+  <source src="obs_clip.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+
 Hammerspoon + OBS PiP automation: config and scripts for projector/capture control, with evidence and ontology documenting the current stable state.
-
-## Demo
-
-Short clip of the rig running in context (OBS with all panels + control surface in the upper-right):
-
-![OBS PiP frankenrig demo](obs_clip.gif)
 
 ## What’s here
 
