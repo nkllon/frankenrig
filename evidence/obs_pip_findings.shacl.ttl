@@ -1,6 +1,7 @@
 @prefix sh: <http://www.w3.org/ns/shacl#> .
 @prefix obs: <urn:lou:obs-pip#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 
 obs:CurrentStateShape a sh:NodeShape ;
   sh:targetNode obs:State_Current ;
@@ -78,4 +79,55 @@ obs:WindowCaptureRiskShape a sh:NodeShape ;
     sh:path obs:captureMethodValue ;
     sh:not [ sh:hasValue 1 ] ;
     sh:message "Capture mode is window-bound (type=1). Works now, but may drift with changing window IDs." ;
+  ] .
+
+obs:UseCaseShape a sh:NodeShape ;
+  sh:targetClass obs:UseCase ;
+  sh:property [
+    sh:path rdfs:label ;
+    sh:minCount 1 ;
+  ] ;
+  sh:property [
+    sh:path obs:hasStakeholder ;
+    sh:minCount 1 ;
+    sh:message "Each use case should reference at least one stakeholder." ;
+  ] ;
+  sh:property [
+    sh:path obs:hasFeature ;
+    sh:minCount 1 ;
+    sh:message "Each use case should be backed by at least one feature." ;
+  ] .
+
+obs:FeatureShape a sh:NodeShape ;
+  sh:targetClass obs:Feature ;
+  sh:property [
+    sh:path rdfs:label ;
+    sh:minCount 1 ;
+  ] ;
+  sh:property [
+    sh:path obs:supportedByAction ;
+    sh:minCount 1 ;
+    sh:message "Each feature should be supported by at least one concrete action." ;
+  ] .
+
+obs:StakeholderShape a sh:NodeShape ;
+  sh:targetClass obs:Stakeholder ;
+  sh:property [
+    sh:path rdfs:label ;
+    sh:minCount 1 ;
+  ] .
+
+obs:ToolShape a sh:NodeShape ;
+  sh:targetClass obs:Tool ;
+  sh:property [
+    sh:path rdfs:label ;
+    sh:minCount 1 ;
+  ] .
+
+obs:IssueRiskShape a sh:NodeShape ;
+  sh:targetClass obs:Issue ;
+  sh:property [
+    sh:path obs:riskLevel ;
+    sh:minCount 1 ;
+    sh:message "Each issue should be annotated with a qualitative riskLevel." ;
   ] .

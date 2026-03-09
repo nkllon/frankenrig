@@ -1,0 +1,2620 @@
+[
+  {
+    "@id": "urn:lou:obs-pip#Ev_PagesDemoVideo",
+    "@type": [
+      "urn:lou:obs-pip#EvidenceArtifact"
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#label": [
+      {
+        "@value": "Published Pages demo video"
+      }
+    ],
+    "urn:lou:obs-pip#artifactPath": [
+      {
+        "@value": "/Users/lou/.hammerspoon/docs/obs_clip.mp4"
+      }
+    ],
+    "urn:lou:obs-pip#note": [
+      {
+        "@value": "Video published for GitHub Pages at top of landing page."
+      }
+    ],
+    "urn:lou:obs-pip#observedAt": [
+      {
+        "@type": "http://www.w3.org/2001/XMLSchema#date",
+        "@value": "2026-03-09"
+      }
+    ]
+  },
+  {
+    "@id": "urn:lou:obs-pip#hasInput",
+    "@type": [
+      "http://www.w3.org/2000/01/rdf-schema#Property"
+    ]
+  },
+  {
+    "@id": "urn:lou:obs-pip#Scene_PiP_Current",
+    "@type": [
+      "urn:lou:obs-pip#Scene"
+    ],
+    "urn:lou:obs-pip#isProgramScene": [
+      {
+        "@type": "http://www.w3.org/2001/XMLSchema#boolean",
+        "@value": true
+      }
+    ],
+    "urn:lou:obs-pip#sceneName": [
+      {
+        "@value": "PiP"
+      }
+    ]
+  },
+  {
+    "@id": "urn:lou:obs-pip#Tool_PythonVenvObsws",
+    "@type": [
+      "urn:lou:obs-pip#Tool"
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#label": [
+      {
+        "@value": "Python + obsws virtualenv"
+      }
+    ],
+    "urn:lou:obs-pip#note": [
+      {
+        "@value": "Python environment (for example .venv_obsws) with websocket-client and any OBS helper libraries used by Python scripts."
+      }
+    ]
+  },
+  {
+    "@id": "urn:lou:obs-pip#Ev_PanelControlScript",
+    "@type": [
+      "urn:lou:obs-pip#EvidenceArtifact"
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#label": [
+      {
+        "@value": "OBS panel control script (panel-level operations)"
+      }
+    ],
+    "urn:lou:obs-pip#artifactPath": [
+      {
+        "@value": "/Users/lou/.hammerspoon/obs_panel_control.py"
+      }
+    ],
+    "urn:lou:obs-pip#note": [
+      {
+        "@value": "Implements change-channel, turn-off, and start operations for PiP panels via OBS WebSocket using logical panel IDs (main, aux_left, aux_right, aux_center) and structured JSON status output."
+      }
+    ]
+  },
+  {
+    "@id": "urn:lou:obs-pip#riskLikelihood",
+    "@type": [
+      "http://www.w3.org/2000/01/rdf-schema#Property"
+    ]
+  },
+  {
+    "@id": "urn:lou:obs-pip#hasConstraint",
+    "@type": [
+      "http://www.w3.org/2000/01/rdf-schema#Property"
+    ]
+  },
+  {
+    "@id": "urn:lou:obs-pip#UseCase",
+    "@type": [
+      "http://www.w3.org/2000/01/rdf-schema#Class"
+    ]
+  },
+  {
+    "@id": "urn:lou:obs-pip#mitigatedBy",
+    "@type": [
+      "http://www.w3.org/2000/01/rdf-schema#Property"
+    ]
+  },
+  {
+    "@id": "urn:lou:obs-pip#Act_PanelControlChangeChannel",
+    "@type": [
+      "urn:lou:obs-pip#Action"
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#label": [
+      {
+        "@value": "Change channel on panel (logical panel id)"
+      }
+    ],
+    "urn:lou:obs-pip#hasEvidence": [
+      {
+        "@id": "urn:lou:obs-pip#Ev_PanelControlScript"
+      }
+    ],
+    "urn:lou:obs-pip#note": [
+      {
+        "@value": "High-level panel control: obs_panel_control.py change-channel --panel <main|aux_left|aux_right|aux_center> --window-id N [--channel ID]. Rebinds panel's window capture input while preserving PiP layout."
+      }
+    ]
+  },
+  {
+    "@id": "urn:lou:obs-pip#HotkeyBinding",
+    "@type": [
+      "http://www.w3.org/2000/01/rdf-schema#Class"
+    ]
+  },
+  {
+    "@id": "urn:lou:obs-pip#HotkeyChromePiP",
+    "@type": [
+      "urn:lou:obs-pip#HotkeyBinding"
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#label": [
+      {
+        "@value": "Chrome PiP toggle"
+      }
+    ],
+    "urn:lou:obs-pip#binding": [
+      {
+        "@value": "ctrl+alt+cmd+p"
+      }
+    ]
+  },
+  {
+    "@id": "urn:lou:obs-pip#Ev_DemoGifPublishedRoot",
+    "@type": [
+      "urn:lou:obs-pip#EvidenceArtifact"
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#label": [
+      {
+        "@value": "Repo root demo GIF regenerated from corrected source"
+      }
+    ],
+    "urn:lou:obs-pip#artifactPath": [
+      {
+        "@value": "/Users/lou/.hammerspoon/obs_clip.gif"
+      }
+    ],
+    "urn:lou:obs-pip#note": [
+      {
+        "@value": "Regenerated via ffmpeg from corrected trimmed MP4 source for README/demo parity."
+      }
+    ],
+    "urn:lou:obs-pip#observedAt": [
+      {
+        "@type": "http://www.w3.org/2001/XMLSchema#date",
+        "@value": "2026-03-09"
+      }
+    ]
+  },
+  {
+    "@id": "urn:lou:obs-pip#Act_RemoveVmWindow",
+    "@type": [
+      "urn:lou:obs-pip#Action"
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#label": [
+      {
+        "@value": "Removed VM Window input"
+      }
+    ]
+  },
+  {
+    "@id": "urn:lou:obs-pip#SystemState",
+    "@type": [
+      "http://www.w3.org/2000/01/rdf-schema#Class"
+    ]
+  },
+  {
+    "@id": "urn:lou:obs-pip#Ev_RdflibValidation_2026_03_09",
+    "@type": [
+      "urn:lou:obs-pip#EvidenceArtifact"
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#label": [
+      {
+        "@value": "RDFlib ontology validation run (2026-03-09)"
+      }
+    ],
+    "urn:lou:obs-pip#artifactPath": [
+      {
+        "@value": "/Users/lou/.hammerspoon/evidence/obs_pip_findings.ttl"
+      }
+    ],
+    "urn:lou:obs-pip#note": [
+      {
+        "@value": "RDFlib parse validation required for ontology edits. Status recorded as RDFLIB_PARSE_OK in session checks."
+      }
+    ],
+    "urn:lou:obs-pip#observedAt": [
+      {
+        "@type": "http://www.w3.org/2001/XMLSchema#date",
+        "@value": "2026-03-09"
+      }
+    ]
+  },
+  {
+    "@id": "urn:lou:obs-pip#UseCase_DualNewsMonitoring",
+    "@type": [
+      "urn:lou:obs-pip#UseCase"
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#label": [
+      {
+        "@value": "Dual news monitoring (primary PiP + secondary OBS projector)"
+      }
+    ],
+    "urn:lou:obs-pip#hasFeature": [
+      {
+        "@id": "urn:lou:obs-pip#Feature_FloatingPiPRecovery"
+      }
+    ],
+    "urn:lou:obs-pip#hasStakeholder": [
+      {
+        "@id": "urn:lou:obs-pip#Stakeholder_OperatorLou"
+      },
+      {
+        "@id": "urn:lou:obs-pip#Stakeholder_Viewer"
+      }
+    ],
+    "urn:lou:obs-pip#note": [
+      {
+        "@value": "Operator watches two concurrent news streams: native browser PiP primary, OBS floating projector secondary."
+      }
+    ]
+  },
+  {
+    "@id": "urn:lou:obs-pip#viewIndex",
+    "@type": [
+      "http://www.w3.org/2000/01/rdf-schema#Property"
+    ]
+  },
+  {
+    "@id": "urn:lou:obs-pip#Stakeholder_DeveloperFuture",
+    "@type": [
+      "urn:lou:obs-pip#Stakeholder"
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#label": [
+      {
+        "@value": "Future developer / maintainer"
+      }
+    ],
+    "urn:lou:obs-pip#note": [
+      {
+        "@value": "Person modifying scripts, ontology, or configuration for new channels or platforms."
+      }
+    ]
+  },
+  {
+    "@id": "urn:lou:obs-pip#rpcVersion",
+    "@type": [
+      "http://www.w3.org/2000/01/rdf-schema#Property"
+    ]
+  },
+  {
+    "@id": "urn:lou:obs-pip#Tool_FFmpeg",
+    "@type": [
+      "urn:lou:obs-pip#Tool"
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#label": [
+      {
+        "@value": "ffmpeg"
+      }
+    ],
+    "urn:lou:obs-pip#note": [
+      {
+        "@value": "CLI tool used to generate obs_clip.mp4 and obs_clip.gif demo media."
+      }
+    ]
+  },
+  {
+    "@id": "urn:lou:obs-pip#Feature_FloatingPiPRecovery",
+    "@type": [
+      "urn:lou:obs-pip#Feature"
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#label": [
+      {
+        "@value": "Floating OBS PiP recovery and layout"
+      }
+    ],
+    "urn:lou:obs-pip#note": [
+      {
+        "@value": "End-to-end ability to reconstruct four-window PiP scene and projector from evidence and window IDs."
+      }
+    ],
+    "urn:lou:obs-pip#supportedByAction": [
+      {
+        "@id": "urn:lou:obs-pip#Act_RebuildPipArrangement"
+      },
+      {
+        "@id": "urn:lou:obs-pip#Act_IdentifyWindowByClick"
+      },
+      {
+        "@id": "urn:lou:obs-pip#Act_RewireCaptureByClick"
+      }
+    ],
+    "urn:lou:obs-pip#usesTool": [
+      {
+        "@id": "urn:lou:obs-pip#Tool_OBSStudio"
+      },
+      {
+        "@id": "urn:lou:obs-pip#Tool_ObsWebsocket"
+      },
+      {
+        "@id": "urn:lou:obs-pip#Tool_PythonVenvObsws"
+      },
+      {
+        "@id": "urn:lou:obs-pip#Tool_Chrome"
+      }
+    ]
+  },
+  {
+    "@id": "urn:lou:obs-pip#EvidenceArtifact",
+    "@type": [
+      "http://www.w3.org/2000/01/rdf-schema#Class"
+    ]
+  },
+  {
+    "@id": "urn:lou:obs-pip#hasIssue",
+    "@type": [
+      "http://www.w3.org/2000/01/rdf-schema#Property"
+    ]
+  },
+  {
+    "@id": "urn:lou:obs-pip#Ev_PanelControlConfig",
+    "@type": [
+      "urn:lou:obs-pip#EvidenceArtifact"
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#label": [
+      {
+        "@value": "OBS panel control configuration"
+      }
+    ],
+    "urn:lou:obs-pip#artifactPath": [
+      {
+        "@value": "/Users/lou/.hammerspoon/obs_panel_control_config.json"
+      }
+    ],
+    "urn:lou:obs-pip#note": [
+      {
+        "@value": "Defines mapping from logical panel IDs to OBS input/scene items and documents available channel labels for panel stream control."
+      }
+    ]
+  },
+  {
+    "@id": "urn:lou:obs-pip#sourceUrl",
+    "@type": [
+      "http://www.w3.org/2000/01/rdf-schema#Property"
+    ]
+  },
+  {
+    "@id": "urn:lou:obs-pip#ObsInstance",
+    "@type": [
+      "http://www.w3.org/2000/01/rdf-schema#Class"
+    ]
+  },
+  {
+    "@id": "urn:lou:obs-pip#Act_EnableGitHubPagesDocs",
+    "@type": [
+      "urn:lou:obs-pip#Action"
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#label": [
+      {
+        "@value": "Enable GitHub Pages from main/docs"
+      }
+    ],
+    "urn:lou:obs-pip#hasEvidence": [
+      {
+        "@id": "urn:lou:obs-pip#Ev_GitHubPagesState_2026_03_09"
+      }
+    ],
+    "urn:lou:obs-pip#note": [
+      {
+        "@value": "Configured GitHub Pages source branch=main and path=/docs; pages URL https://nkllon.github.io/frankenrig/."
+      }
+    ]
+  },
+  {
+    "@id": "urn:lou:obs-pip#Ev_CaptureChromeUrlsScript",
+    "@type": [
+      "urn:lou:obs-pip#EvidenceArtifact"
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#label": [
+      {
+        "@value": "Chrome window URL/title capture script"
+      }
+    ],
+    "urn:lou:obs-pip#artifactPath": [
+      {
+        "@value": "/Users/lou/.hammerspoon/capture_chrome_window_urls.sh"
+      }
+    ],
+    "urn:lou:obs-pip#note": [
+      {
+        "@value": "AppleScript lists every Chrome window active tab URL and title. Run per view or once; save to evidence/obs_pip_source_urls.txt to record the three source URLs."
+      }
+    ]
+  },
+  {
+    "@id": "urn:lou:obs-pip#UseCase_PanelChannelSwitching",
+    "@type": [
+      "urn:lou:obs-pip#UseCase"
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#label": [
+      {
+        "@value": "Switch news channels on individual PiP panels"
+      }
+    ],
+    "urn:lou:obs-pip#hasFeature": [
+      {
+        "@id": "urn:lou:obs-pip#Feature_PanelLevelControl"
+      }
+    ],
+    "urn:lou:obs-pip#hasStakeholder": [
+      {
+        "@id": "urn:lou:obs-pip#Stakeholder_OperatorLou"
+      }
+    ],
+    "urn:lou:obs-pip#note": [
+      {
+        "@value": "Use obs_panel_control.py to change-channel, start, or turn-off individual PiP panels without touching layout transforms."
+      }
+    ]
+  },
+  {
+    "@id": "urn:lou:obs-pip#Ev_DemoClipCorrectedSource",
+    "@type": [
+      "urn:lou:obs-pip#EvidenceArtifact"
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#label": [
+      {
+        "@value": "Corrected trimmed demo source clip"
+      }
+    ],
+    "urn:lou:obs-pip#artifactPath": [
+      {
+        "@value": "/Users/lou/Documents/obs-clip.mp4"
+      }
+    ],
+    "urn:lou:obs-pip#note": [
+      {
+        "@value": "User-specified canonical clip used to replace previous incorrect demo media."
+      }
+    ],
+    "urn:lou:obs-pip#observedAt": [
+      {
+        "@type": "http://www.w3.org/2001/XMLSchema#date",
+        "@value": "2026-03-09"
+      }
+    ]
+  },
+  {
+    "@id": "urn:lou:obs-pip#UseCase_PiPRecoveryAfterCrash",
+    "@type": [
+      "urn:lou:obs-pip#UseCase"
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#label": [
+      {
+        "@value": "Recover PiP rig after restart or drift"
+      }
+    ],
+    "urn:lou:obs-pip#hasFeature": [
+      {
+        "@id": "urn:lou:obs-pip#Feature_FloatingPiPRecovery"
+      }
+    ],
+    "urn:lou:obs-pip#hasIssue": [
+      {
+        "@id": "urn:lou:obs-pip#Issue_WindowBindingRisk"
+      }
+    ],
+    "urn:lou:obs-pip#hasStakeholder": [
+      {
+        "@id": "urn:lou:obs-pip#Stakeholder_OperatorLou"
+      },
+      {
+        "@id": "urn:lou:obs-pip#Stakeholder_DeveloperFuture"
+      }
+    ],
+    "urn:lou:obs-pip#note": [
+      {
+        "@value": "Rebuilds scene graph and window bindings deterministically after OBS restart, window ID drift, or accidental input removal."
+      }
+    ]
+  },
+  {
+    "@id": "urn:lou:obs-pip#Input_PiPCapture_Current",
+    "@type": [
+      "urn:lou:obs-pip#InputSource"
+    ],
+    "urn:lou:obs-pip#captureMethodLabel": [
+      {
+        "@value": "Window Capture"
+      }
+    ],
+    "urn:lou:obs-pip#captureMethodValue": [
+      {
+        "@type": "http://www.w3.org/2001/XMLSchema#integer",
+        "@value": 1
+      }
+    ],
+    "urn:lou:obs-pip#enabled": [
+      {
+        "@type": "http://www.w3.org/2001/XMLSchema#boolean",
+        "@value": true
+      }
+    ],
+    "urn:lou:obs-pip#inputKind": [
+      {
+        "@value": "screen_capture"
+      }
+    ],
+    "urn:lou:obs-pip#inputName": [
+      {
+        "@value": "PiP Capture"
+      }
+    ],
+    "urn:lou:obs-pip#note": [
+      {
+        "@value": "Main source on PiP canvas; full-size. Window-bound (drift risk). windowId from Ev_ApiDiscovery_ReviewNow (obs_api_discovery_review_now.json); update ontology or re-check evidence when re-binding."
+      }
+    ],
+    "urn:lou:obs-pip#windowId": [
+      {
+        "@type": "http://www.w3.org/2001/XMLSchema#integer",
+        "@value": 21552
+      }
+    ]
+  },
+  {
+    "@id": "urn:lou:obs-pip#ObsMain",
+    "@type": [
+      "urn:lou:obs-pip#ObsInstance"
+    ],
+    "urn:lou:obs-pip#obsVersion": [
+      {
+        "@value": "32.0.4"
+      }
+    ],
+    "urn:lou:obs-pip#rpcVersion": [
+      {
+        "@type": "http://www.w3.org/2001/XMLSchema#integer",
+        "@value": 1
+      }
+    ],
+    "urn:lou:obs-pip#wsEnabled": [
+      {
+        "@type": "http://www.w3.org/2001/XMLSchema#boolean",
+        "@value": true
+      }
+    ],
+    "urn:lou:obs-pip#wsPort": [
+      {
+        "@type": "http://www.w3.org/2001/XMLSchema#integer",
+        "@value": 4455
+      }
+    ]
+  },
+  {
+    "@id": "urn:lou:obs-pip#Act_AddFourthSourceCenter",
+    "@type": [
+      "urn:lou:obs-pip#Action"
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#label": [
+      {
+        "@value": "Add fourth window as bottom-center PiP source"
+      }
+    ],
+    "urn:lou:obs-pip#hasEvidence": [
+      {
+        "@id": "urn:lou:obs-pip#Ev_RebuildScript"
+      }
+    ],
+    "urn:lou:obs-pip#note": [
+      {
+        "@value": "Run obs_rebuild_pip_arrangement.py --add-fourth-center --window4 ID. Creates input Aux4Center_<timestamp>, adds to PiP scene, position center X and same Y/scale as other small PiPs, alignment 36 (center of source at position), move to top."
+      }
+    ]
+  },
+  {
+    "@id": "urn:lou:obs-pip#Ev_ApiDiscovery_ReviewNow",
+    "@type": [
+      "urn:lou:obs-pip#EvidenceArtifact"
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#label": [
+      {
+        "@value": "API discovery snapshot for state review (authoritative for current window IDs and full input list)"
+      }
+    ],
+    "urn:lou:obs-pip#artifactPath": [
+      {
+        "@value": "/Users/lou/.hammerspoon/evidence/obs_api_discovery_review_now.json"
+      }
+    ],
+    "urn:lou:obs-pip#note": [
+      {
+        "@value": "GetVideoSettings, GetInputList, GetInputSettings (window IDs), GetSceneItemList for PiP. Use for operational checks; State_Current window IDs and OrphanInputs_ReviewNow align to this file."
+      }
+    ]
+  },
+  {
+    "@id": "urn:lou:obs-pip#Tool_Chrome",
+    "@type": [
+      "urn:lou:obs-pip#Tool"
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#label": [
+      {
+        "@value": "Google Chrome"
+      }
+    ],
+    "urn:lou:obs-pip#note": [
+      {
+        "@value": "Browser providing native PiP toggle and full-screen windows for each channel view."
+      }
+    ]
+  },
+  {
+    "@id": "urn:lou:obs-pip#Constraint",
+    "@type": [
+      "http://www.w3.org/2000/01/rdf-schema#Class"
+    ]
+  },
+  {
+    "@id": "urn:lou:obs-pip#Ev_ReadmePagesLink",
+    "@type": [
+      "urn:lou:obs-pip#EvidenceArtifact"
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#label": [
+      {
+        "@value": "README link/badge to Pages site"
+      }
+    ],
+    "urn:lou:obs-pip#artifactPath": [
+      {
+        "@value": "/Users/lou/.hammerspoon/README.md"
+      }
+    ],
+    "urn:lou:obs-pip#note": [
+      {
+        "@value": "README contains prominent badge and live-site link to https://nkllon.github.io/frankenrig/."
+      }
+    ],
+    "urn:lou:obs-pip#observedAt": [
+      {
+        "@type": "http://www.w3.org/2001/XMLSchema#date",
+        "@value": "2026-03-09"
+      }
+    ]
+  },
+  {
+    "@id": "urn:lou:obs-pip#Ev_AfterRewireSuccess",
+    "@type": [
+      "urn:lou:obs-pip#EvidenceArtifact"
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#label": [
+      {
+        "@value": "OBS API snapshot after successful rewire (post-restart)"
+      }
+    ],
+    "urn:lou:obs-pip#artifactPath": [
+      {
+        "@value": "/Users/lou/.hammerspoon/evidence/obs_api_after_rewire_success.json"
+      }
+    ],
+    "urn:lou:obs-pip#note": [
+      {
+        "@value": "User restarted OBS and Chrome; ran rewire script, clicked target window; PiP Capture bound to window 19763, program scene PiP, scene item enabled. User confirmed experiment success."
+      }
+    ],
+    "urn:lou:obs-pip#observedAt": [
+      {
+        "@type": "http://www.w3.org/2001/XMLSchema#date",
+        "@value": "2026-03-08"
+      }
+    ]
+  },
+  {
+    "@id": "urn:lou:obs-pip#Act_PanelControlTurnOff",
+    "@type": [
+      "urn:lou:obs-pip#Action"
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#label": [
+      {
+        "@value": "Turn off selected PiP panels"
+      }
+    ],
+    "urn:lou:obs-pip#hasEvidence": [
+      {
+        "@id": "urn:lou:obs-pip#Ev_PanelControlScript"
+      }
+    ],
+    "urn:lou:obs-pip#note": [
+      {
+        "@value": "High-level panel control: obs_panel_control.py turn-off <panel...>. Resolves logical panel IDs to scene items in PiP scene and disables them so the corresponding panels are hidden (and can later be restarted)."
+      }
+    ]
+  },
+  {
+    "@id": "urn:lou:obs-pip#Act_ReplaceDemoClipWithTrimmedSource",
+    "@type": [
+      "urn:lou:obs-pip#Action"
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#label": [
+      {
+        "@value": "Replace demo clip with corrected trimmed source"
+      }
+    ],
+    "urn:lou:obs-pip#hasEvidence": [
+      {
+        "@id": "urn:lou:obs-pip#Ev_DemoClipCorrectedSource"
+      },
+      {
+        "@id": "urn:lou:obs-pip#Ev_DemoClipPublishedRoot"
+      },
+      {
+        "@id": "urn:lou:obs-pip#Ev_DemoGifPublishedRoot"
+      },
+      {
+        "@id": "urn:lou:obs-pip#Ev_PagesDemoVideo"
+      }
+    ],
+    "urn:lou:obs-pip#note": [
+      {
+        "@value": "Replaced repo and Pages demo media with /Users/lou/Documents/obs-clip.mp4. Verified SHA-256 parity between source and published MP4 files. Regenerated GIF from corrected source."
+      }
+    ]
+  },
+  {
+    "@id": "urn:lou:obs-pip#OrphanInputs_ReviewNow",
+    "@type": [
+      "http://www.w3.org/2000/01/rdf-schema#Resource"
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#label": [
+      {
+        "@value": "Orphan inputs (in OBS input list, not in PiP scene)"
+      }
+    ],
+    "urn:lou:obs-pip#note": [
+      {
+        "@value": "Present in GetInputList per Ev_ApiDiscovery_ReviewNow: Aux3, Aux3 Capture, Aux3LR. Leftover/stuck names; RemoveInput often does not remove. Intended scene uses Aux3LR_<timestamp> and Aux4Center_<timestamp>. Full inventory: obs_api_discovery_review_now.json input_list."
+      }
+    ]
+  },
+  {
+    "@id": "urn:lou:obs-pip#Act_ValidateOntologyWithRDFlib",
+    "@type": [
+      "urn:lou:obs-pip#Action"
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#label": [
+      {
+        "@value": "Validate ontology with RDFlib parser"
+      }
+    ],
+    "urn:lou:obs-pip#hasEvidence": [
+      {
+        "@id": "urn:lou:obs-pip#Ev_RdflibValidation_2026_03_09"
+      }
+    ],
+    "urn:lou:obs-pip#note": [
+      {
+        "@value": "Parse ontology with RDFlib after edits and require parse success before reporting completion."
+      }
+    ]
+  },
+  {
+    "@id": "urn:lou:obs-pip#requiredTool",
+    "@type": [
+      "http://www.w3.org/2000/01/rdf-schema#Property"
+    ]
+  },
+  {
+    "@id": "urn:lou:obs-pip#State_Current",
+    "@type": [
+      "urn:lou:obs-pip#SystemState"
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#label": [
+      {
+        "@value": "Current known-good operational state (rolling; one canvas, four intended sources)"
+      }
+    ],
+    "urn:lou:obs-pip#hasAction": [
+      {
+        "@id": "urn:lou:obs-pip#Act_AddFourthSourceCenter"
+      },
+      {
+        "@id": "urn:lou:obs-pip#Act_AddThirdSourceLowerRight"
+      },
+      {
+        "@id": "urn:lou:obs-pip#Act_EnableGitHubPagesDocs"
+      },
+      {
+        "@id": "urn:lou:obs-pip#Act_FixAux3"
+      },
+      {
+        "@id": "urn:lou:obs-pip#Act_FixAux4"
+      },
+      {
+        "@id": "urn:lou:obs-pip#Act_IdentifyWindowByClick"
+      },
+      {
+        "@id": "urn:lou:obs-pip#Act_PanelControlChangeChannel"
+      },
+      {
+        "@id": "urn:lou:obs-pip#Act_PanelControlStartPanels"
+      },
+      {
+        "@id": "urn:lou:obs-pip#Act_PanelControlTurnOff"
+      },
+      {
+        "@id": "urn:lou:obs-pip#Act_PublishTopVideoOnPages"
+      },
+      {
+        "@id": "urn:lou:obs-pip#Act_RebuildPipArrangement"
+      },
+      {
+        "@id": "urn:lou:obs-pip#Act_RemoveVmWindow"
+      },
+      {
+        "@id": "urn:lou:obs-pip#Act_RenameInput"
+      },
+      {
+        "@id": "urn:lou:obs-pip#Act_ReplaceDemoClipWithTrimmedSource"
+      },
+      {
+        "@id": "urn:lou:obs-pip#Act_RewireCaptureByClick"
+      },
+      {
+        "@id": "urn:lou:obs-pip#Act_SetRepoHomepageToPages"
+      },
+      {
+        "@id": "urn:lou:obs-pip#Act_SetRepoPublic"
+      },
+      {
+        "@id": "urn:lou:obs-pip#Act_SetSecondSourceByClick"
+      },
+      {
+        "@id": "urn:lou:obs-pip#Act_ValidateOntologyWithRDFlib"
+      }
+    ],
+    "urn:lou:obs-pip#hasEvidence": [
+      {
+        "@id": "urn:lou:obs-pip#Ev_AfterRewireSuccess"
+      },
+      {
+        "@id": "urn:lou:obs-pip#Ev_ApiDiscovery_Current"
+      },
+      {
+        "@id": "urn:lou:obs-pip#Ev_ApiDiscovery_CurrentRuntime"
+      },
+      {
+        "@id": "urn:lou:obs-pip#Ev_ApiDiscovery_ReviewNow"
+      },
+      {
+        "@id": "urn:lou:obs-pip#Ev_CaptureChromeUrlsScript"
+      },
+      {
+        "@id": "urn:lou:obs-pip#Ev_CleanupAfterAux"
+      },
+      {
+        "@id": "urn:lou:obs-pip#Ev_DemoClipCorrectedSource"
+      },
+      {
+        "@id": "urn:lou:obs-pip#Ev_DemoClipPublishedRoot"
+      },
+      {
+        "@id": "urn:lou:obs-pip#Ev_DemoGifPublishedRoot"
+      },
+      {
+        "@id": "urn:lou:obs-pip#Ev_GitHubPagesState_2026_03_09"
+      },
+      {
+        "@id": "urn:lou:obs-pip#Ev_PagesDemoVideo"
+      },
+      {
+        "@id": "urn:lou:obs-pip#Ev_PagesLandingFile"
+      },
+      {
+        "@id": "urn:lou:obs-pip#Ev_PanelControlConfig"
+      },
+      {
+        "@id": "urn:lou:obs-pip#Ev_PanelControlScript"
+      },
+      {
+        "@id": "urn:lou:obs-pip#Ev_PipCurrentScreenshot"
+      },
+      {
+        "@id": "urn:lou:obs-pip#Ev_PipScreenshotAfter"
+      },
+      {
+        "@id": "urn:lou:obs-pip#Ev_PipScreenshotBefore"
+      },
+      {
+        "@id": "urn:lou:obs-pip#Ev_RdflibValidation_2026_03_09"
+      },
+      {
+        "@id": "urn:lou:obs-pip#Ev_ReadmePagesLink"
+      },
+      {
+        "@id": "urn:lou:obs-pip#Ev_SceneGeometry"
+      },
+      {
+        "@id": "urn:lou:obs-pip#Ev_ScreenshotAfter"
+      },
+      {
+        "@id": "urn:lou:obs-pip#Ev_SourceUrls"
+      },
+      {
+        "@id": "urn:lou:obs-pip#Ev_WindowsAfter"
+      }
+    ],
+    "urn:lou:obs-pip#hasHotkey": [
+      {
+        "@id": "urn:lou:obs-pip#HotkeyChromePiP"
+      },
+      {
+        "@id": "urn:lou:obs-pip#HotkeyObsFallback"
+      },
+      {
+        "@id": "urn:lou:obs-pip#HotkeyObsMain"
+      }
+    ],
+    "urn:lou:obs-pip#hasInput": [
+      {
+        "@id": "urn:lou:obs-pip#Input_Aux2_Current"
+      },
+      {
+        "@id": "urn:lou:obs-pip#Input_FourthSource_Current"
+      },
+      {
+        "@id": "urn:lou:obs-pip#Input_PiPCapture_Current"
+      },
+      {
+        "@id": "urn:lou:obs-pip#Input_ThirdSource_Current"
+      }
+    ],
+    "urn:lou:obs-pip#hasIssue": [
+      {
+        "@id": "urn:lou:obs-pip#Issue_WindowBindingRisk"
+      }
+    ],
+    "urn:lou:obs-pip#hasObsInstance": [
+      {
+        "@id": "urn:lou:obs-pip#ObsMain"
+      }
+    ],
+    "urn:lou:obs-pip#hasOrphanInputs": [
+      {
+        "@id": "urn:lou:obs-pip#OrphanInputs_ReviewNow"
+      }
+    ],
+    "urn:lou:obs-pip#hasScene": [
+      {
+        "@id": "urn:lou:obs-pip#Scene_PiP_Current"
+      }
+    ],
+    "urn:lou:obs-pip#hasUseCase": [
+      {
+        "@id": "urn:lou:obs-pip#UseCase_DualNewsMonitoring"
+      },
+      {
+        "@id": "urn:lou:obs-pip#UseCase_PiPRecoveryAfterCrash"
+      },
+      {
+        "@id": "urn:lou:obs-pip#UseCase_PanelChannelSwitching"
+      },
+      {
+        "@id": "urn:lou:obs-pip#UseCase_DemoRecordingAndDocs"
+      }
+    ],
+    "urn:lou:obs-pip#lastVerifiedAt": [
+      {
+        "@type": "http://www.w3.org/2001/XMLSchema#date",
+        "@value": "2026-03-09"
+      }
+    ],
+    "urn:lou:obs-pip#note": [
+      {
+        "@value": "Rolling aggregate: structure and capabilities. Not a point-in-time snapshot. For current window IDs and full input inventory use Ev_ApiDiscovery_ReviewNow. For historical snapshots see State_PreCleanup or timestamped evidence."
+      }
+    ],
+    "urn:lou:obs-pip#requiredTool": [
+      {
+        "@id": "urn:lou:obs-pip#Tool_OBSStudio"
+      },
+      {
+        "@id": "urn:lou:obs-pip#Tool_ObsWebsocket"
+      },
+      {
+        "@id": "urn:lou:obs-pip#Tool_Hammerspoon"
+      },
+      {
+        "@id": "urn:lou:obs-pip#Tool_PythonVenvObsws"
+      },
+      {
+        "@id": "urn:lou:obs-pip#Tool_Chrome"
+      },
+      {
+        "@id": "urn:lou:obs-pip#Tool_FFmpeg"
+      },
+      {
+        "@id": "urn:lou:obs-pip#Tool_GitHubPages"
+      }
+    ]
+  },
+  {
+    "@id": "urn:lou:obs-pip#Act_SetRepoPublic",
+    "@type": [
+      "urn:lou:obs-pip#Action"
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#label": [
+      {
+        "@value": "Set GitHub repository visibility to public"
+      }
+    ],
+    "urn:lou:obs-pip#hasEvidence": [
+      {
+        "@id": "urn:lou:obs-pip#Ev_GitHubPagesState_2026_03_09"
+      }
+    ],
+    "urn:lou:obs-pip#note": [
+      {
+        "@value": "Changed repository nkllon/frankenrig visibility from PRIVATE to PUBLIC using gh CLI on 2026-03-09."
+      }
+    ]
+  },
+  {
+    "@id": "urn:lou:obs-pip#Ev_SceneGeometry",
+    "@type": [
+      "urn:lou:obs-pip#EvidenceArtifact"
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#label": [
+      {
+        "@value": "PiP scene geometry snapshot"
+      }
+    ],
+    "urn:lou:obs-pip#artifactPath": [
+      {
+        "@value": "/Users/lou/.hammerspoon/evidence/obs_pip_scene_geometry.json"
+      }
+    ],
+    "urn:lou:obs-pip#note": [
+      {
+        "@value": "Canvas 3840x2254; position/scale/alignment per source (PiP Capture, Aux2, Aux3LR_*, Aux4Center_*). Lower-right: positionX 3300 positionY 2129, alignment 8, insets 540/125. Fourth: positionX 1920 (center), alignment 36 (center of source at position)."
+      }
+    ],
+    "urn:lou:obs-pip#observedAt": [
+      {
+        "@type": "http://www.w3.org/2001/XMLSchema#date",
+        "@value": "2026-03-08"
+      }
+    ]
+  },
+  {
+    "@id": "urn:lou:obs-pip#Scene",
+    "@type": [
+      "http://www.w3.org/2000/01/rdf-schema#Class"
+    ]
+  },
+  {
+    "@id": "urn:lou:obs-pip#hasObsInstance",
+    "@type": [
+      "http://www.w3.org/2000/01/rdf-schema#Property"
+    ]
+  },
+  {
+    "@id": "urn:lou:obs-pip#hasScene",
+    "@type": [
+      "http://www.w3.org/2000/01/rdf-schema#Property"
+    ]
+  },
+  {
+    "@id": "urn:lou:obs-pip#Tool_Hammerspoon",
+    "@type": [
+      "urn:lou:obs-pip#Tool"
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#label": [
+      {
+        "@value": "Hammerspoon"
+      }
+    ],
+    "urn:lou:obs-pip#note": [
+      {
+        "@value": "macOS automation engine providing hotkeys and window management used by init.lua."
+      }
+    ]
+  },
+  {
+    "@id": "urn:lou:obs-pip#hasUseCase",
+    "@type": [
+      "http://www.w3.org/2000/01/rdf-schema#Property"
+    ]
+  },
+  {
+    "@id": "urn:lou:obs-pip#usesTool",
+    "@type": [
+      "http://www.w3.org/2000/01/rdf-schema#Property"
+    ]
+  },
+  {
+    "@id": "urn:lou:obs-pip#Ontology",
+    "@type": [
+      "http://www.w3.org/2000/01/rdf-schema#Resource"
+    ],
+    "http://purl.org/dc/terms/created": [
+      {
+        "@type": "http://www.w3.org/2001/XMLSchema#date",
+        "@value": "2026-03-08"
+      }
+    ],
+    "http://purl.org/dc/terms/creator": [
+      {
+        "@value": "Codex + Lou"
+      }
+    ],
+    "http://purl.org/dc/terms/description": [
+      {
+        "@value": "Evidence-backed model of OBS projector and capture behavior in Lou's macOS setup."
+      }
+    ],
+    "http://purl.org/dc/terms/title": [
+      {
+        "@value": "OBS PiP Findings Ontology"
+      }
+    ]
+  },
+  {
+    "@id": "urn:lou:obs-pip#Ev_ScreenshotBefore",
+    "@type": [
+      "urn:lou:obs-pip#EvidenceArtifact"
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#label": [
+      {
+        "@value": "Screenshot before cleanup"
+      }
+    ],
+    "urn:lou:obs-pip#artifactPath": [
+      {
+        "@value": "/Users/lou/.hammerspoon/evidence/obs_before.png"
+      }
+    ]
+  },
+  {
+    "@id": "urn:lou:obs-pip#Input_Aux2_Current",
+    "@type": [
+      "urn:lou:obs-pip#InputSource"
+    ],
+    "urn:lou:obs-pip#captureMethodLabel": [
+      {
+        "@value": "Window Capture"
+      }
+    ],
+    "urn:lou:obs-pip#captureMethodValue": [
+      {
+        "@type": "http://www.w3.org/2001/XMLSchema#integer",
+        "@value": 1
+      }
+    ],
+    "urn:lou:obs-pip#inputKind": [
+      {
+        "@value": "screen_capture"
+      }
+    ],
+    "urn:lou:obs-pip#inputName": [
+      {
+        "@value": "Aux2"
+      }
+    ],
+    "urn:lou:obs-pip#note": [
+      {
+        "@value": "Second source on same PiP canvas; positioned lower-left (positionX 20, positionY 1561, scale ~0.25). Set via open_aux_projector_by_click.py; do not open its projector from script (overlays)."
+      }
+    ]
+  },
+  {
+    "@id": "urn:lou:obs-pip#wsEnabled",
+    "@type": [
+      "http://www.w3.org/2000/01/rdf-schema#Property"
+    ]
+  },
+  {
+    "@id": "urn:lou:obs-pip#Ev_RebuildScript",
+    "@type": [
+      "urn:lou:obs-pip#EvidenceArtifact"
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#label": [
+      {
+        "@value": "Rebuild PiP arrangement from scratch"
+      }
+    ],
+    "urn:lou:obs-pip#artifactPath": [
+      {
+        "@value": "/Users/lou/.hammerspoon/obs_rebuild_pip_arrangement.py"
+      }
+    ],
+    "urn:lou:obs-pip#note": [
+      {
+        "@value": "Modes: two windows (window1/2 or clicks); --lower-right for third (Aux3LR_<timestamp>, insets 540/125); --add-fourth-center --window4 for fourth (Aux4Center_<timestamp>, alignment 36); --fix-aux3/--fix-aux4 re-apply transform by prefix; --diagnose. SetSceneItemTransform bounds >= 1. Response matching by requestId."
+      }
+    ]
+  },
+  {
+    "@id": "urn:lou:obs-pip#artifactPath",
+    "@type": [
+      "http://www.w3.org/2000/01/rdf-schema#Property"
+    ]
+  },
+  {
+    "@id": "urn:lou:obs-pip#projectorCount",
+    "@type": [
+      "http://www.w3.org/2000/01/rdf-schema#Property"
+    ]
+  },
+  {
+    "@id": "urn:lou:obs-pip#sceneName",
+    "@type": [
+      "http://www.w3.org/2000/01/rdf-schema#Property"
+    ]
+  },
+  {
+    "@id": "urn:lou:obs-pip#Input_ThirdSource_Current",
+    "@type": [
+      "urn:lou:obs-pip#InputSource"
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#label": [
+      {
+        "@value": "Third source (lower-right PiP)"
+      }
+    ],
+    "urn:lou:obs-pip#captureMethodLabel": [
+      {
+        "@value": "Window Capture"
+      }
+    ],
+    "urn:lou:obs-pip#captureMethodValue": [
+      {
+        "@type": "http://www.w3.org/2001/XMLSchema#integer",
+        "@value": 1
+      }
+    ],
+    "urn:lou:obs-pip#inputKind": [
+      {
+        "@value": "screen_capture"
+      }
+    ],
+    "urn:lou:obs-pip#inputName": [
+      {
+        "@value": "Aux3LR_*"
+      }
+    ],
+    "urn:lou:obs-pip#note": [
+      {
+        "@value": "Third source on PiP canvas; name pattern Aux3LR_<timestamp> so CreateInput always succeeds. Lower-right: alignment 8, insets from canvas right/bottom 540/125, same scale as Aux2. RemoveInput often does not remove; CreateSceneItem for orphaned input fails 700; unique naming workaround. Script: obs_rebuild_pip_arrangement.py --lower-right; --fix-aux3 finds by prefix."
+      }
+    ]
+  },
+  {
+    "@id": "urn:lou:obs-pip#Ev_SourceUrls",
+    "@type": [
+      "urn:lou:obs-pip#EvidenceArtifact"
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#label": [
+      {
+        "@value": "Source URLs and capture script"
+      }
+    ],
+    "urn:lou:obs-pip#artifactPath": [
+      {
+        "@value": "/Users/lou/.hammerspoon/evidence/obs_pip_source_urls.json"
+      }
+    ],
+    "urn:lou:obs-pip#note": [
+      {
+        "@value": "Canonical URLs for four sources: bootybunt (main), Deutsche Welle Live (lower-left), France 24/French news (lower-right), BBC News Live (bottom center, via BBC website). Capture exact URLs: capture_chrome_window_urls.sh; optional obs_pip_source_urls.txt. Used to reconstruct arrangement from scratch (open URLs in four views, get window IDs, run rebuild script with --window1..3 and --add-fourth-center --window4)."
+      }
+    ]
+  },
+  {
+    "@id": "urn:lou:obs-pip#Stakeholder_Viewer",
+    "@type": [
+      "urn:lou:obs-pip#Stakeholder"
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#label": [
+      {
+        "@value": "Viewer / audience"
+      }
+    ],
+    "urn:lou:obs-pip#note": [
+      {
+        "@value": "End viewer who benefits from stable dual-view news monitoring layout."
+      }
+    ]
+  },
+  {
+    "@id": "urn:lou:obs-pip#Input_VMWindow_Pre",
+    "@type": [
+      "urn:lou:obs-pip#InputSource"
+    ],
+    "urn:lou:obs-pip#captureMethodLabel": [
+      {
+        "@value": "Window Capture"
+      }
+    ],
+    "urn:lou:obs-pip#captureMethodValue": [
+      {
+        "@type": "http://www.w3.org/2001/XMLSchema#integer",
+        "@value": 1
+      }
+    ],
+    "urn:lou:obs-pip#enabled": [
+      {
+        "@type": "http://www.w3.org/2001/XMLSchema#boolean",
+        "@value": false
+      }
+    ],
+    "urn:lou:obs-pip#inputKind": [
+      {
+        "@value": "screen_capture"
+      }
+    ],
+    "urn:lou:obs-pip#inputName": [
+      {
+        "@value": "VM Window"
+      }
+    ],
+    "urn:lou:obs-pip#windowId": [
+      {
+        "@type": "http://www.w3.org/2001/XMLSchema#integer",
+        "@value": 16300
+      }
+    ]
+  },
+  {
+    "@id": "urn:lou:obs-pip#captureMethodLabel",
+    "@type": [
+      "http://www.w3.org/2000/01/rdf-schema#Property"
+    ]
+  },
+  {
+    "@id": "urn:lou:obs-pip#Act_PanelControlStartPanels",
+    "@type": [
+      "urn:lou:obs-pip#Action"
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#label": [
+      {
+        "@value": "Start streaming on selected PiP panels"
+      }
+    ],
+    "urn:lou:obs-pip#hasEvidence": [
+      {
+        "@id": "urn:lou:obs-pip#Ev_PanelControlScript"
+      }
+    ],
+    "urn:lou:obs-pip#note": [
+      {
+        "@value": "High-level panel control: obs_panel_control.py start <panel...>. Resolves logical panel IDs to scene items in PiP scene and re-enables them so the corresponding panels become visible again."
+      }
+    ]
+  },
+  {
+    "@id": "urn:lou:obs-pip#Ev_ApiDiscovery_Pre",
+    "@type": [
+      "urn:lou:obs-pip#EvidenceArtifact"
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#label": [
+      {
+        "@value": "API discovery before cleanup"
+      }
+    ],
+    "urn:lou:obs-pip#artifactPath": [
+      {
+        "@value": "/Users/lou/.hammerspoon/evidence/obs_api_discovery.json"
+      }
+    ]
+  },
+  {
+    "@id": "urn:lou:obs-pip#Stakeholder_OperatorLou",
+    "@type": [
+      "urn:lou:obs-pip#Stakeholder"
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#label": [
+      {
+        "@value": "Rig operator (Lou)"
+      }
+    ],
+    "urn:lou:obs-pip#note": [
+      {
+        "@value": "Primary operator running the frankenrig OBS PiP setup on macOS."
+      }
+    ]
+  },
+  {
+    "@id": "urn:lou:obs-pip#Ev_PipScreenshotAfter",
+    "@type": [
+      "urn:lou:obs-pip#EvidenceArtifact"
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#label": [
+      {
+        "@value": "PiP screenshot after (aux cleanup)"
+      }
+    ],
+    "urn:lou:obs-pip#artifactPath": [
+      {
+        "@value": "/Users/lou/.hammerspoon/evidence/obs_pip_screenshot_after.png"
+      }
+    ]
+  },
+  {
+    "@id": "urn:lou:obs-pip#Act_PublishTopVideoOnPages",
+    "@type": [
+      "urn:lou:obs-pip#Action"
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#label": [
+      {
+        "@value": "Publish top-of-page video on Pages landing"
+      }
+    ],
+    "urn:lou:obs-pip#hasEvidence": [
+      {
+        "@id": "urn:lou:obs-pip#Ev_PagesDemoVideo"
+      },
+      {
+        "@id": "urn:lou:obs-pip#Ev_PagesLandingFile"
+      }
+    ],
+    "urn:lou:obs-pip#note": [
+      {
+        "@value": "Updated docs/index.md to render top video using HTML video tag with docs/obs_clip.mp4 as source."
+      }
+    ]
+  },
+  {
+    "@id": "urn:lou:obs-pip#riskLevel",
+    "@type": [
+      "http://www.w3.org/2000/01/rdf-schema#Property"
+    ]
+  },
+  {
+    "@id": "urn:lou:obs-pip#Ev_PipCurrentScreenshot",
+    "@type": [
+      "urn:lou:obs-pip#EvidenceArtifact"
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#label": [
+      {
+        "@value": "PiP current state screenshot"
+      }
+    ],
+    "urn:lou:obs-pip#artifactPath": [
+      {
+        "@value": "/Users/lou/.hammerspoon/evidence/obs_pip_current.png"
+      }
+    ]
+  },
+  {
+    "@id": "urn:lou:obs-pip#Constraint_ObsWebsocketRequired",
+    "@type": [
+      "urn:lou:obs-pip#Constraint"
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#label": [
+      {
+        "@value": "obs-websocket must be enabled"
+      }
+    ],
+    "urn:lou:obs-pip#note": [
+      {
+        "@value": "Requires OBS WebSocket 5.x enabled on port 4455 with matching rpcVersion for all scripted control paths."
+      }
+    ]
+  },
+  {
+    "@id": "urn:lou:obs-pip#inputKind",
+    "@type": [
+      "http://www.w3.org/2000/01/rdf-schema#Property"
+    ]
+  },
+  {
+    "@id": "urn:lou:obs-pip#State_PreCleanup",
+    "@type": [
+      "urn:lou:obs-pip#SystemState"
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#label": [
+      {
+        "@value": "State before VM input removal"
+      }
+    ],
+    "urn:lou:obs-pip#hasAction": [
+      {
+        "@id": "urn:lou:obs-pip#Act_CloseDuplicateProjectors"
+      },
+      {
+        "@id": "urn:lou:obs-pip#Act_EnableWebsocket"
+      }
+    ],
+    "urn:lou:obs-pip#hasEvidence": [
+      {
+        "@id": "urn:lou:obs-pip#Ev_ApiDiscovery_Pre"
+      },
+      {
+        "@id": "urn:lou:obs-pip#Ev_ScreenshotBefore"
+      },
+      {
+        "@id": "urn:lou:obs-pip#Ev_WindowsBefore"
+      }
+    ],
+    "urn:lou:obs-pip#hasInput": [
+      {
+        "@id": "urn:lou:obs-pip#Input_MacScreenCapture_Pre"
+      },
+      {
+        "@id": "urn:lou:obs-pip#Input_VMWindow_Pre"
+      }
+    ],
+    "urn:lou:obs-pip#hasIssue": [
+      {
+        "@id": "urn:lou:obs-pip#Issue_DuplicateProjectors"
+      },
+      {
+        "@id": "urn:lou:obs-pip#Issue_VMWindowAmbiguity"
+      },
+      {
+        "@id": "urn:lou:obs-pip#Issue_WindowBindingRisk"
+      }
+    ],
+    "urn:lou:obs-pip#hasObsInstance": [
+      {
+        "@id": "urn:lou:obs-pip#ObsMain"
+      }
+    ],
+    "urn:lou:obs-pip#hasScene": [
+      {
+        "@id": "urn:lou:obs-pip#Scene_PiP_Pre"
+      }
+    ],
+    "urn:lou:obs-pip#observedAt": [
+      {
+        "@type": "http://www.w3.org/2001/XMLSchema#dateTime",
+        "@value": "2026-03-08T17:05:00-07:00"
+      }
+    ]
+  },
+  {
+    "@id": "urn:lou:obs-pip#Act_IdentifyWindowByClick",
+    "@type": [
+      "urn:lou:obs-pip#Action"
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#label": [
+      {
+        "@value": "Identify target window by click for OBS capture binding"
+      }
+    ],
+    "urn:lou:obs-pip#hasEvidence": [
+      {
+        "@id": "urn:lou:obs-pip#Ev_IdentifyWindowScript"
+      }
+    ],
+    "urn:lou:obs-pip#note": [
+      {
+        "@value": "Standalone Python script: run script, click desired window within 7s; outputs window ID (id= N title= app= pid=). Use that ID to configure or re-bind OBS window capture. Solves correct-window identification so OBS can be pointed at the clicked window."
+      }
+    ]
+  },
+  {
+    "@id": "urn:lou:obs-pip#Act_RebuildPipArrangement",
+    "@type": [
+      "urn:lou:obs-pip#Action"
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#label": [
+      {
+        "@value": "Reconstruct PiP arrangement from window IDs"
+      }
+    ],
+    "urn:lou:obs-pip#hasEvidence": [
+      {
+        "@id": "urn:lou:obs-pip#Ev_RebuildScript"
+      }
+    ],
+    "urn:lou:obs-pip#note": [
+      {
+        "@value": "Script: obs_rebuild_pip_arrangement.py. Two windows: window1→PiP Capture, window2→Aux2; layout main + lower-left; open preview. Third: --lower-right (optional --window3 ID) creates Aux3LR_<timestamp>, lower-right insets 540/125, alignment 8. --fix-aux3 re-applies transform to source name starting with Aux3LR. --diagnose prints scene items and canvas. SetSceneItemTransform bounds >= 1."
+      }
+    ]
+  },
+  {
+    "@id": "urn:lou:obs-pip#Ev_IdentifyWindowScript",
+    "@type": [
+      "urn:lou:obs-pip#EvidenceArtifact"
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#label": [
+      {
+        "@value": "Click-to-identify-window script"
+      }
+    ],
+    "urn:lou:obs-pip#artifactPath": [
+      {
+        "@value": "/Users/lou/.hammerspoon/identify_window_click.py"
+      }
+    ],
+    "urn:lou:obs-pip#note": [
+      {
+        "@value": "Run with: .venv_obsws/bin/python3 identify_window_click.py. Uses 7s timeout. Requires Accessibility for click path; fallback: move cursor over window and press Enter. Filters system windows; returns topmost app window at click. Historically verified: OBS projector (id=19325), PiP capture target (id=14767). Current PiP Capture window ID in Ev_ApiDiscovery_ReviewNow."
+      }
+    ]
+  },
+  {
+    "@id": "urn:lou:obs-pip#Issue_WindowBindingRisk",
+    "@type": [
+      "urn:lou:obs-pip#Issue"
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#label": [
+      {
+        "@value": "Window-bound capture ID can drift"
+      }
+    ],
+    "urn:lou:obs-pip#mitigatedBy": [
+      {
+        "@id": "urn:lou:obs-pip#Act_IdentifyWindowByClick"
+      },
+      {
+        "@id": "urn:lou:obs-pip#Act_RewireCaptureByClick"
+      }
+    ],
+    "urn:lou:obs-pip#note": [
+      {
+        "@value": "No instability reported for last couple of hours, but risk remains structurally present."
+      }
+    ],
+    "urn:lou:obs-pip#riskImpact": [
+      {
+        "@value": "secondary view may silently drift or break when window IDs change"
+      }
+    ],
+    "urn:lou:obs-pip#riskLevel": [
+      {
+        "@value": "medium"
+      }
+    ],
+    "urn:lou:obs-pip#riskLikelihood": [
+      {
+        "@value": "structural"
+      }
+    ]
+  },
+  {
+    "@id": "urn:lou:obs-pip#Ev_WindowsBefore",
+    "@type": [
+      "urn:lou:obs-pip#EvidenceArtifact"
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#label": [
+      {
+        "@value": "Window inventory before cleanup"
+      }
+    ],
+    "urn:lou:obs-pip#artifactPath": [
+      {
+        "@value": "/Users/lou/.hammerspoon/evidence/obs_windows_before.txt"
+      }
+    ]
+  },
+  {
+    "@id": "urn:lou:obs-pip#lastVerifiedAt",
+    "@type": [
+      "http://www.w3.org/2000/01/rdf-schema#Property"
+    ]
+  },
+  {
+    "@id": "urn:lou:obs-pip#captureMethodValue",
+    "@type": [
+      "http://www.w3.org/2000/01/rdf-schema#Property"
+    ]
+  },
+  {
+    "@id": "urn:lou:obs-pip#Input_MacScreenCapture_Pre",
+    "@type": [
+      "urn:lou:obs-pip#InputSource"
+    ],
+    "urn:lou:obs-pip#captureMethodLabel": [
+      {
+        "@value": "Window Capture"
+      }
+    ],
+    "urn:lou:obs-pip#captureMethodValue": [
+      {
+        "@type": "http://www.w3.org/2001/XMLSchema#integer",
+        "@value": 1
+      }
+    ],
+    "urn:lou:obs-pip#enabled": [
+      {
+        "@type": "http://www.w3.org/2001/XMLSchema#boolean",
+        "@value": true
+      }
+    ],
+    "urn:lou:obs-pip#inputKind": [
+      {
+        "@value": "screen_capture"
+      }
+    ],
+    "urn:lou:obs-pip#inputName": [
+      {
+        "@value": "macOS Screen Capture"
+      }
+    ],
+    "urn:lou:obs-pip#windowId": [
+      {
+        "@type": "http://www.w3.org/2001/XMLSchema#integer",
+        "@value": 14767
+      }
+    ]
+  },
+  {
+    "@id": "urn:lou:obs-pip#riskImpact",
+    "@type": [
+      "http://www.w3.org/2000/01/rdf-schema#Property"
+    ]
+  },
+  {
+    "@id": "urn:lou:obs-pip#hasFeature",
+    "@type": [
+      "http://www.w3.org/2000/01/rdf-schema#Property"
+    ]
+  },
+  {
+    "@id": "urn:lou:obs-pip#Tool_OBSStudio",
+    "@type": [
+      "urn:lou:obs-pip#Tool"
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#label": [
+      {
+        "@value": "OBS Studio"
+      }
+    ],
+    "urn:lou:obs-pip#note": [
+      {
+        "@value": "Desktop streaming/recording application providing scenes, inputs, and projector windows."
+      }
+    ]
+  },
+  {
+    "@id": "urn:lou:obs-pip#isProgramScene",
+    "@type": [
+      "http://www.w3.org/2000/01/rdf-schema#Property"
+    ]
+  },
+  {
+    "@id": "urn:lou:obs-pip#Ev_OpenAuxScript",
+    "@type": [
+      "urn:lou:obs-pip#EvidenceArtifact"
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#label": [
+      {
+        "@value": "Set second source by click (no projector open)"
+      }
+    ],
+    "urn:lou:obs-pip#artifactPath": [
+      {
+        "@value": "/Users/lou/.hammerspoon/open_aux_projector_by_click.py"
+      }
+    ],
+    "urn:lou:obs-pip#note": [
+      {
+        "@value": "Sets Aux Capture or Aux2 to clicked window. Does not call OpenSourceProjector."
+      }
+    ]
+  },
+  {
+    "@id": "urn:lou:obs-pip#Feature",
+    "@type": [
+      "http://www.w3.org/2000/01/rdf-schema#Class"
+    ]
+  },
+  {
+    "@id": "urn:lou:obs-pip#observedAt",
+    "@type": [
+      "http://www.w3.org/2000/01/rdf-schema#Property"
+    ]
+  },
+  {
+    "@id": "urn:lou:obs-pip#Act_FixAux3",
+    "@type": [
+      "urn:lou:obs-pip#Action"
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#label": [
+      {
+        "@value": "Re-apply lower-right transform to third source"
+      }
+    ],
+    "urn:lou:obs-pip#hasEvidence": [
+      {
+        "@id": "urn:lou:obs-pip#Ev_RebuildScript"
+      }
+    ],
+    "urn:lou:obs-pip#note": [
+      {
+        "@value": "Run obs_rebuild_pip_arrangement.py --fix-aux3. Finds scene item by sourceName prefix Aux3LR, applies transform (insets 540/125, alignment 8), moves to top."
+      }
+    ]
+  },
+  {
+    "@id": "urn:lou:obs-pip#Tool_ObsWebsocket",
+    "@type": [
+      "urn:lou:obs-pip#Tool"
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#label": [
+      {
+        "@value": "OBS WebSocket 5.x"
+      }
+    ],
+    "urn:lou:obs-pip#note": [
+      {
+        "@value": "WebSocket control API enabling deterministic programmatic access from Python helpers."
+      }
+    ]
+  },
+  {
+    "@id": "urn:lou:obs-pip#Ev_WindowsAfter",
+    "@type": [
+      "urn:lou:obs-pip#EvidenceArtifact"
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#label": [
+      {
+        "@value": "Window inventory after cleanup"
+      }
+    ],
+    "urn:lou:obs-pip#artifactPath": [
+      {
+        "@value": "/Users/lou/.hammerspoon/evidence/obs_windows_after.txt"
+      }
+    ]
+  },
+  {
+    "@id": "urn:lou:obs-pip#HotkeyObsFallback",
+    "@type": [
+      "urn:lou:obs-pip#HotkeyBinding"
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#label": [
+      {
+        "@value": "OBS projector toggle (fallback)"
+      }
+    ],
+    "urn:lou:obs-pip#binding": [
+      {
+        "@value": "ctrl+alt+cmd+o"
+      }
+    ]
+  },
+  {
+    "@id": "urn:lou:obs-pip#UseCase_DemoRecordingAndDocs",
+    "@type": [
+      "urn:lou:obs-pip#UseCase"
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#label": [
+      {
+        "@value": "Record and publish frankenrig demo"
+      }
+    ],
+    "urn:lou:obs-pip#hasFeature": [
+      {
+        "@id": "urn:lou:obs-pip#Feature_DocumentationAndEvidence"
+      }
+    ],
+    "urn:lou:obs-pip#hasStakeholder": [
+      {
+        "@id": "urn:lou:obs-pip#Stakeholder_OperatorLou"
+      },
+      {
+        "@id": "urn:lou:obs-pip#Stakeholder_DeveloperFuture"
+      },
+      {
+        "@id": "urn:lou:obs-pip#Stakeholder_Viewer"
+      }
+    ],
+    "urn:lou:obs-pip#note": [
+      {
+        "@value": "Produce obs_clip.mp4/obs_clip.gif from a working rig and publish documentation and video via GitHub Pages."
+      }
+    ]
+  },
+  {
+    "@id": "urn:lou:obs-pip#obsVersion",
+    "@type": [
+      "http://www.w3.org/2000/01/rdf-schema#Property"
+    ]
+  },
+  {
+    "@id": "urn:lou:obs-pip#Act_CloseDuplicateProjectors",
+    "@type": [
+      "urn:lou:obs-pip#Action"
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#label": [
+      {
+        "@value": "Closed extra projector windows"
+      }
+    ],
+    "urn:lou:obs-pip#note": [
+      {
+        "@value": "Reduced projector windows to singleton."
+      }
+    ]
+  },
+  {
+    "@id": "urn:lou:obs-pip#enabled",
+    "@type": [
+      "http://www.w3.org/2000/01/rdf-schema#Property"
+    ]
+  },
+  {
+    "@id": "urn:lou:obs-pip#Stakeholder",
+    "@type": [
+      "http://www.w3.org/2000/01/rdf-schema#Class"
+    ]
+  },
+  {
+    "@id": "urn:lou:obs-pip#SourceUrlDiscovery",
+    "@type": [
+      "http://www.w3.org/2000/01/rdf-schema#Resource"
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#label": [
+      {
+        "@value": "Underlying window sources (URLs and views)"
+      }
+    ],
+    "urn:lou:obs-pip#note": [
+      {
+        "@value": "Four OBS sources map to four Chrome windows in separate views (Control-Left/Right). All four are Chrome. Window 1 (main): YouTube bootybunt. Window 2 (lower-left): Deutsche Welle Live (YouTube). Window 3 (lower-right): French news (e.g. France 24) live. Window 4 (bottom center): BBC News Live via BBC website (e.g. bbc.co.uk/iplayer/live/bbcnews). Stable URLs in evidence/obs_pip_source_urls.json; capture exact URLs via capture_chrome_window_urls.sh. Reconstruct: open four URLs in four full-screen Chrome windows, get window IDs (click or identify), run obs_rebuild_pip_arrangement.py --window1 ID1 --window2 ID2 --window3 ID3 and --add-fourth-center --window4 ID4."
+      }
+    ]
+  },
+  {
+    "@id": "urn:lou:obs-pip#Ev_GitHubPagesState_2026_03_09",
+    "@type": [
+      "urn:lou:obs-pip#EvidenceArtifact"
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#label": [
+      {
+        "@value": "GitHub Pages and repository visibility state (2026-03-09)"
+      }
+    ],
+    "urn:lou:obs-pip#artifactPath": [
+      {
+        "@value": "/Users/lou/.hammerspoon/evidence/obs_pip_findings.md"
+      }
+    ],
+    "urn:lou:obs-pip#note": [
+      {
+        "@value": "Repo visibility PUBLIC; Pages source main:/docs; homepageUrl set to https://nkllon.github.io/frankenrig/. Related commits: 6926d99, bf8becb, 51d3bab, 0054968."
+      }
+    ],
+    "urn:lou:obs-pip#observedAt": [
+      {
+        "@type": "http://www.w3.org/2001/XMLSchema#date",
+        "@value": "2026-03-09"
+      }
+    ]
+  },
+  {
+    "@id": "urn:lou:obs-pip#Constraint_MacOSOnly",
+    "@type": [
+      "urn:lou:obs-pip#Constraint"
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#label": [
+      {
+        "@value": "macOS-only observations"
+      }
+    ],
+    "urn:lou:obs-pip#note": [
+      {
+        "@value": "Ontology and evidence are specific to Lou's macOS rig; window IDs, permissions, and capture behavior may differ on other platforms."
+      }
+    ]
+  },
+  {
+    "@id": "urn:lou:obs-pip#Feature_DocumentationAndEvidence",
+    "@type": [
+      "urn:lou:obs-pip#Feature"
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#label": [
+      {
+        "@value": "Evidence-backed documentation and pages"
+      }
+    ],
+    "urn:lou:obs-pip#note": [
+      {
+        "@value": "Keep README, docs/index.md, ontology, and demo media in sync with current rig state and publish via GitHub Pages."
+      }
+    ],
+    "urn:lou:obs-pip#supportedByAction": [
+      {
+        "@id": "urn:lou:obs-pip#Act_EnableGitHubPagesDocs"
+      },
+      {
+        "@id": "urn:lou:obs-pip#Act_PublishTopVideoOnPages"
+      },
+      {
+        "@id": "urn:lou:obs-pip#Act_ReplaceDemoClipWithTrimmedSource"
+      },
+      {
+        "@id": "urn:lou:obs-pip#Act_SetRepoHomepageToPages"
+      },
+      {
+        "@id": "urn:lou:obs-pip#Act_SetRepoPublic"
+      },
+      {
+        "@id": "urn:lou:obs-pip#Act_ValidateOntologyWithRDFlib"
+      }
+    ],
+    "urn:lou:obs-pip#usesTool": [
+      {
+        "@id": "urn:lou:obs-pip#Tool_GitHubPages"
+      },
+      {
+        "@id": "urn:lou:obs-pip#Tool_FFmpeg"
+      }
+    ]
+  },
+  {
+    "@id": "urn:lou:obs-pip#Act_AddThirdSourceLowerRight",
+    "@type": [
+      "urn:lou:obs-pip#Action"
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#label": [
+      {
+        "@value": "Add third window as lower-right PiP source"
+      }
+    ],
+    "urn:lou:obs-pip#hasEvidence": [
+      {
+        "@id": "urn:lou:obs-pip#Ev_RebuildScript"
+      }
+    ],
+    "urn:lou:obs-pip#note": [
+      {
+        "@value": "Run obs_rebuild_pip_arrangement.py --lower-right (click or --window3 ID). Creates input Aux3LR_<timestamp>, adds to PiP scene, position from canvas insets X=540 Y=125, alignment 8, move to top. Unique name avoids CreateInput 601 and CreateSceneItem 700."
+      }
+    ]
+  },
+  {
+    "@id": "urn:lou:obs-pip#Ev_DemoClipPublishedRoot",
+    "@type": [
+      "urn:lou:obs-pip#EvidenceArtifact"
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#label": [
+      {
+        "@value": "Repo root demo clip (synced from corrected source)"
+      }
+    ],
+    "urn:lou:obs-pip#artifactPath": [
+      {
+        "@value": "/Users/lou/.hammerspoon/obs_clip.mp4"
+      }
+    ],
+    "urn:lou:obs-pip#note": [
+      {
+        "@value": "SHA-256 matches /Users/lou/Documents/obs-clip.mp4 after replacement."
+      }
+    ],
+    "urn:lou:obs-pip#observedAt": [
+      {
+        "@type": "http://www.w3.org/2001/XMLSchema#date",
+        "@value": "2026-03-09"
+      }
+    ]
+  },
+  {
+    "@id": "urn:lou:obs-pip#Action",
+    "@type": [
+      "http://www.w3.org/2000/01/rdf-schema#Class"
+    ]
+  },
+  {
+    "@id": "urn:lou:obs-pip#note",
+    "@type": [
+      "http://www.w3.org/2000/01/rdf-schema#Property"
+    ]
+  },
+  {
+    "@id": "urn:lou:obs-pip#Ev_ScreenshotAfter",
+    "@type": [
+      "urn:lou:obs-pip#EvidenceArtifact"
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#label": [
+      {
+        "@value": "Screenshot after cleanup"
+      }
+    ],
+    "urn:lou:obs-pip#artifactPath": [
+      {
+        "@value": "/Users/lou/.hammerspoon/evidence/obs_after.png"
+      }
+    ]
+  },
+  {
+    "@id": "urn:lou:obs-pip#Ev_RewireScript",
+    "@type": [
+      "urn:lou:obs-pip#EvidenceArtifact"
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#label": [
+      {
+        "@value": "OBS rewire-by-click script (draft)"
+      }
+    ],
+    "urn:lou:obs-pip#artifactPath": [
+      {
+        "@value": "/Users/lou/.hammerspoon/rewire_obs_capture_by_click.py"
+      }
+    ],
+    "urn:lou:obs-pip#note": [
+      {
+        "@value": "Run with: .venv_obsws/bin/python3 rewire_obs_capture_by_click.py. Optional: --window-id N, --dry-run. Uses OBS websocket API to rebind PiP Capture to clicked window ID."
+      }
+    ]
+  },
+  {
+    "@id": "urn:lou:obs-pip#Ev_PagesLandingFile",
+    "@type": [
+      "urn:lou:obs-pip#EvidenceArtifact"
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#label": [
+      {
+        "@value": "GitHub Pages landing page (README-style)"
+      }
+    ],
+    "urn:lou:obs-pip#artifactPath": [
+      {
+        "@value": "/Users/lou/.hammerspoon/docs/index.md"
+      }
+    ],
+    "urn:lou:obs-pip#note": [
+      {
+        "@value": "Landing page content updated to represent README-style project overview and include top video embed."
+      }
+    ],
+    "urn:lou:obs-pip#observedAt": [
+      {
+        "@type": "http://www.w3.org/2001/XMLSchema#date",
+        "@value": "2026-03-09"
+      }
+    ]
+  },
+  {
+    "@id": "urn:lou:obs-pip#Scene_PiP_Pre",
+    "@type": [
+      "urn:lou:obs-pip#Scene"
+    ],
+    "urn:lou:obs-pip#isProgramScene": [
+      {
+        "@type": "http://www.w3.org/2001/XMLSchema#boolean",
+        "@value": true
+      }
+    ],
+    "urn:lou:obs-pip#sceneName": [
+      {
+        "@value": "PiP"
+      }
+    ]
+  },
+  {
+    "@id": "urn:lou:obs-pip#Tool_GitHubPages",
+    "@type": [
+      "urn:lou:obs-pip#Tool"
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#label": [
+      {
+        "@value": "GitHub Pages"
+      }
+    ],
+    "urn:lou:obs-pip#note": [
+      {
+        "@value": "Static site hosting for docs/ and demo video at the frankenrig project URL."
+      }
+    ]
+  },
+  {
+    "@id": "urn:lou:obs-pip#supportedByAction",
+    "@type": [
+      "http://www.w3.org/2000/01/rdf-schema#Property"
+    ]
+  },
+  {
+    "@id": "urn:lou:obs-pip#windowId",
+    "@type": [
+      "http://www.w3.org/2000/01/rdf-schema#Property"
+    ]
+  },
+  {
+    "@id": "urn:lou:obs-pip#hasOrphanInputs",
+    "@type": [
+      "http://www.w3.org/2000/01/rdf-schema#Property"
+    ]
+  },
+  {
+    "@id": "urn:lou:obs-pip#hasHotkey",
+    "@type": [
+      "http://www.w3.org/2000/01/rdf-schema#Property"
+    ]
+  },
+  {
+    "@id": "urn:lou:obs-pip#HotkeyObsMain",
+    "@type": [
+      "urn:lou:obs-pip#HotkeyBinding"
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#label": [
+      {
+        "@value": "OBS projector toggle (main)"
+      }
+    ],
+    "urn:lou:obs-pip#binding": [
+      {
+        "@value": "alt+cmd+o"
+      }
+    ]
+  },
+  {
+    "@id": "urn:lou:obs-pip#Issue",
+    "@type": [
+      "http://www.w3.org/2000/01/rdf-schema#Class"
+    ]
+  },
+  {
+    "@id": "urn:lou:obs-pip#Ev_ApiDiscovery_Current",
+    "@type": [
+      "urn:lou:obs-pip#EvidenceArtifact"
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#label": [
+      {
+        "@value": "API discovery current"
+      }
+    ],
+    "urn:lou:obs-pip#artifactPath": [
+      {
+        "@value": "/Users/lou/.hammerspoon/evidence/obs_api_discovery_rename_check.json"
+      }
+    ]
+  },
+  {
+    "@id": "urn:lou:obs-pip#Act_SetRepoHomepageToPages",
+    "@type": [
+      "urn:lou:obs-pip#Action"
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#label": [
+      {
+        "@value": "Set repository homepage to Pages URL"
+      }
+    ],
+    "urn:lou:obs-pip#hasEvidence": [
+      {
+        "@id": "urn:lou:obs-pip#Ev_GitHubPagesState_2026_03_09"
+      }
+    ],
+    "urn:lou:obs-pip#note": [
+      {
+        "@value": "Set repository homepageUrl to https://nkllon.github.io/frankenrig/ so users land on site-first view."
+      }
+    ]
+  },
+  {
+    "@id": "urn:lou:obs-pip#Act_FixAux4",
+    "@type": [
+      "urn:lou:obs-pip#Action"
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#label": [
+      {
+        "@value": "Re-apply bottom-center transform to fourth source"
+      }
+    ],
+    "urn:lou:obs-pip#hasEvidence": [
+      {
+        "@id": "urn:lou:obs-pip#Ev_RebuildScript"
+      }
+    ],
+    "urn:lou:obs-pip#note": [
+      {
+        "@value": "Run obs_rebuild_pip_arrangement.py --fix-aux4. Finds scene item by sourceName prefix Aux4Center, applies transform (alignment 36, center X), moves to top."
+      }
+    ]
+  },
+  {
+    "@id": "urn:lou:obs-pip#wsPort",
+    "@type": [
+      "http://www.w3.org/2000/01/rdf-schema#Property"
+    ]
+  },
+  {
+    "@id": "urn:lou:obs-pip#Ev_ApiDiscovery_CurrentRuntime",
+    "@type": [
+      "urn:lou:obs-pip#EvidenceArtifact"
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#label": [
+      {
+        "@value": "API discovery current runtime snapshot"
+      }
+    ],
+    "urn:lou:obs-pip#artifactPath": [
+      {
+        "@value": "/Users/lou/.hammerspoon/evidence/obs_api_discovery_current.json"
+      }
+    ]
+  },
+  {
+    "@id": "urn:lou:obs-pip#Act_SetSecondSourceByClick",
+    "@type": [
+      "urn:lou:obs-pip#Action"
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#label": [
+      {
+        "@value": "Set second source (Aux2) to clicked window ID"
+      }
+    ],
+    "urn:lou:obs-pip#hasEvidence": [
+      {
+        "@id": "urn:lou:obs-pip#Ev_OpenAuxScript"
+      }
+    ],
+    "urn:lou:obs-pip#note": [
+      {
+        "@value": "Script: open_aux_projector_by_click.py. Get window ID (click or --window-id), create or update input Aux2 to that window. Does not open projector (avoids overlay). User opens that source's projector from OBS if desired."
+      }
+    ]
+  },
+  {
+    "@id": "urn:lou:obs-pip#hasEvidence",
+    "@type": [
+      "http://www.w3.org/2000/01/rdf-schema#Property"
+    ]
+  },
+  {
+    "@id": "urn:lou:obs-pip#primaryStakeholder",
+    "@type": [
+      "http://www.w3.org/2000/01/rdf-schema#Property"
+    ]
+  },
+  {
+    "@id": "urn:lou:obs-pip#Issue_VMWindowAmbiguity",
+    "@type": [
+      "urn:lou:obs-pip#Issue"
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#label": [
+      {
+        "@value": "Unused VM window source created ambiguity"
+      }
+    ],
+    "urn:lou:obs-pip#mitigatedBy": [
+      {
+        "@id": "urn:lou:obs-pip#Act_RemoveVmWindow"
+      }
+    ]
+  },
+  {
+    "@id": "urn:lou:obs-pip#hasStakeholder",
+    "@type": [
+      "http://www.w3.org/2000/01/rdf-schema#Property"
+    ]
+  },
+  {
+    "@id": "urn:lou:obs-pip#Constraint_ScreenRecordingPermissions",
+    "@type": [
+      "urn:lou:obs-pip#Constraint"
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#label": [
+      {
+        "@value": "macOS Screen Recording permission"
+      }
+    ],
+    "urn:lou:obs-pip#note": [
+      {
+        "@value": "OBS must be granted Screen Recording permission to avoid S_ERR_CAPTURE_BLACK states for Display Capture inputs."
+      }
+    ]
+  },
+  {
+    "@id": "urn:lou:obs-pip#inputName",
+    "@type": [
+      "http://www.w3.org/2000/01/rdf-schema#Property"
+    ]
+  },
+  {
+    "@id": "urn:lou:obs-pip#Act_RenameInput",
+    "@type": [
+      "urn:lou:obs-pip#Action"
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#label": [
+      {
+        "@value": "Renamed macOS Screen Capture to PiP Capture"
+      }
+    ]
+  },
+  {
+    "@id": "urn:lou:obs-pip#binding",
+    "@type": [
+      "http://www.w3.org/2000/01/rdf-schema#Property"
+    ]
+  },
+  {
+    "@id": "urn:lou:obs-pip#hasAction",
+    "@type": [
+      "http://www.w3.org/2000/01/rdf-schema#Property"
+    ]
+  },
+  {
+    "@id": "urn:lou:obs-pip#Ev_PipScreenshotBefore",
+    "@type": [
+      "urn:lou:obs-pip#EvidenceArtifact"
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#label": [
+      {
+        "@value": "PiP screenshot before (aux cleanup)"
+      }
+    ],
+    "urn:lou:obs-pip#artifactPath": [
+      {
+        "@value": "/Users/lou/.hammerspoon/evidence/obs_pip_screenshot_before.png"
+      }
+    ]
+  },
+  {
+    "@id": "urn:lou:obs-pip#Input_FourthSource_Current",
+    "@type": [
+      "urn:lou:obs-pip#InputSource"
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#label": [
+      {
+        "@value": "Fourth source (bottom center PiP)"
+      }
+    ],
+    "urn:lou:obs-pip#captureMethodLabel": [
+      {
+        "@value": "Window Capture"
+      }
+    ],
+    "urn:lou:obs-pip#captureMethodValue": [
+      {
+        "@type": "http://www.w3.org/2001/XMLSchema#integer",
+        "@value": 1
+      }
+    ],
+    "urn:lou:obs-pip#inputKind": [
+      {
+        "@value": "screen_capture"
+      }
+    ],
+    "urn:lou:obs-pip#inputName": [
+      {
+        "@value": "Aux4Center_*"
+      }
+    ],
+    "urn:lou:obs-pip#note": [
+      {
+        "@value": "Fourth source on PiP canvas; name pattern Aux4Center_<timestamp>. Bottom center between the two small PiPs: alignment 36 (center horizontal | center vertical) so position is the source center; positionX = canvas width/2, positionY scaled. Script: --add-fourth-center --window4 ID; --fix-aux4 re-applies transform by prefix."
+      }
+    ]
+  },
+  {
+    "@id": "urn:lou:obs-pip#Ev_CleanupAfterAux",
+    "@type": [
+      "urn:lou:obs-pip#EvidenceArtifact"
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#label": [
+      {
+        "@value": "Cleanup after aux (narrative)"
+      }
+    ],
+    "urn:lou:obs-pip#artifactPath": [
+      {
+        "@value": "/Users/lou/.hammerspoon/evidence/obs_cleanup_after_aux.md"
+      }
+    ]
+  },
+  {
+    "@id": "urn:lou:obs-pip#Act_RewireCaptureByClick",
+    "@type": [
+      "urn:lou:obs-pip#Action"
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#label": [
+      {
+        "@value": "Rewire OBS capture input to clicked window ID"
+      }
+    ],
+    "urn:lou:obs-pip#hasEvidence": [
+      {
+        "@id": "urn:lou:obs-pip#Ev_RewireScript"
+      }
+    ],
+    "urn:lou:obs-pip#note": [
+      {
+        "@value": "Script: rewire_obs_capture_by_click.py. Get window ID (click or --window-id), SetInputSettings PiP Capture (type=1, window=id), set scene PiP, enable scene item, open preview projector."
+      }
+    ]
+  },
+  {
+    "@id": "urn:lou:obs-pip#Act_EnableWebsocket",
+    "@type": [
+      "urn:lou:obs-pip#Action"
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#label": [
+      {
+        "@value": "Enabled obs-websocket server"
+      }
+    ],
+    "urn:lou:obs-pip#note": [
+      {
+        "@value": "server_enabled=true, auth_required=false, port=4455"
+      }
+    ]
+  },
+  {
+    "@id": "urn:lou:obs-pip#InputSource",
+    "@type": [
+      "http://www.w3.org/2000/01/rdf-schema#Class"
+    ]
+  },
+  {
+    "@id": "urn:lou:obs-pip#Tool",
+    "@type": [
+      "http://www.w3.org/2000/01/rdf-schema#Class"
+    ]
+  },
+  {
+    "@id": "urn:lou:obs-pip#Constraint_WindowBindingFragile",
+    "@type": [
+      "urn:lou:obs-pip#Constraint"
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#label": [
+      {
+        "@value": "Window-bound capture can drift"
+      }
+    ],
+    "urn:lou:obs-pip#note": [
+      {
+        "@value": "Window capture by numeric window ID is structurally fragile across browser restarts and workspace changes; mitigated by click-to-identify and rebuild scripts."
+      }
+    ]
+  },
+  {
+    "@id": "urn:lou:obs-pip#Issue_DuplicateProjectors",
+    "@type": [
+      "urn:lou:obs-pip#Issue"
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#label": [
+      {
+        "@value": "Duplicate projector windows"
+      }
+    ],
+    "urn:lou:obs-pip#mitigatedBy": [
+      {
+        "@id": "urn:lou:obs-pip#Act_CloseDuplicateProjectors"
+      }
+    ],
+    "urn:lou:obs-pip#projectorCount": [
+      {
+        "@type": "http://www.w3.org/2001/XMLSchema#integer",
+        "@value": 24
+      }
+    ]
+  },
+  {
+    "@id": "urn:lou:obs-pip#Feature_PanelLevelControl",
+    "@type": [
+      "urn:lou:obs-pip#Feature"
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#label": [
+      {
+        "@value": "Panel-level channel and power control"
+      }
+    ],
+    "urn:lou:obs-pip#note": [
+      {
+        "@value": "High-level panel operations (change-channel, start, turn-off) for main and auxiliary PiP panels via obs_panel_control.py."
+      }
+    ],
+    "urn:lou:obs-pip#supportedByAction": [
+      {
+        "@id": "urn:lou:obs-pip#Act_PanelControlChangeChannel"
+      },
+      {
+        "@id": "urn:lou:obs-pip#Act_PanelControlStartPanels"
+      },
+      {
+        "@id": "urn:lou:obs-pip#Act_PanelControlTurnOff"
+      }
+    ],
+    "urn:lou:obs-pip#usesTool": [
+      {
+        "@id": "urn:lou:obs-pip#Tool_OBSStudio"
+      },
+      {
+        "@id": "urn:lou:obs-pip#Tool_ObsWebsocket"
+      },
+      {
+        "@id": "urn:lou:obs-pip#Tool_PythonVenvObsws"
+      }
+    ]
+  }
+]

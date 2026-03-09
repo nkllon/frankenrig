@@ -73,6 +73,17 @@ obs:State_Current a obs:SystemState ;
         obs:Ev_ScreenshotAfter,
         obs:Ev_SourceUrls,
         obs:Ev_WindowsAfter ;
+    obs:hasUseCase obs:UseCase_DualNewsMonitoring,
+        obs:UseCase_PiPRecoveryAfterCrash,
+        obs:UseCase_PanelChannelSwitching,
+        obs:UseCase_DemoRecordingAndDocs ;
+    obs:requiredTool obs:Tool_OBSStudio,
+        obs:Tool_ObsWebsocket,
+        obs:Tool_Hammerspoon,
+        obs:Tool_PythonVenvObsws,
+        obs:Tool_Chrome,
+        obs:Tool_FFmpeg,
+        obs:Tool_GitHubPages ;
     obs:hasHotkey obs:HotkeyChromePiP,
         obs:HotkeyObsFallback,
         obs:HotkeyObsMain ;
@@ -476,6 +487,9 @@ obs:Issue_WindowBindingRisk a obs:Issue ;
     rdfs:label "Window-bound capture ID can drift" ;
     obs:mitigatedBy obs:Act_IdentifyWindowByClick,
         obs:Act_RewireCaptureByClick ;
+    obs:riskLevel "medium" ;
+    obs:riskImpact "secondary view may silently drift or break when window IDs change" ;
+    obs:riskLikelihood "structural" ;
     obs:note "No instability reported for last couple of hours, but risk remains structurally present." .
 
 obs:ObsMain a obs:ObsInstance ;
@@ -505,4 +519,154 @@ obs:Ev_RebuildScript a obs:EvidenceArtifact ;
     rdfs:label "Rebuild PiP arrangement from scratch" ;
     obs:artifactPath "/Users/lou/.hammerspoon/obs_rebuild_pip_arrangement.py" ;
     obs:note "Modes: two windows (window1/2 or clicks); --lower-right for third (Aux3LR_<timestamp>, insets 540/125); --add-fourth-center --window4 for fourth (Aux4Center_<timestamp>, alignment 36); --fix-aux3/--fix-aux4 re-apply transform by prefix; --diagnose. SetSceneItemTransform bounds >= 1. Response matching by requestId." .
+
+obs:Feature a rdfs:Class .
+
+obs:UseCase a rdfs:Class .
+
+obs:Stakeholder a rdfs:Class .
+
+obs:Tool a rdfs:Class .
+
+obs:Constraint a rdfs:Class .
+
+obs:hasUseCase a rdfs:Property .
+
+obs:hasStakeholder a rdfs:Property .
+
+obs:primaryStakeholder a rdfs:Property .
+
+obs:hasFeature a rdfs:Property .
+
+obs:supportedByAction a rdfs:Property .
+
+obs:usesTool a rdfs:Property .
+
+obs:requiredTool a rdfs:Property .
+
+obs:hasConstraint a rdfs:Property .
+
+obs:riskLevel a rdfs:Property .
+
+obs:riskLikelihood a rdfs:Property .
+
+obs:riskImpact a rdfs:Property .
+
+obs:Stakeholder_OperatorLou a obs:Stakeholder ;
+    rdfs:label "Rig operator (Lou)" ;
+    obs:note "Primary operator running the frankenrig OBS PiP setup on macOS." .
+
+obs:Stakeholder_DeveloperFuture a obs:Stakeholder ;
+    rdfs:label "Future developer / maintainer" ;
+    obs:note "Person modifying scripts, ontology, or configuration for new channels or platforms." .
+
+obs:Stakeholder_Viewer a obs:Stakeholder ;
+    rdfs:label "Viewer / audience" ;
+    obs:note "End viewer who benefits from stable dual-view news monitoring layout." .
+
+obs:Tool_OBSStudio a obs:Tool ;
+    rdfs:label "OBS Studio" ;
+    obs:note "Desktop streaming/recording application providing scenes, inputs, and projector windows." .
+
+obs:Tool_ObsWebsocket a obs:Tool ;
+    rdfs:label "OBS WebSocket 5.x" ;
+    obs:note "WebSocket control API enabling deterministic programmatic access from Python helpers." .
+
+obs:Tool_Hammerspoon a obs:Tool ;
+    rdfs:label "Hammerspoon" ;
+    obs:note "macOS automation engine providing hotkeys and window management used by init.lua." .
+
+obs:Tool_PythonVenvObsws a obs:Tool ;
+    rdfs:label "Python + obsws virtualenv" ;
+    obs:note "Python environment (for example .venv_obsws) with websocket-client and any OBS helper libraries used by Python scripts." .
+
+obs:Tool_Chrome a obs:Tool ;
+    rdfs:label "Google Chrome" ;
+    obs:note "Browser providing native PiP toggle and full-screen windows for each channel view." .
+
+obs:Tool_FFmpeg a obs:Tool ;
+    rdfs:label "ffmpeg" ;
+    obs:note "CLI tool used to generate obs_clip.mp4 and obs_clip.gif demo media." .
+
+obs:Tool_GitHubPages a obs:Tool ;
+    rdfs:label "GitHub Pages" ;
+    obs:note "Static site hosting for docs/ and demo video at the frankenrig project URL." .
+
+obs:Constraint_MacOSOnly a obs:Constraint ;
+    rdfs:label "macOS-only observations" ;
+    obs:note "Ontology and evidence are specific to Lou's macOS rig; window IDs, permissions, and capture behavior may differ on other platforms." .
+
+obs:Constraint_ObsWebsocketRequired a obs:Constraint ;
+    rdfs:label "obs-websocket must be enabled" ;
+    obs:note "Requires OBS WebSocket 5.x enabled on port 4455 with matching rpcVersion for all scripted control paths." .
+
+obs:Constraint_ScreenRecordingPermissions a obs:Constraint ;
+    rdfs:label "macOS Screen Recording permission" ;
+    obs:note "OBS must be granted Screen Recording permission to avoid S_ERR_CAPTURE_BLACK states for Display Capture inputs." .
+
+obs:Constraint_WindowBindingFragile a obs:Constraint ;
+    rdfs:label "Window-bound capture can drift" ;
+    obs:note "Window capture by numeric window ID is structurally fragile across browser restarts and workspace changes; mitigated by click-to-identify and rebuild scripts." .
+
+obs:UseCase_DualNewsMonitoring a obs:UseCase ;
+    rdfs:label "Dual news monitoring (primary PiP + secondary OBS projector)" ;
+    obs:note "Operator watches two concurrent news streams: native browser PiP primary, OBS floating projector secondary." ;
+    obs:hasStakeholder obs:Stakeholder_OperatorLou,
+        obs:Stakeholder_Viewer ;
+    obs:hasFeature obs:Feature_FloatingPiPRecovery .
+
+obs:UseCase_PiPRecoveryAfterCrash a obs:UseCase ;
+    rdfs:label "Recover PiP rig after restart or drift" ;
+    obs:note "Rebuilds scene graph and window bindings deterministically after OBS restart, window ID drift, or accidental input removal." ;
+    obs:hasStakeholder obs:Stakeholder_OperatorLou,
+        obs:Stakeholder_DeveloperFuture ;
+    obs:hasFeature obs:Feature_FloatingPiPRecovery ;
+    obs:hasIssue obs:Issue_WindowBindingRisk .
+
+obs:UseCase_PanelChannelSwitching a obs:UseCase ;
+    rdfs:label "Switch news channels on individual PiP panels" ;
+    obs:note "Use obs_panel_control.py to change-channel, start, or turn-off individual PiP panels without touching layout transforms." ;
+    obs:hasStakeholder obs:Stakeholder_OperatorLou ;
+    obs:hasFeature obs:Feature_PanelLevelControl .
+
+obs:UseCase_DemoRecordingAndDocs a obs:UseCase ;
+    rdfs:label "Record and publish frankenrig demo" ;
+    obs:note "Produce obs_clip.mp4/obs_clip.gif from a working rig and publish documentation and video via GitHub Pages." ;
+    obs:hasStakeholder obs:Stakeholder_OperatorLou,
+        obs:Stakeholder_DeveloperFuture,
+        obs:Stakeholder_Viewer ;
+    obs:hasFeature obs:Feature_DocumentationAndEvidence .
+
+obs:Feature_FloatingPiPRecovery a obs:Feature ;
+    rdfs:label "Floating OBS PiP recovery and layout" ;
+    obs:note "End-to-end ability to reconstruct four-window PiP scene and projector from evidence and window IDs." ;
+    obs:supportedByAction obs:Act_RebuildPipArrangement,
+        obs:Act_IdentifyWindowByClick,
+        obs:Act_RewireCaptureByClick ;
+    obs:usesTool obs:Tool_OBSStudio,
+        obs:Tool_ObsWebsocket,
+        obs:Tool_PythonVenvObsws,
+        obs:Tool_Chrome .
+
+obs:Feature_PanelLevelControl a obs:Feature ;
+    rdfs:label "Panel-level channel and power control" ;
+    obs:note "High-level panel operations (change-channel, start, turn-off) for main and auxiliary PiP panels via obs_panel_control.py." ;
+    obs:supportedByAction obs:Act_PanelControlChangeChannel,
+        obs:Act_PanelControlStartPanels,
+        obs:Act_PanelControlTurnOff ;
+    obs:usesTool obs:Tool_OBSStudio,
+        obs:Tool_ObsWebsocket,
+        obs:Tool_PythonVenvObsws .
+
+obs:Feature_DocumentationAndEvidence a obs:Feature ;
+    rdfs:label "Evidence-backed documentation and pages" ;
+    obs:note "Keep README, docs/index.md, ontology, and demo media in sync with current rig state and publish via GitHub Pages." ;
+    obs:supportedByAction obs:Act_EnableGitHubPagesDocs,
+        obs:Act_PublishTopVideoOnPages,
+        obs:Act_ReplaceDemoClipWithTrimmedSource,
+        obs:Act_SetRepoHomepageToPages,
+        obs:Act_SetRepoPublic,
+        obs:Act_ValidateOntologyWithRDFlib ;
+    obs:usesTool obs:Tool_GitHubPages,
+        obs:Tool_FFmpeg .
 
