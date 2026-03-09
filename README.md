@@ -20,3 +20,7 @@ Hammerspoon + OBS PiP automation: config and scripts for projector/capture contr
 - Current window IDs and input list: **evidence/obs_api_discovery_review_now.json** (drifts after rebinds).
 - How things work and how to recover: **evidence/obs_pip_findings.md**.
 - Rewire PiP capture to a new window: `./.venv_obsws/bin/python3 rewire_obs_capture_by_click.py` (or with `--window-id N` from review_now).
+
+## 1Password / credentials
+
+This repo does not store secrets. For full instructions on using 1Password (e.g. `op` CLI, `get_creds`, agent guardrails), see the **Eudorus** repository. Deployments on this machine: **`/Volumes/lemon/cursor/eudorus`** or **`/Volumes/lemon/codex/eudorus`** (or under `/Volumes/lemon/gemini/eudorus`). Key docs: `.kiro/steering/credentials.md`, `AGENTS.md` (1Password access guardrails).
