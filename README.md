@@ -6,11 +6,10 @@ Hammerspoon + OBS PiP automation: config and scripts for projector/capture contr
 
 Short clip of the rig running in context (OBS with all panels + control surface in the upper-right):
 
-```1:1:obs_clip.mp4
-// OBS PiP frankenrig demo clip
-```
-
-> Place your recorded file as `obs_clip.mp4` at the repo root so this link works both locally and on GitHub.
+<video src="obs_clip.mp4" controls loop muted playsinline style="max-width: 100%; height: auto;">
+  Your browser does not support the video tag. You can download the clip from
+  <a href="obs_clip.mp4">obs_clip.mp4</a>.
+</video>
 
 ## What’s here
 
