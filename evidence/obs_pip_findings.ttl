@@ -106,8 +106,8 @@ obs:State_Current a obs:SystemState ;
   obs:hasOrphanInputs obs:OrphanInputs_ReviewNow ;
   obs:hasHotkey obs:HotkeyObsMain, obs:HotkeyObsFallback, obs:HotkeyChromePiP ;
   obs:hasIssue obs:Issue_WindowBindingRisk ;
-  obs:hasEvidence obs:Ev_ApiDiscovery_Current, obs:Ev_ApiDiscovery_CurrentRuntime, obs:Ev_WindowsAfter, obs:Ev_ScreenshotAfter, obs:Ev_AfterRewireSuccess, obs:Ev_SceneGeometry, obs:Ev_SourceUrls, obs:Ev_CaptureChromeUrlsScript, obs:Ev_ApiDiscovery_ReviewNow, obs:Ev_PipCurrentScreenshot, obs:Ev_PipScreenshotBefore, obs:Ev_PipScreenshotAfter, obs:Ev_CleanupAfterAux ;
-  obs:hasAction obs:Act_RemoveVmWindow, obs:Act_RenameInput, obs:Act_IdentifyWindowByClick, obs:Act_RewireCaptureByClick, obs:Act_SetSecondSourceByClick, obs:Act_RebuildPipArrangement, obs:Act_AddThirdSourceLowerRight, obs:Act_FixAux3, obs:Act_AddFourthSourceCenter, obs:Act_FixAux4 .
+  obs:hasEvidence obs:Ev_ApiDiscovery_Current, obs:Ev_ApiDiscovery_CurrentRuntime, obs:Ev_WindowsAfter, obs:Ev_ScreenshotAfter, obs:Ev_AfterRewireSuccess, obs:Ev_SceneGeometry, obs:Ev_SourceUrls, obs:Ev_CaptureChromeUrlsScript, obs:Ev_ApiDiscovery_ReviewNow, obs:Ev_PipCurrentScreenshot, obs:Ev_PipScreenshotBefore, obs:Ev_PipScreenshotAfter, obs:Ev_CleanupAfterAux, obs:Ev_PanelControlScript, obs:Ev_PanelControlConfig ;
+  obs:hasAction obs:Act_RemoveVmWindow, obs:Act_RenameInput, obs:Act_IdentifyWindowByClick, obs:Act_RewireCaptureByClick, obs:Act_SetSecondSourceByClick, obs:Act_RebuildPipArrangement, obs:Act_AddThirdSourceLowerRight, obs:Act_FixAux3, obs:Act_AddFourthSourceCenter, obs:Act_FixAux4, obs:Act_PanelControlChangeChannel, obs:Act_PanelControlTurnOff, obs:Act_PanelControlStartPanels .
 
 obs:Scene_PiP_Current a obs:Scene ;
   obs:sceneName "PiP" ;
@@ -221,6 +221,21 @@ obs:Act_FixAux4 a obs:Action ;
   obs:note "Run obs_rebuild_pip_arrangement.py --fix-aux4. Finds scene item by sourceName prefix Aux4Center, applies transform (alignment 36, center X), moves to top." ;
   obs:hasEvidence obs:Ev_RebuildScript .
 
+obs:Act_PanelControlChangeChannel a obs:Action ;
+  rdfs:label "Change channel on panel (logical panel id)" ;
+  obs:note "High-level panel control: obs_panel_control.py change-channel --panel <main|aux_left|aux_right|aux_center> --window-id N [--channel ID]. Rebinds panel's window capture input while preserving PiP layout." ;
+  obs:hasEvidence obs:Ev_PanelControlScript .
+
+obs:Act_PanelControlTurnOff a obs:Action ;
+  rdfs:label "Turn off selected PiP panels" ;
+  obs:note "High-level panel control: obs_panel_control.py turn-off <panel...>. Resolves logical panel IDs to scene items in PiP scene and disables them so the corresponding panels are hidden (and can later be restarted)." ;
+  obs:hasEvidence obs:Ev_PanelControlScript .
+
+obs:Act_PanelControlStartPanels a obs:Action ;
+  rdfs:label "Start streaming on selected PiP panels" ;
+  obs:note "High-level panel control: obs_panel_control.py start <panel...>. Resolves logical panel IDs to scene items in PiP scene and re-enables them so the corresponding panels become visible again." ;
+  obs:hasEvidence obs:Ev_PanelControlScript .
+
 obs:Ev_OpenAuxScript a obs:EvidenceArtifact ;
   rdfs:label "Set second source by click (no projector open)" ;
   obs:artifactPath "/Users/lou/.hammerspoon/open_aux_projector_by_click.py" ;
@@ -256,6 +271,16 @@ obs:Ev_RewireScript a obs:EvidenceArtifact ;
   rdfs:label "OBS rewire-by-click script (draft)" ;
   obs:artifactPath "/Users/lou/.hammerspoon/rewire_obs_capture_by_click.py" ;
   obs:note "Run with: .venv_obsws/bin/python3 rewire_obs_capture_by_click.py. Optional: --window-id N, --dry-run. Uses OBS websocket API to rebind PiP Capture to clicked window ID." .
+
+obs:Ev_PanelControlScript a obs:EvidenceArtifact ;
+  rdfs:label "OBS panel control script (panel-level operations)" ;
+  obs:artifactPath "/Users/lou/.hammerspoon/obs_panel_control.py" ;
+  obs:note "Implements change-channel, turn-off, and start operations for PiP panels via OBS WebSocket using logical panel IDs (main, aux_left, aux_right, aux_center) and structured JSON status output." .
+
+obs:Ev_PanelControlConfig a obs:EvidenceArtifact ;
+  rdfs:label "OBS panel control configuration" ;
+  obs:artifactPath "/Users/lou/.hammerspoon/obs_panel_control_config.json" ;
+  obs:note "Defines mapping from logical panel IDs to OBS input/scene items and documents available channel labels for panel stream control." .
 
 obs:Ev_AfterRewireSuccess a obs:EvidenceArtifact ;
   rdfs:label "OBS API snapshot after successful rewire (post-restart)" ;

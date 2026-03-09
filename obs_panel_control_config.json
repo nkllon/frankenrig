@@ -1,0 +1,31 @@
+{
+  "scene": "PiP",
+  "panels": {
+    "main": {
+      "inputName": "PiP Capture",
+      "sceneItemSourceName": "PiP Capture"
+    },
+    "aux_left": {
+      "inputName": "Aux2",
+      "sceneItemSourceName": "Aux2"
+    },
+    "aux_right": {
+      "inputNamePrefix": "Aux3LR",
+      "sceneItemSourcePrefix": "Aux3LR"
+    },
+    "aux_center": {
+      "inputNamePrefix": "Aux4Center",
+      "sceneItemSourcePrefix": "Aux4Center"
+    }
+  },
+  "channels": {
+    "dw_live": {
+      "description": "Deutsche Welle Live (YouTube)",
+      "note": "Current implementation expects Chrome window already showing this channel; associate window IDs manually when changing."
+    },
+    "bbc_live": {
+      "description": "BBC News Live",
+      "note": "Same as above; channel ID is metadata only for now."
+    }
+  }
+}
