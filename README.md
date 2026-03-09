@@ -1,6 +1,6 @@
-# Hammerspoon + OBS PiP automation
+# frankenrig
 
-Hammerspoon configuration and scripts for OBS projector/capture control, with evidence and ontology documenting the current stable state.
+Hammerspoon + OBS PiP automation: config and scripts for projector/capture control, with evidence and ontology documenting the current stable state.
 
 ## Before you use or change anything
 
