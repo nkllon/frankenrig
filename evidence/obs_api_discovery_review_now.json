@@ -1,0 +1,546 @@
+{
+  "version": {
+    "ok": true,
+    "status": {
+      "code": 100,
+      "result": true
+    },
+    "data": {
+      "availableRequests": [
+        "GetMonitorList",
+        "OpenInputInteractDialog",
+        "SetMediaInputCursor",
+        "CreateRecordChapter",
+        "ToggleRecordPause",
+        "StopRecord",
+        "ToggleRecord",
+        "GetRecordStatus",
+        "SendStreamCaption",
+        "TriggerMediaInputAction",
+        "StopStream",
+        "StartStream",
+        "SetOutputSettings",
+        "GetOutputSettings",
+        "StartOutput",
+        "ToggleOutput",
+        "SaveReplayBuffer",
+        "StopReplayBuffer",
+        "StartReplayBuffer",
+        "StopVirtualCam",
+        "StartVirtualCam",
+        "SetSceneItemPrivateSettings",
+        "GetStudioModeEnabled",
+        "GetSceneItemPrivateSettings",
+        "SetSceneItemBlendMode",
+        "GetSceneItemLocked",
+        "SetSceneItemIndex",
+        "SetSceneItemEnabled",
+        "GetSceneItemEnabled",
+        "GetLastReplayBufferReplay",
+        "GetSceneItemBlendMode",
+        "GetSceneItemTransform",
+        "GetGroupSceneItemList",
+        "GetSceneItemId",
+        "ToggleVirtualCam",
+        "GetSceneItemList",
+        "GetInputList",
+        "GetVideoSettings",
+        "DuplicateSceneItem",
+        "GetSourcePrivateSettings",
+        "GetSourceScreenshot",
+        "SetSourceFilterIndex",
+        "SetTBarPosition",
+        "GetSourceFilter",
+        "OpenInputFiltersDialog",
+        "SetSourceFilterName",
+        "RemoveSourceFilter",
+        "SetSceneItemLocked",
+        "GetSourceFilterDefaultSettings",
+        "GetSourceFilterList",
+        "GetMediaInputStatus",
+        "TriggerStudioModeTransition",
+        "GetCurrentSceneTransitionCursor",
+        "ResumeRecord",
+        "GetInputAudioMonitorType",
+        "GetSceneItemSource",
+        "SetCurrentSceneTransitionDuration",
+        "OffsetMediaInputCursor",
+        "GetVirtualCamStatus",
+        "CreateSourceFilter",
+        "SetCurrentSceneTransition",
+        "GetTransitionKindList",
+        "SetInputAudioTracks",
+        "OpenInputPropertiesDialog",
+        "ToggleReplayBuffer",
+        "GetHotkeyList",
+        "GetInputDeinterlaceFieldOrder",
+        "GetInputVolume",
+        "GetInputAudioTracks",
+        "SetCurrentProgramScene",
+        "SetInputAudioMonitorType",
+        "GetSourceFilterKindList",
+        "SetInputAudioSyncOffset",
+        "SetInputAudioBalance",
+        "GetCurrentSceneTransition",
+        "SetInputSettings",
+        "SetSourceFilterEnabled",
+        "GetInputSettings",
+        "OpenSourceProjector",
+        "SetSceneItemTransform",
+        "GetInputAudioBalance",
+        "BroadcastCustomEvent",
+        "GetPersistentData",
+        "SetInputName",
+        "GetInputKindList",
+        "CreateSceneCollection",
+        "GetOutputStatus",
+        "GetSceneSceneTransitionOverride",
+        "SetInputMute",
+        "GetSceneItemIndex",
+        "RemoveScene",
+        "SetCurrentSceneTransitionSettings",
+        "GetSceneTransitionList",
+        "PauseRecord",
+        "SetSceneSceneTransitionOverride",
+        "OpenVideoMixProjector",
+        "SetCurrentPreviewScene",
+        "GetSceneCollectionList",
+        "SetRecordDirectory",
+        "SplitRecordFile",
+        "SetSceneName",
+        "CreateScene",
+        "GetInputAudioSyncOffset",
+        "GetStreamStatus",
+        "GetGroupList",
+        "GetOutputList",
+        "GetSceneList",
+        "CreateSceneItem",
+        "GetInputMute",
+        "GetCurrentProgramScene",
+        "SetSourceFilterSettings",
+        "CallVendorRequest",
+        "SetStreamServiceSettings",
+        "SaveSourceScreenshot",
+        "GetInputDeinterlaceMode",
+        "GetRecordDirectory",
+        "GetInputDefaultSettings",
+        "GetStreamServiceSettings",
+        "CreateProfile",
+        "RemoveProfile",
+        "RemoveInput",
+        "SetCurrentSceneCollection",
+        "SetInputDeinterlaceMode",
+        "GetProfileList",
+        "ToggleInputMute",
+        "TriggerHotkeyByKeySequence",
+        "CreateInput",
+        "GetCurrentPreviewScene",
+        "TriggerHotkeyByName",
+        "SetStudioModeEnabled",
+        "GetSourceActive",
+        "SetVideoSettings",
+        "PressInputPropertiesButton",
+        "SetProfileParameter",
+        "SetInputVolume",
+        "ToggleStream",
+        "SetSourcePrivateSettings",
+        "Sleep",
+        "StartRecord",
+        "GetReplayBufferStatus",
+        "SetPersistentData",
+        "GetProfileParameter",
+        "GetInputPropertiesListPropertyItems",
+        "GetStats",
+        "GetSpecialInputs",
+        "SetInputDeinterlaceFieldOrder",
+        "RemoveSceneItem",
+        "StopOutput",
+        "SetCurrentProfile",
+        "GetVersion"
+      ],
+      "obsVersion": "32.0.4",
+      "obsWebSocketVersion": "5.6.3",
+      "platform": "macos",
+      "platformDescription": "macOS 26.3",
+      "rpcVersion": 1,
+      "supportedImageFormats": [
+        "bmp",
+        "cur",
+        "heic",
+        "heif",
+        "icns",
+        "ico",
+        "jfif",
+        "jp2",
+        "jpeg",
+        "jpg",
+        "pbm",
+        "pgm",
+        "png",
+        "ppm",
+        "tif",
+        "tiff",
+        "wbmp",
+        "webp",
+        "xbm",
+        "xpm"
+      ]
+    }
+  },
+  "scene_list": {
+    "ok": true,
+    "status": {
+      "code": 100,
+      "result": true
+    },
+    "data": {
+      "currentPreviewSceneName": null,
+      "currentPreviewSceneUuid": null,
+      "currentProgramSceneName": "PiP",
+      "currentProgramSceneUuid": "2f8145df-f417-4ff6-9786-1eb94242c114",
+      "scenes": [
+        {
+          "sceneIndex": 0,
+          "sceneName": "PiP",
+          "sceneUuid": "2f8145df-f417-4ff6-9786-1eb94242c114"
+        }
+      ]
+    }
+  },
+  "program_scene": {
+    "ok": true,
+    "status": {
+      "code": 100,
+      "result": true
+    },
+    "data": {
+      "currentProgramSceneName": "PiP",
+      "currentProgramSceneUuid": "2f8145df-f417-4ff6-9786-1eb94242c114",
+      "sceneName": "PiP",
+      "sceneUuid": "2f8145df-f417-4ff6-9786-1eb94242c114"
+    }
+  },
+  "input_list": {
+    "ok": true,
+    "status": {
+      "code": 100,
+      "result": true
+    },
+    "data": {
+      "inputs": [
+        {
+          "inputKind": "screen_capture",
+          "inputKindCaps": 32907,
+          "inputName": "PiP Capture",
+          "inputUuid": "5f410c72-0607-457c-a502-742134f872e4",
+          "unversionedInputKind": "screen_capture"
+        },
+        {
+          "inputKind": "screen_capture",
+          "inputKindCaps": 32907,
+          "inputName": "Aux2",
+          "inputUuid": "ad69efd3-5516-40fe-9a4a-8432f3f4c9a3",
+          "unversionedInputKind": "screen_capture"
+        },
+        {
+          "inputKind": "screen_capture",
+          "inputKindCaps": 32907,
+          "inputName": "Aux3",
+          "inputUuid": "3874b4e4-a087-4861-9718-def3164068e7",
+          "unversionedInputKind": "screen_capture"
+        },
+        {
+          "inputKind": "screen_capture",
+          "inputKindCaps": 32907,
+          "inputName": "Aux3 Capture",
+          "inputUuid": "abdcb36c-b5f0-4f75-86e3-425b943c0ca2",
+          "unversionedInputKind": "screen_capture"
+        },
+        {
+          "inputKind": "screen_capture",
+          "inputKindCaps": 32907,
+          "inputName": "Aux3LR",
+          "inputUuid": "828f02c4-07a7-4a3a-89b1-dc861f0f3e76",
+          "unversionedInputKind": "screen_capture"
+        },
+        {
+          "inputKind": "screen_capture",
+          "inputKindCaps": 32907,
+          "inputName": "Aux3LR_1773018462",
+          "inputUuid": "70011082-f888-4a16-9a00-6ae68ee7cc6c",
+          "unversionedInputKind": "screen_capture"
+        },
+        {
+          "inputKind": "screen_capture",
+          "inputKindCaps": 32907,
+          "inputName": "Aux4Center_1773019268",
+          "inputUuid": "73a29437-494a-4d45-b5db-8b2a975cb2c1",
+          "unversionedInputKind": "screen_capture"
+        }
+      ]
+    }
+  },
+  "inputs_with_settings": [
+    {
+      "inputName": "PiP Capture",
+      "inputKind": "screen_capture",
+      "settings_ok": true,
+      "settings": {
+        "hide_obs": true,
+        "show_empty_names": true,
+        "show_hidden_windows": true,
+        "type": 1,
+        "window": 21552
+      }
+    },
+    {
+      "inputName": "Aux2",
+      "inputKind": "screen_capture",
+      "settings_ok": true,
+      "settings": {
+        "hide_obs": true,
+        "show_cursor": true,
+        "show_empty_names": true,
+        "show_hidden_windows": true,
+        "type": 1,
+        "window": 21564
+      }
+    },
+    {
+      "inputName": "Aux3",
+      "inputKind": "screen_capture",
+      "settings_ok": true,
+      "settings": {
+        "hide_obs": true,
+        "show_cursor": true,
+        "show_empty_names": true,
+        "show_hidden_windows": true,
+        "type": 1,
+        "window": 23187
+      }
+    },
+    {
+      "inputName": "Aux3 Capture",
+      "inputKind": "screen_capture",
+      "settings_ok": true,
+      "settings": {
+        "hide_obs": true,
+        "show_cursor": true,
+        "show_empty_names": true,
+        "show_hidden_windows": true,
+        "type": 1,
+        "window": 23187
+      }
+    },
+    {
+      "inputName": "Aux3LR",
+      "inputKind": "screen_capture",
+      "settings_ok": true,
+      "settings": {
+        "hide_obs": true,
+        "show_cursor": true,
+        "show_empty_names": true,
+        "show_hidden_windows": true,
+        "type": 1,
+        "window": 23187
+      }
+    },
+    {
+      "inputName": "Aux3LR_1773018462",
+      "inputKind": "screen_capture",
+      "settings_ok": true,
+      "settings": {
+        "hide_obs": true,
+        "show_cursor": true,
+        "show_empty_names": true,
+        "show_hidden_windows": true,
+        "type": 1,
+        "window": 23187
+      }
+    },
+    {
+      "inputName": "Aux4Center_1773019268",
+      "inputKind": "screen_capture",
+      "settings_ok": true,
+      "settings": {
+        "hide_obs": true,
+        "show_cursor": true,
+        "show_empty_names": true,
+        "show_hidden_windows": true,
+        "type": 1,
+        "window": 23720
+      }
+    }
+  ],
+  "scene_items": [
+    {
+      "sceneName": "PiP",
+      "items_ok": true,
+      "items": [
+        {
+          "inputKind": "screen_capture",
+          "isGroup": null,
+          "sceneItemBlendMode": "OBS_BLEND_NORMAL",
+          "sceneItemEnabled": true,
+          "sceneItemId": 4,
+          "sceneItemIndex": 0,
+          "sceneItemLocked": false,
+          "sceneItemTransform": {
+            "alignment": 5,
+            "boundsAlignment": 0,
+            "boundsHeight": 2254.0,
+            "boundsType": "OBS_BOUNDS_STRETCH",
+            "boundsWidth": 3840.0,
+            "cropBottom": 0,
+            "cropLeft": 0,
+            "cropRight": 0,
+            "cropToBounds": false,
+            "cropTop": 0,
+            "height": 2254.0,
+            "positionX": 0.0,
+            "positionY": -95.0,
+            "rotation": 0.0,
+            "scaleX": 1.0,
+            "scaleY": 1.0,
+            "sourceHeight": 2254.0,
+            "sourceWidth": 3840.0,
+            "width": 3840.0
+          },
+          "sourceName": "PiP Capture",
+          "sourceType": "OBS_SOURCE_TYPE_INPUT",
+          "sourceUuid": "5f410c72-0607-457c-a502-742134f872e4"
+        },
+        {
+          "inputKind": "screen_capture",
+          "isGroup": null,
+          "sceneItemBlendMode": "OBS_BLEND_NORMAL",
+          "sceneItemEnabled": true,
+          "sceneItemId": 8,
+          "sceneItemIndex": 1,
+          "sceneItemLocked": false,
+          "sceneItemTransform": {
+            "alignment": 5,
+            "boundsAlignment": 0,
+            "boundsHeight": 1.0,
+            "boundsType": "OBS_BOUNDS_NONE",
+            "boundsWidth": 1.0,
+            "cropBottom": 0,
+            "cropLeft": 0,
+            "cropRight": 0,
+            "cropToBounds": false,
+            "cropTop": 0,
+            "height": 564.0,
+            "positionX": 20.0,
+            "positionY": 1561.0,
+            "rotation": 0.0,
+            "scaleX": 0.2502604126930237,
+            "scaleY": 0.2502218186855316,
+            "sourceHeight": 2254.0,
+            "sourceWidth": 3840.0,
+            "width": 961.0
+          },
+          "sourceName": "Aux2",
+          "sourceType": "OBS_SOURCE_TYPE_INPUT",
+          "sourceUuid": "ad69efd3-5516-40fe-9a4a-8432f3f4c9a3"
+        },
+        {
+          "inputKind": "screen_capture",
+          "isGroup": null,
+          "sceneItemBlendMode": "OBS_BLEND_NORMAL",
+          "sceneItemEnabled": true,
+          "sceneItemId": 13,
+          "sceneItemIndex": 2,
+          "sceneItemLocked": false,
+          "sceneItemTransform": {
+            "alignment": 8,
+            "boundsAlignment": 0,
+            "boundsHeight": 1.0,
+            "boundsType": "OBS_BOUNDS_NONE",
+            "boundsWidth": 1.0,
+            "cropBottom": 0,
+            "cropLeft": 0,
+            "cropRight": 0,
+            "cropToBounds": false,
+            "cropTop": 0,
+            "height": 564.0,
+            "positionX": 3300.0,
+            "positionY": 2129.0,
+            "rotation": 0.0,
+            "scaleX": 0.2502604126930237,
+            "scaleY": 0.2502218186855316,
+            "sourceHeight": 2254.0,
+            "sourceWidth": 3840.0,
+            "width": 961.0
+          },
+          "sourceName": "Aux3LR_1773018462",
+          "sourceType": "OBS_SOURCE_TYPE_INPUT",
+          "sourceUuid": "70011082-f888-4a16-9a00-6ae68ee7cc6c"
+        },
+        {
+          "inputKind": "screen_capture",
+          "isGroup": null,
+          "sceneItemBlendMode": "OBS_BLEND_NORMAL",
+          "sceneItemEnabled": true,
+          "sceneItemId": 14,
+          "sceneItemIndex": 3,
+          "sceneItemLocked": false,
+          "sceneItemTransform": {
+            "alignment": 36,
+            "boundsAlignment": 0,
+            "boundsHeight": 1.0,
+            "boundsType": "OBS_BOUNDS_NONE",
+            "boundsWidth": 1.0,
+            "cropBottom": 0,
+            "cropLeft": 0,
+            "cropRight": 0,
+            "cropToBounds": false,
+            "cropTop": 0,
+            "height": 564.0,
+            "positionX": 1920.0,
+            "positionY": 1561.0,
+            "rotation": 0.0,
+            "scaleX": 0.2502604126930237,
+            "scaleY": 0.2502218186855316,
+            "sourceHeight": 2254.0,
+            "sourceWidth": 3840.0,
+            "width": 961.0
+          },
+          "sourceName": "Aux4Center_1773019268",
+          "sourceType": "OBS_SOURCE_TYPE_INPUT",
+          "sourceUuid": "73a29437-494a-4d45-b5db-8b2a975cb2c1"
+        }
+      ]
+    }
+  ],
+  "record_status": {
+    "ok": true,
+    "status": {
+      "code": 100,
+      "result": true
+    },
+    "data": {
+      "outputActive": false,
+      "outputBytes": 0,
+      "outputDuration": 0,
+      "outputPaused": false,
+      "outputTimecode": "00:00:00.000"
+    }
+  },
+  "stream_status": {
+    "ok": true,
+    "status": {
+      "code": 100,
+      "result": true
+    },
+    "data": {
+      "outputActive": false,
+      "outputBytes": 0,
+      "outputCongestion": 0.0,
+      "outputDuration": 0,
+      "outputReconnecting": false,
+      "outputSkippedFrames": 0,
+      "outputTimecode": "00:00:00.000",
+      "outputTotalFrames": 0
+    }
+  }
+}

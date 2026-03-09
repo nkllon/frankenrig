@@ -1,0 +1,14 @@
+# Virtual env and caches
+.venv_obsws/
+__pycache__/
+*.pyc
+*.pyo
+
+# macOS
+.DS_Store
+
+# Editor / IDE
+.idea/
+*.swp
+*.swo
+*~

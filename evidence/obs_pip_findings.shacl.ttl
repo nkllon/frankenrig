@@ -1,0 +1,81 @@
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix obs: <urn:lou:obs-pip#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+obs:CurrentStateShape a sh:NodeShape ;
+  sh:targetNode obs:State_Current ;
+  sh:property [
+    sh:path obs:hasScene ;
+    sh:minCount 1 ;
+    sh:maxCount 1 ;
+    sh:message "Current state must have exactly one scene." ;
+  ] ;
+  sh:property [
+    sh:path obs:hasInput ;
+    sh:minCount 1 ;
+    sh:message "Current state must have at least one input (PiP Capture, Aux2, optional third lower-right, optional fourth bottom center)." ;
+  ] ;
+  sh:property [
+    sh:path obs:hasHotkey ;
+    sh:minCount 3 ;
+    sh:message "Current state should include OBS main/fallback plus browser PiP hotkeys." ;
+  ] ;
+  sh:property [
+    sh:path obs:hasObsInstance ;
+    sh:minCount 1 ;
+    sh:maxCount 1 ;
+  ] .
+
+obs:CurrentSceneNameShape a sh:NodeShape ;
+  sh:targetNode obs:Scene_PiP_Current ;
+  sh:property [
+    sh:path obs:sceneName ;
+    sh:hasValue "PiP" ;
+    sh:message "Current scene should be named PiP." ;
+  ] ;
+  sh:property [
+    sh:path obs:isProgramScene ;
+    sh:datatype xsd:boolean ;
+    sh:hasValue true ;
+    sh:message "PiP scene should be the active program scene." ;
+  ] .
+
+obs:CurrentInputNameShape a sh:NodeShape ;
+  sh:targetNode obs:Input_PiPCapture_Current ;
+  sh:property [
+    sh:path obs:inputName ;
+    sh:hasValue "PiP Capture" ;
+    sh:message "Primary input should be named PiP Capture." ;
+  ] ;
+  sh:property [
+    sh:path obs:inputKind ;
+    sh:hasValue "screen_capture" ;
+  ] ;
+  sh:property [
+    sh:path obs:enabled ;
+    sh:datatype xsd:boolean ;
+    sh:hasValue true ;
+  ] .
+
+obs:ObsWebsocketShape a sh:NodeShape ;
+  sh:targetNode obs:ObsMain ;
+  sh:property [
+    sh:path obs:wsEnabled ;
+    sh:datatype xsd:boolean ;
+    sh:hasValue true ;
+    sh:message "obs-websocket must be enabled for deterministic API control." ;
+  ] ;
+  sh:property [
+    sh:path obs:wsPort ;
+    sh:datatype xsd:integer ;
+    sh:hasValue 4455 ;
+  ] .
+
+obs:WindowCaptureRiskShape a sh:NodeShape ;
+  sh:targetNode obs:Input_PiPCapture_Current ;
+  sh:severity sh:Warning ;
+  sh:property [
+    sh:path obs:captureMethodValue ;
+    sh:not [ sh:hasValue 1 ] ;
+    sh:message "Capture mode is window-bound (type=1). Works now, but may drift with changing window IDs." ;
+  ] .

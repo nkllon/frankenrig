@@ -1,0 +1,31 @@
+[View]
+Reset UI
+missing value
+Scene List Mode
+Dock Toolbars
+Source Toolbar
+Source Icons
+Status Bar
+missing value
+Stats
+missing value
+Open Multiview
+missing value
+Always On Top
+Enter Full Screen
+
+[Docks]
+Lock Docks
+Full-Height Docks
+Reset Docks
+missing value
+Custom Browser Docks
+missing value
+Scenes
+Sources
+Audio Mixer
+Scene Transitions
+Controls
+Stats
+YouTube Live Control Panel
+

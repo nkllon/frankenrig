@@ -1,0 +1,32 @@
+{
+  "description": "Canonical URLs for the four PiP source windows. All four are Chrome windows. Fill URLs after running capture_chrome_window_urls.sh in each view, or set from known stable links.",
+  "client": "Google Chrome (all four sources)",
+  "views": "View 1 = main; View 2 = lower-left; View 3 = lower-right; View 4 = bottom center (Control-Left/Right)",
+  "sources": {
+    "window1_main": {
+      "label": "PiP Capture (main)",
+      "url": "",
+      "note": "YouTube video from contributor bootybunt; exact URL varies by video. Capture from browser or set manually."
+    },
+    "window2_lowerLeft": {
+      "label": "Aux2 (lower-left)",
+      "url": "https://www.youtube.com/watch?v=DxmDPrfinXY",
+      "note": "Bloomberg Live (current). Was Al Jazeera; swapped per user."
+    },
+    "window3_lowerRight": {
+      "label": "Aux3LR_* (lower-right)",
+      "url": "https://www.youtube.com/c/FRANCE24English/live",
+      "url_streams": "https://www.youtube.com/c/FRANCE24English/streams",
+      "url_live_example": "https://www.youtube.com/live/h3MuIUNCCzI",
+      "note": "French news (e.g. France 24 English) live."
+    },
+    "window4_center": {
+      "label": "Aux4Center_* (bottom center)",
+      "url_wrong": "https://www.youtube.com/watch?v=5hRGqR6a3s4",
+      "url_wrong_note": "Previous DW/YouTube assumptions; center is now BBC News on BBC site.",
+      "url": "http://www.bbc.co.uk/iplayer/live/bbcnews",
+      "url_alt": "https://www.bbc.com/watch-live-news/",
+      "note": "BBC News live via BBC website (iPlayer/watch-live); not a YouTube URL."
+    }
+  }
+}

@@ -1,0 +1,313 @@
+@prefix obs: <urn:lou:obs-pip#> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+obs:Ontology a rdfs:Resource ;
+  dct:title "OBS PiP Findings Ontology" ;
+  dct:description "Evidence-backed model of OBS projector and capture behavior in Lou's macOS setup." ;
+  dct:created "2026-03-08"^^xsd:date ;
+  dct:creator "Codex + Lou" .
+
+obs:SystemState a rdfs:Class .
+obs:ObsInstance a rdfs:Class .
+obs:Scene a rdfs:Class .
+obs:InputSource a rdfs:Class .
+obs:Issue a rdfs:Class .
+obs:Action a rdfs:Class .
+obs:HotkeyBinding a rdfs:Class .
+obs:EvidenceArtifact a rdfs:Class .
+
+obs:hasObsInstance a rdfs:Property .
+obs:hasScene a rdfs:Property .
+obs:hasInput a rdfs:Property .
+obs:hasIssue a rdfs:Property .
+obs:mitigatedBy a rdfs:Property .
+obs:hasAction a rdfs:Property .
+obs:hasEvidence a rdfs:Property .
+obs:hasHotkey a rdfs:Property .
+obs:sceneName a rdfs:Property .
+obs:inputName a rdfs:Property .
+obs:inputKind a rdfs:Property .
+obs:captureMethodValue a rdfs:Property .
+obs:captureMethodLabel a rdfs:Property .
+obs:windowId a rdfs:Property .
+obs:enabled a rdfs:Property .
+obs:isProgramScene a rdfs:Property .
+obs:wsEnabled a rdfs:Property .
+obs:wsPort a rdfs:Property .
+obs:obsVersion a rdfs:Property .
+obs:rpcVersion a rdfs:Property .
+obs:binding a rdfs:Property .
+obs:artifactPath a rdfs:Property .
+obs:observedAt a rdfs:Property .
+obs:lastVerifiedAt a rdfs:Property .
+obs:hasOrphanInputs a rdfs:Property .
+obs:note a rdfs:Property .
+obs:projectorCount a rdfs:Property .
+obs:sourceUrl a rdfs:Property .
+obs:viewIndex a rdfs:Property .
+
+obs:ObsMain a obs:ObsInstance ;
+  obs:obsVersion "32.0.4" ;
+  obs:rpcVersion 1 ;
+  obs:wsEnabled true ;
+  obs:wsPort 4455 .
+
+obs:HotkeyObsMain a obs:HotkeyBinding ;
+  rdfs:label "OBS projector toggle (main)" ;
+  obs:binding "alt+cmd+o" .
+
+obs:HotkeyObsFallback a obs:HotkeyBinding ;
+  rdfs:label "OBS projector toggle (fallback)" ;
+  obs:binding "ctrl+alt+cmd+o" .
+
+obs:HotkeyChromePiP a obs:HotkeyBinding ;
+  rdfs:label "Chrome PiP toggle" ;
+  obs:binding "ctrl+alt+cmd+p" .
+
+obs:State_PreCleanup a obs:SystemState ;
+  rdfs:label "State before VM input removal" ;
+  obs:observedAt "2026-03-08T17:05:00-07:00"^^xsd:dateTime ;
+  obs:hasObsInstance obs:ObsMain ;
+  obs:hasScene obs:Scene_PiP_Pre ;
+  obs:hasInput obs:Input_MacScreenCapture_Pre, obs:Input_VMWindow_Pre ;
+  obs:hasIssue obs:Issue_DuplicateProjectors, obs:Issue_VMWindowAmbiguity, obs:Issue_WindowBindingRisk ;
+  obs:hasEvidence obs:Ev_ApiDiscovery_Pre, obs:Ev_WindowsBefore, obs:Ev_ScreenshotBefore ;
+  obs:hasAction obs:Act_EnableWebsocket, obs:Act_CloseDuplicateProjectors .
+
+obs:Scene_PiP_Pre a obs:Scene ;
+  obs:sceneName "PiP" ;
+  obs:isProgramScene true .
+
+obs:Input_MacScreenCapture_Pre a obs:InputSource ;
+  obs:inputName "macOS Screen Capture" ;
+  obs:inputKind "screen_capture" ;
+  obs:captureMethodValue 1 ;
+  obs:captureMethodLabel "Window Capture" ;
+  obs:windowId 14767 ;
+  obs:enabled true .
+
+obs:Input_VMWindow_Pre a obs:InputSource ;
+  obs:inputName "VM Window" ;
+  obs:inputKind "screen_capture" ;
+  obs:captureMethodValue 1 ;
+  obs:captureMethodLabel "Window Capture" ;
+  obs:windowId 16300 ;
+  obs:enabled false .
+
+obs:State_Current a obs:SystemState ;
+  rdfs:label "Current known-good operational state (rolling; one canvas, four intended sources)" ;
+  obs:note "Rolling aggregate: structure and capabilities. Not a point-in-time snapshot. For current window IDs and full input inventory use Ev_ApiDiscovery_ReviewNow. For historical snapshots see State_PreCleanup or timestamped evidence." ;
+  obs:lastVerifiedAt "2026-03-08"^^xsd:date ;
+  obs:hasObsInstance obs:ObsMain ;
+  obs:hasScene obs:Scene_PiP_Current ;
+  obs:hasInput obs:Input_PiPCapture_Current, obs:Input_Aux2_Current, obs:Input_ThirdSource_Current, obs:Input_FourthSource_Current ;
+  obs:hasOrphanInputs obs:OrphanInputs_ReviewNow ;
+  obs:hasHotkey obs:HotkeyObsMain, obs:HotkeyObsFallback, obs:HotkeyChromePiP ;
+  obs:hasIssue obs:Issue_WindowBindingRisk ;
+  obs:hasEvidence obs:Ev_ApiDiscovery_Current, obs:Ev_ApiDiscovery_CurrentRuntime, obs:Ev_WindowsAfter, obs:Ev_ScreenshotAfter, obs:Ev_AfterRewireSuccess, obs:Ev_SceneGeometry, obs:Ev_SourceUrls, obs:Ev_CaptureChromeUrlsScript, obs:Ev_ApiDiscovery_ReviewNow, obs:Ev_PipCurrentScreenshot, obs:Ev_PipScreenshotBefore, obs:Ev_PipScreenshotAfter, obs:Ev_CleanupAfterAux ;
+  obs:hasAction obs:Act_RemoveVmWindow, obs:Act_RenameInput, obs:Act_IdentifyWindowByClick, obs:Act_RewireCaptureByClick, obs:Act_SetSecondSourceByClick, obs:Act_RebuildPipArrangement, obs:Act_AddThirdSourceLowerRight, obs:Act_FixAux3, obs:Act_AddFourthSourceCenter, obs:Act_FixAux4 .
+
+obs:Scene_PiP_Current a obs:Scene ;
+  obs:sceneName "PiP" ;
+  obs:isProgramScene true .
+
+obs:Input_PiPCapture_Current a obs:InputSource ;
+  obs:inputName "PiP Capture" ;
+  obs:inputKind "screen_capture" ;
+  obs:captureMethodValue 1 ;
+  obs:captureMethodLabel "Window Capture" ;
+  obs:windowId 21552 ;
+  obs:enabled true ;
+  obs:note "Main source on PiP canvas; full-size. Window-bound (drift risk). windowId from Ev_ApiDiscovery_ReviewNow (obs_api_discovery_review_now.json); update ontology or re-check evidence when re-binding." .
+
+obs:Input_Aux2_Current a obs:InputSource ;
+  obs:inputName "Aux2" ;
+  obs:inputKind "screen_capture" ;
+  obs:captureMethodValue 1 ;
+  obs:captureMethodLabel "Window Capture" ;
+  obs:note "Second source on same PiP canvas; positioned lower-left (positionX 20, positionY 1561, scale ~0.25). Set via open_aux_projector_by_click.py; do not open its projector from script (overlays)." .
+
+obs:Input_ThirdSource_Current a obs:InputSource ;
+  rdfs:label "Third source (lower-right PiP)" ;
+  obs:inputName "Aux3LR_*" ;
+  obs:inputKind "screen_capture" ;
+  obs:captureMethodValue 1 ;
+  obs:captureMethodLabel "Window Capture" ;
+  obs:note "Third source on PiP canvas; name pattern Aux3LR_<timestamp> so CreateInput always succeeds. Lower-right: alignment 8, insets from canvas right/bottom 540/125, same scale as Aux2. RemoveInput often does not remove; CreateSceneItem for orphaned input fails 700; unique naming workaround. Script: obs_rebuild_pip_arrangement.py --lower-right; --fix-aux3 finds by prefix." .
+
+obs:Input_FourthSource_Current a obs:InputSource ;
+  rdfs:label "Fourth source (bottom center PiP)" ;
+  obs:inputName "Aux4Center_*" ;
+  obs:inputKind "screen_capture" ;
+  obs:captureMethodValue 1 ;
+  obs:captureMethodLabel "Window Capture" ;
+  obs:note "Fourth source on PiP canvas; name pattern Aux4Center_<timestamp>. Bottom center between the two small PiPs: alignment 36 (center horizontal | center vertical) so position is the source center; positionX = canvas width/2, positionY scaled. Script: --add-fourth-center --window4 ID; --fix-aux4 re-applies transform by prefix." .
+
+obs:OrphanInputs_ReviewNow a rdfs:Resource ;
+  rdfs:label "Orphan inputs (in OBS input list, not in PiP scene)" ;
+  obs:note "Present in GetInputList per Ev_ApiDiscovery_ReviewNow: Aux3, Aux3 Capture, Aux3LR. Leftover/stuck names; RemoveInput often does not remove. Intended scene uses Aux3LR_<timestamp> and Aux4Center_<timestamp>. Full inventory: obs_api_discovery_review_now.json input_list." .
+
+obs:SourceUrlDiscovery a rdfs:Resource ;
+  rdfs:label "Underlying window sources (URLs and views)" ;
+  obs:note "Four OBS sources map to four Chrome windows in separate views (Control-Left/Right). All four are Chrome. Window 1 (main): YouTube bootybunt. Window 2 (lower-left): Deutsche Welle Live (YouTube). Window 3 (lower-right): French news (e.g. France 24) live. Window 4 (bottom center): BBC News Live via BBC website (e.g. bbc.co.uk/iplayer/live/bbcnews). Stable URLs in evidence/obs_pip_source_urls.json; capture exact URLs via capture_chrome_window_urls.sh. Reconstruct: open four URLs in four full-screen Chrome windows, get window IDs (click or identify), run obs_rebuild_pip_arrangement.py --window1 ID1 --window2 ID2 --window3 ID3 and --add-fourth-center --window4 ID4." .
+
+obs:Issue_DuplicateProjectors a obs:Issue ;
+  rdfs:label "Duplicate projector windows" ;
+  obs:projectorCount 24 ;
+  obs:mitigatedBy obs:Act_CloseDuplicateProjectors .
+
+obs:Issue_VMWindowAmbiguity a obs:Issue ;
+  rdfs:label "Unused VM window source created ambiguity" ;
+  obs:mitigatedBy obs:Act_RemoveVmWindow .
+
+obs:Issue_WindowBindingRisk a obs:Issue ;
+  rdfs:label "Window-bound capture ID can drift" ;
+  obs:note "No instability reported for last couple of hours, but risk remains structurally present." ;
+  obs:mitigatedBy obs:Act_IdentifyWindowByClick, obs:Act_RewireCaptureByClick .
+
+obs:Act_EnableWebsocket a obs:Action ;
+  rdfs:label "Enabled obs-websocket server" ;
+  obs:note "server_enabled=true, auth_required=false, port=4455" .
+
+obs:Act_CloseDuplicateProjectors a obs:Action ;
+  rdfs:label "Closed extra projector windows" ;
+  obs:note "Reduced projector windows to singleton." .
+
+obs:Act_RemoveVmWindow a obs:Action ;
+  rdfs:label "Removed VM Window input" .
+
+obs:Act_RenameInput a obs:Action ;
+  rdfs:label "Renamed macOS Screen Capture to PiP Capture" .
+
+obs:Act_IdentifyWindowByClick a obs:Action ;
+  rdfs:label "Identify target window by click for OBS capture binding" ;
+  obs:note "Standalone Python script: run script, click desired window within 7s; outputs window ID (id= N title= app= pid=). Use that ID to configure or re-bind OBS window capture. Solves correct-window identification so OBS can be pointed at the clicked window." ;
+  obs:hasEvidence obs:Ev_IdentifyWindowScript .
+
+obs:Act_RewireCaptureByClick a obs:Action ;
+  rdfs:label "Rewire OBS capture input to clicked window ID" ;
+  obs:note "Script: rewire_obs_capture_by_click.py. Get window ID (click or --window-id), SetInputSettings PiP Capture (type=1, window=id), set scene PiP, enable scene item, open preview projector." ;
+  obs:hasEvidence obs:Ev_RewireScript .
+
+obs:Act_SetSecondSourceByClick a obs:Action ;
+  rdfs:label "Set second source (Aux2) to clicked window ID" ;
+  obs:note "Script: open_aux_projector_by_click.py. Get window ID (click or --window-id), create or update input Aux2 to that window. Does not open projector (avoids overlay). User opens that source's projector from OBS if desired." ;
+  obs:hasEvidence obs:Ev_OpenAuxScript .
+
+obs:Act_RebuildPipArrangement a obs:Action ;
+  rdfs:label "Reconstruct PiP arrangement from window IDs" ;
+  obs:note "Script: obs_rebuild_pip_arrangement.py. Two windows: window1→PiP Capture, window2→Aux2; layout main + lower-left; open preview. Third: --lower-right (optional --window3 ID) creates Aux3LR_<timestamp>, lower-right insets 540/125, alignment 8. --fix-aux3 re-applies transform to source name starting with Aux3LR. --diagnose prints scene items and canvas. SetSceneItemTransform bounds >= 1." ;
+  obs:hasEvidence obs:Ev_RebuildScript .
+
+obs:Act_AddThirdSourceLowerRight a obs:Action ;
+  rdfs:label "Add third window as lower-right PiP source" ;
+  obs:note "Run obs_rebuild_pip_arrangement.py --lower-right (click or --window3 ID). Creates input Aux3LR_<timestamp>, adds to PiP scene, position from canvas insets X=540 Y=125, alignment 8, move to top. Unique name avoids CreateInput 601 and CreateSceneItem 700." ;
+  obs:hasEvidence obs:Ev_RebuildScript .
+
+obs:Act_FixAux3 a obs:Action ;
+  rdfs:label "Re-apply lower-right transform to third source" ;
+  obs:note "Run obs_rebuild_pip_arrangement.py --fix-aux3. Finds scene item by sourceName prefix Aux3LR, applies transform (insets 540/125, alignment 8), moves to top." ;
+  obs:hasEvidence obs:Ev_RebuildScript .
+
+obs:Act_AddFourthSourceCenter a obs:Action ;
+  rdfs:label "Add fourth window as bottom-center PiP source" ;
+  obs:note "Run obs_rebuild_pip_arrangement.py --add-fourth-center --window4 ID. Creates input Aux4Center_<timestamp>, adds to PiP scene, position center X and same Y/scale as other small PiPs, alignment 36 (center of source at position), move to top." ;
+  obs:hasEvidence obs:Ev_RebuildScript .
+
+obs:Act_FixAux4 a obs:Action ;
+  rdfs:label "Re-apply bottom-center transform to fourth source" ;
+  obs:note "Run obs_rebuild_pip_arrangement.py --fix-aux4. Finds scene item by sourceName prefix Aux4Center, applies transform (alignment 36, center X), moves to top." ;
+  obs:hasEvidence obs:Ev_RebuildScript .
+
+obs:Ev_OpenAuxScript a obs:EvidenceArtifact ;
+  rdfs:label "Set second source by click (no projector open)" ;
+  obs:artifactPath "/Users/lou/.hammerspoon/open_aux_projector_by_click.py" ;
+  obs:note "Sets Aux Capture or Aux2 to clicked window. Does not call OpenSourceProjector." .
+
+obs:Ev_RebuildScript a obs:EvidenceArtifact ;
+  rdfs:label "Rebuild PiP arrangement from scratch" ;
+  obs:artifactPath "/Users/lou/.hammerspoon/obs_rebuild_pip_arrangement.py" ;
+  obs:note "Modes: two windows (window1/2 or clicks); --lower-right for third (Aux3LR_<timestamp>, insets 540/125); --add-fourth-center --window4 for fourth (Aux4Center_<timestamp>, alignment 36); --fix-aux3/--fix-aux4 re-apply transform by prefix; --diagnose. SetSceneItemTransform bounds >= 1. Response matching by requestId." .
+
+obs:Ev_SceneGeometry a obs:EvidenceArtifact ;
+  rdfs:label "PiP scene geometry snapshot" ;
+  obs:artifactPath "/Users/lou/.hammerspoon/evidence/obs_pip_scene_geometry.json" ;
+  obs:observedAt "2026-03-08"^^xsd:date ;
+  obs:note "Canvas 3840x2254; position/scale/alignment per source (PiP Capture, Aux2, Aux3LR_*, Aux4Center_*). Lower-right: positionX 3300 positionY 2129, alignment 8, insets 540/125. Fourth: positionX 1920 (center), alignment 36 (center of source at position)." .
+
+obs:Ev_SourceUrls a obs:EvidenceArtifact ;
+  rdfs:label "Source URLs and capture script" ;
+  obs:artifactPath "/Users/lou/.hammerspoon/evidence/obs_pip_source_urls.json" ;
+  obs:note "Canonical URLs for four sources: bootybunt (main), Deutsche Welle Live (lower-left), France 24/French news (lower-right), BBC News Live (bottom center, via BBC website). Capture exact URLs: capture_chrome_window_urls.sh; optional obs_pip_source_urls.txt. Used to reconstruct arrangement from scratch (open URLs in four views, get window IDs, run rebuild script with --window1..3 and --add-fourth-center --window4)." .
+
+obs:Ev_CaptureChromeUrlsScript a obs:EvidenceArtifact ;
+  rdfs:label "Chrome window URL/title capture script" ;
+  obs:artifactPath "/Users/lou/.hammerspoon/capture_chrome_window_urls.sh" ;
+  obs:note "AppleScript lists every Chrome window active tab URL and title. Run per view or once; save to evidence/obs_pip_source_urls.txt to record the three source URLs." .
+
+obs:Ev_IdentifyWindowScript a obs:EvidenceArtifact ;
+  rdfs:label "Click-to-identify-window script" ;
+  obs:artifactPath "/Users/lou/.hammerspoon/identify_window_click.py" ;
+  obs:note "Run with: .venv_obsws/bin/python3 identify_window_click.py. Uses 7s timeout. Requires Accessibility for click path; fallback: move cursor over window and press Enter. Filters system windows; returns topmost app window at click. Historically verified: OBS projector (id=19325), PiP capture target (id=14767). Current PiP Capture window ID in Ev_ApiDiscovery_ReviewNow." .
+
+obs:Ev_RewireScript a obs:EvidenceArtifact ;
+  rdfs:label "OBS rewire-by-click script (draft)" ;
+  obs:artifactPath "/Users/lou/.hammerspoon/rewire_obs_capture_by_click.py" ;
+  obs:note "Run with: .venv_obsws/bin/python3 rewire_obs_capture_by_click.py. Optional: --window-id N, --dry-run. Uses OBS websocket API to rebind PiP Capture to clicked window ID." .
+
+obs:Ev_AfterRewireSuccess a obs:EvidenceArtifact ;
+  rdfs:label "OBS API snapshot after successful rewire (post-restart)" ;
+  obs:artifactPath "/Users/lou/.hammerspoon/evidence/obs_api_after_rewire_success.json" ;
+  obs:observedAt "2026-03-08"^^xsd:date ;
+  obs:note "User restarted OBS and Chrome; ran rewire script, clicked target window; PiP Capture bound to window 19763, program scene PiP, scene item enabled. User confirmed experiment success." .
+
+obs:Ev_ApiDiscovery_Pre a obs:EvidenceArtifact ;
+  rdfs:label "API discovery before cleanup" ;
+  obs:artifactPath "/Users/lou/.hammerspoon/evidence/obs_api_discovery.json" .
+
+obs:Ev_ApiDiscovery_Current a obs:EvidenceArtifact ;
+  rdfs:label "API discovery current" ;
+  obs:artifactPath "/Users/lou/.hammerspoon/evidence/obs_api_discovery_rename_check.json" .
+
+obs:Ev_ApiDiscovery_CurrentRuntime a obs:EvidenceArtifact ;
+  rdfs:label "API discovery current runtime snapshot" ;
+  obs:artifactPath "/Users/lou/.hammerspoon/evidence/obs_api_discovery_current.json" .
+
+obs:Ev_ApiDiscovery_ReviewNow a obs:EvidenceArtifact ;
+  rdfs:label "API discovery snapshot for state review (authoritative for current window IDs and full input list)" ;
+  obs:artifactPath "/Users/lou/.hammerspoon/evidence/obs_api_discovery_review_now.json" ;
+  obs:note "GetVideoSettings, GetInputList, GetInputSettings (window IDs), GetSceneItemList for PiP. Use for operational checks; State_Current window IDs and OrphanInputs_ReviewNow align to this file." .
+
+obs:Ev_WindowsBefore a obs:EvidenceArtifact ;
+  rdfs:label "Window inventory before cleanup" ;
+  obs:artifactPath "/Users/lou/.hammerspoon/evidence/obs_windows_before.txt" .
+
+obs:Ev_WindowsAfter a obs:EvidenceArtifact ;
+  rdfs:label "Window inventory after cleanup" ;
+  obs:artifactPath "/Users/lou/.hammerspoon/evidence/obs_windows_after.txt" .
+
+obs:Ev_ScreenshotBefore a obs:EvidenceArtifact ;
+  rdfs:label "Screenshot before cleanup" ;
+  obs:artifactPath "/Users/lou/.hammerspoon/evidence/obs_before.png" .
+
+obs:Ev_ScreenshotAfter a obs:EvidenceArtifact ;
+  rdfs:label "Screenshot after cleanup" ;
+  obs:artifactPath "/Users/lou/.hammerspoon/evidence/obs_after.png" .
+
+obs:Ev_PipCurrentScreenshot a obs:EvidenceArtifact ;
+  rdfs:label "PiP current state screenshot" ;
+  obs:artifactPath "/Users/lou/.hammerspoon/evidence/obs_pip_current.png" .
+
+obs:Ev_PipScreenshotBefore a obs:EvidenceArtifact ;
+  rdfs:label "PiP screenshot before (aux cleanup)" ;
+  obs:artifactPath "/Users/lou/.hammerspoon/evidence/obs_pip_screenshot_before.png" .
+
+obs:Ev_PipScreenshotAfter a obs:EvidenceArtifact ;
+  rdfs:label "PiP screenshot after (aux cleanup)" ;
+  obs:artifactPath "/Users/lou/.hammerspoon/evidence/obs_pip_screenshot_after.png" .
+
+obs:Ev_CleanupAfterAux a obs:EvidenceArtifact ;
+  rdfs:label "Cleanup after aux (narrative)" ;
+  obs:artifactPath "/Users/lou/.hammerspoon/evidence/obs_cleanup_after_aux.md" .

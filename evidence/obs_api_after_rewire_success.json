@@ -1,0 +1,55 @@
+{
+  "PiP_Capture_settings": {
+    "inputKind": "screen_capture",
+    "inputSettings": {
+      "hide_obs": true,
+      "show_empty_names": true,
+      "show_hidden_windows": true,
+      "type": 1,
+      "window": 19763
+    }
+  },
+  "currentProgramScene": {
+    "currentProgramSceneName": "PiP",
+    "currentProgramSceneUuid": "2f8145df-f417-4ff6-9786-1eb94242c114",
+    "sceneName": "PiP",
+    "sceneUuid": "2f8145df-f417-4ff6-9786-1eb94242c114"
+  },
+  "PiP_sceneItems": {
+    "sceneItems": [
+      {
+        "inputKind": "screen_capture",
+        "isGroup": null,
+        "sceneItemBlendMode": "OBS_BLEND_NORMAL",
+        "sceneItemEnabled": true,
+        "sceneItemId": 4,
+        "sceneItemIndex": 0,
+        "sceneItemLocked": false,
+        "sceneItemTransform": {
+          "alignment": 5,
+          "boundsAlignment": 0,
+          "boundsHeight": 2254.0,
+          "boundsType": "OBS_BOUNDS_STRETCH",
+          "boundsWidth": 3840.0,
+          "cropBottom": 0,
+          "cropLeft": 0,
+          "cropRight": 0,
+          "cropToBounds": false,
+          "cropTop": 0,
+          "height": 2254.0,
+          "positionX": 0.0,
+          "positionY": -54.0,
+          "rotation": 0.0,
+          "scaleX": 1.0,
+          "scaleY": 1.0,
+          "sourceHeight": 2254.0,
+          "sourceWidth": 3840.0,
+          "width": 3840.0
+        },
+        "sourceName": "PiP Capture",
+        "sourceType": "OBS_SOURCE_TYPE_INPUT",
+        "sourceUuid": "5f410c72-0607-457c-a502-742134f872e4"
+      }
+    ]
+  }
+}

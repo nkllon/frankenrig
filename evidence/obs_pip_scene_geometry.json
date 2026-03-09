@@ -1,0 +1,60 @@
+{
+  "canvas": { "width": 3840, "height": 2254 },
+  "scene": "PiP",
+  "sources": [
+    {
+      "sourceName": "PiP Capture",
+      "positionX": 0.0,
+      "positionY": -95.0,
+      "scaleX": 1.0,
+      "scaleY": 1.0,
+      "alignment": 5,
+      "boundsType": "OBS_BOUNDS_STRETCH",
+      "boundsWidth": 3840.0,
+      "boundsHeight": 2254.0,
+      "note": "main full canvas"
+    },
+    {
+      "sourceName": "Aux2",
+      "positionX": 20.0,
+      "positionY": 1561.0,
+      "scaleX": 0.2502604126930237,
+      "scaleY": 0.2502218186855316,
+      "alignment": 5,
+      "boundsType": "OBS_BOUNDS_NONE",
+      "boundsWidth": 1.0,
+      "boundsHeight": 1.0,
+      "note": "lower-left PiP"
+    },
+    {
+      "sourceName": "Aux3LR_1773018462",
+      "positionX": 3300.0,
+      "positionY": 2129.0,
+      "scaleX": 0.2502604126930237,
+      "scaleY": 0.2502218186855316,
+      "alignment": 8,
+      "boundsType": "OBS_BOUNDS_NONE",
+      "boundsWidth": 1.0,
+      "boundsHeight": 1.0,
+      "note": "lower-right PiP; alignment 8 = bottom-right so (positionX, positionY) is bottom-right corner. Inset from right = 3840-3300 = 540, from bottom = 2254-2129 = 125. A smidge right would be ~520–530 inset X."
+    },
+    {
+      "sourceName": "Aux4Center_*",
+      "positionX": 1920.0,
+      "positionY": 1561.0,
+      "scaleX": 0.2502604126930237,
+      "scaleY": 0.2502218186855316,
+      "alignment": 36,
+      "boundsType": "OBS_BOUNDS_NONE",
+      "boundsWidth": 1.0,
+      "boundsHeight": 1.0,
+      "note": "Fourth PiP, bottom center between the two; alignment 36 = center horizontal | center vertical so (positionX, positionY) is the center of the source. positionX = canvas width/2; positionY scales with canvas (REF_PIP_POS_Y * canvasHeight/REF_CANVAS_HEIGHT)."
+    }
+  ],
+  "derived": {
+    "lowerRight_insetFromRight": 540,
+    "lowerRight_insetFromBottom": 125,
+    "smallPiP_scale": [0.2502604126930237, 0.2502218186855316],
+    "fourth_center_alignment": 36
+  }
+}
