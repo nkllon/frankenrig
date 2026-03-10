@@ -1,0 +1,26 @@
+[
+  {
+    "client_id": "perf-proxy-openai",
+    "estimated_cost": 0.005999999999999999,
+    "request_count": 10,
+    "total_tokens": 1600
+  },
+  {
+    "client_id": "perf-proxy-anthropic",
+    "estimated_cost": 0.008400000000000001,
+    "request_count": 10,
+    "total_tokens": 1500
+  },
+  {
+    "client_id": "seed-runner-a",
+    "estimated_cost": 0.0006,
+    "request_count": 1,
+    "total_tokens": 160
+  },
+  {
+    "client_id": "seed-runner-b",
+    "estimated_cost": 0.00084,
+    "request_count": 1,
+    "total_tokens": 150
+  }
+]

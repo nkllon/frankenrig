@@ -1,0 +1,22 @@
+[
+  {
+    "completion_tokens": 660,
+    "estimated_cost": 0.00924,
+    "model": "claude-3-7-sonnet",
+    "prompt_tokens": 990,
+    "provider": "anthropic_mock",
+    "request_count": 11,
+    "total_tokens": 1650,
+    "unknown_pricing_count": 0
+  },
+  {
+    "completion_tokens": 440,
+    "estimated_cost": 0.006599999999999999,
+    "model": "gpt-4.1-mini",
+    "prompt_tokens": 1320,
+    "provider": "openai_mock",
+    "request_count": 11,
+    "total_tokens": 1760,
+    "unknown_pricing_count": 0
+  }
+]

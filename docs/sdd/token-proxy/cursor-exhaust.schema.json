@@ -1,0 +1,243 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://energration.local/schemas/token-proxy/cursor-exhaust.schema.json",
+  "title": "Cursor Local Exhaust Snapshot",
+  "description": "Deterministic snapshot of local Cursor routing preference exhaust for token-proxy enrichment.",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "captured_at_utc",
+    "cursor_state",
+    "pairing_sessions",
+    "extension_runtime",
+    "derived_signals"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "const": "token-proxy.cursor-exhaust.v1"
+    },
+    "captured_at_utc": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "cursor_state": {
+      "type": "object",
+      "required": [
+        "bestOfNEnsemblePreferences",
+        "lastSingleModelPreference",
+        "planExecUseChatModel",
+        "newChatModelAutoSwitchApplied",
+        "openaiChatgptAllowlisted"
+      ],
+      "properties": {
+        "bestOfNEnsemblePreferences": {
+          "type": [
+            "object",
+            "array",
+            "string",
+            "boolean",
+            "null"
+          ]
+        },
+        "lastSingleModelPreference": {
+          "type": [
+            "object",
+            "array",
+            "string",
+            "boolean",
+            "null"
+          ]
+        },
+        "planExecUseChatModel": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "newChatModelAutoSwitchApplied": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "openaiChatgptAllowlisted": {
+          "type": "object",
+          "additionalProperties": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "pairing_sessions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "file",
+          "appName",
+          "workspaceName",
+          "id",
+          "timestamp"
+        ],
+        "properties": {
+          "file": {
+            "type": "string"
+          },
+          "appName": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "workspaceName": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "id": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "timestamp": {
+            "type": [
+              "number",
+              "null"
+            ]
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "extension_runtime": {
+      "type": "object",
+      "required": [
+        "latest_session",
+        "windows"
+      ],
+      "properties": {
+        "latest_session": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "windows": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "window",
+              "codex_log",
+              "claude_log"
+            ],
+            "properties": {
+              "window": {
+                "type": "string"
+              },
+              "codex_log": {
+                "$ref": "#/$defs/logSummary"
+              },
+              "claude_log": {
+                "$ref": "#/$defs/logSummary"
+              }
+            },
+            "additionalProperties": false
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "derived_signals": {
+      "type": "object",
+      "required": [
+        "candidate_model_pool",
+        "per_turn_model_attribution",
+        "routing_visibility",
+        "routing_visibility_reason"
+      ],
+      "properties": {
+        "candidate_model_pool": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "per_turn_model_attribution": {
+          "type": "object",
+          "required": [
+            "status",
+            "reason"
+          ],
+          "properties": {
+            "status": {
+              "type": "string",
+              "enum": [
+                "known",
+                "partially_known",
+                "unknown"
+              ]
+            },
+            "reason": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false
+        },
+        "routing_visibility": {
+          "type": "string",
+          "enum": [
+            "known",
+            "partially_known",
+            "unknown"
+          ]
+        },
+        "routing_visibility_reason": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "$defs": {
+    "logSummary": {
+      "type": "object",
+      "required": [
+        "exists"
+      ],
+      "properties": {
+        "exists": {
+          "type": "boolean"
+        },
+        "line_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "activation_line_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "spawn_or_app_server_line_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "first_non_empty_line": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "last_non_empty_line": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}
