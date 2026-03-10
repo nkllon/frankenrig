@@ -22,6 +22,7 @@ import sys
 from pathlib import Path
 
 import websocket
+from obs_pip_ontology import get_slot_spec
 
 OBS_WS_URL = "ws://127.0.0.1:4455"
 DEFAULT_INPUT = "PiP Capture"
@@ -91,6 +92,14 @@ class ObsClient:
         ok = status.get("result", False)
         return ok, status, d.get("responseData", {})
 
+    def get_input_window_id(self, input_name: str) -> int | None:
+        ok, status, data = self.req("GetInputSettings", {"inputName": input_name})
+        if not ok:
+            raise RuntimeError(f"GetInputSettings failed for '{input_name}': {status}")
+        settings = data.get("inputSettings", {}) or {}
+        wid = settings.get("window")
+        return int(wid) if wid is not None else None
+
 
 def ensure_scene_item_enabled(cli: ObsClient, scene_name: str, source_name: str) -> None:
     ok, status, data = cli.req("GetSceneItemList", {"sceneName": scene_name})
@@ -133,6 +142,14 @@ def main() -> int:
     cli = ObsClient(OBS_WS_URL)
     try:
         cli.connect()
+        main_input = get_slot_spec("main").input_name
+        lower_left_input = get_slot_spec("lowerLeft").input_name
+        if args.input == main_input and lower_left_input:
+            lower_left_window_id = cli.get_input_window_id(lower_left_input)
+            if lower_left_window_id is not None and lower_left_window_id == window_id:
+                raise RuntimeError(
+                    f"Refusing to bind {args.input} to window {window_id}: duplicates {lower_left_input}"
+                )
 
         ok, status, current = cli.req("GetInputSettings", {"inputName": args.input})
         if not ok:

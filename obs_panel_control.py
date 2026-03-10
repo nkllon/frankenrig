@@ -13,15 +13,18 @@ when rebinding. The config file records panel mappings and last-known channel.
 
 import argparse
 import json
+import re
+import subprocess
 import sys
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple
 
 import websocket
-
-CONFIG_PATH = Path("/Users/lou/.hammerspoon/obs_panel_control_config.json")
+from obs_pip_ontology import get_panel_control_config, load_graph
 OBS_WS_URL = "ws://127.0.0.1:4455"
+IDENT_SCRIPT = Path("/Users/lou/.hammerspoon/identify_window_click.py")
+IDENT_PY = Path("/Users/lou/.hammerspoon/.venv_obsws/bin/python3")
 
 
 @dataclass
@@ -122,12 +125,64 @@ class ObsClient:
             print(f"SetInputSettings failed for '{input_name}': {status}", file=sys.stderr)
         return ok
 
+    def get_input_window_id(self, input_name: str) -> Optional[int]:
+        ok, status, current = self.req("GetInputSettings", {"inputName": input_name})
+        if not ok:
+            print(f"GetInputSettings failed for '{input_name}': {status}", file=sys.stderr)
+            return None
+        settings = dict(current.get("inputSettings", {}) or {})
+        wid = settings.get("window")
+        return int(wid) if wid is not None else None
+
+    def list_input_names(self) -> List[str]:
+        ok, status, data = self.req("GetInputList")
+        if not ok:
+            print(f"GetInputList failed: {status}", file=sys.stderr)
+            return []
+        names: List[str] = []
+        for item in data.get("inputs", []):
+            name = item.get("inputName")
+            if isinstance(name, str) and name:
+                names.append(name)
+        return names
+
+    def scene_source_names_by_prefix(self, scene: str, prefix: str) -> List[str]:
+        ok, status, data = self.req("GetSceneItemList", {"sceneName": scene})
+        if not ok:
+            print(f"GetSceneItemList failed for '{scene}': {status}", file=sys.stderr)
+            return []
+        names: List[str] = []
+        for item in data.get("sceneItems", []):
+            source_name = item.get("sourceName")
+            if isinstance(source_name, str) and source_name.startswith(prefix):
+                names.append(source_name)
+        return names
+
+
+def parse_window_id(text: str) -> int:
+    m = re.search(r"\bid\s*=\s*(\d+)\b", text)
+    if not m:
+        raise ValueError(f"Could not parse window id from output: {text!r}")
+    return int(m.group(1))
+
+
+def identify_window_by_click() -> int:
+    if not IDENT_SCRIPT.exists():
+        raise FileNotFoundError(f"Missing script: {IDENT_SCRIPT}")
+    proc = subprocess.run(
+        [str(IDENT_PY), str(IDENT_SCRIPT)],
+        check=False,
+        text=True,
+        capture_output=True,
+    )
+    output = (proc.stdout or "") + "\n" + (proc.stderr or "")
+    if proc.returncode != 0:
+        raise RuntimeError(f"identify script failed (code {proc.returncode}):\n{output.strip()}")
+    return parse_window_id(output)
+
 
 def load_config() -> Dict[str, Any]:
-    if not CONFIG_PATH.exists():
-        raise FileNotFoundError(f"Missing config file: {CONFIG_PATH}")
-    with CONFIG_PATH.open("r", encoding="utf-8") as f:
-        return json.load(f)
+    return get_panel_control_config(load_graph())
 
 
 def resolve_panel_configs(config: Dict[str, Any]) -> Dict[str, PanelConfig]:
@@ -153,6 +208,46 @@ def find_scene_items_for_panel(cli: ObsClient, scene: str, panel: PanelConfig) -
     return []
 
 
+def resolve_panel_input_name(cli: ObsClient, scene: str, panel: PanelConfig) -> Optional[str]:
+    if panel.input_name:
+        return panel.input_name
+    if panel.source_name:
+        return panel.source_name
+    if panel.source_prefix:
+        source_names = sorted(set(cli.scene_source_names_by_prefix(scene, panel.source_prefix)))
+        if len(source_names) == 1:
+            return source_names[0]
+        if len(source_names) > 1:
+            print(
+                json.dumps(
+                    {
+                        "status": "error",
+                        "error": f"ambiguous scene sources for prefix '{panel.source_prefix}'",
+                        "candidates": source_names,
+                    }
+                ),
+                file=sys.stderr,
+            )
+            return None
+    if panel.input_name_prefix:
+        input_names = sorted({n for n in cli.list_input_names() if n.startswith(panel.input_name_prefix)})
+        if len(input_names) == 1:
+            return input_names[0]
+        if len(input_names) > 1:
+            print(
+                json.dumps(
+                    {
+                        "status": "error",
+                        "error": f"ambiguous inputs for prefix '{panel.input_name_prefix}'",
+                        "candidates": input_names,
+                    }
+                ),
+                file=sys.stderr,
+            )
+            return None
+    return None
+
+
 def cmd_change_channel(args: argparse.Namespace) -> int:
     cfg = load_config()
     scene = cfg.get("scene", "PiP")
@@ -161,15 +256,52 @@ def cmd_change_channel(args: argparse.Namespace) -> int:
     if not panel:
         print(json.dumps({"status": "error", "error": f"unknown panel '{args.panel}'"}))
         return 1
-    if not panel.input_name:
-        print(json.dumps({"status": "error", "error": f"panel '{args.panel}' has no fixed inputName in config"}))
+    if args.window_id is None and args.pick_window:
+        try:
+            window_id = identify_window_by_click()
+        except Exception as exc:
+            print(json.dumps({"status": "error", "panel": args.panel, "error": f"window-pick failed: {exc}"}))
+            return 1
+    elif args.window_id is not None:
+        window_id = args.window_id
+    else:
+        print(json.dumps({"status": "error", "panel": args.panel, "error": "must provide --window-id or --pick-window"}))
         return 1
     cli = ObsClient(OBS_WS_URL)
     try:
         cli.connect()
-        ok = cli.set_input_window_capture(panel.input_name, args.window_id)
+        resolved_input_name = resolve_panel_input_name(cli, scene, panel)
+        if not resolved_input_name:
+            print(
+                json.dumps(
+                    {
+                        "status": "error",
+                        "panel": args.panel,
+                        "error": "could not resolve concrete input name from ontology panel mapping",
+                    }
+                )
+            )
+            return 1
+        if args.panel in {"main", "aux_left"}:
+            peer_panel_id = "aux_left" if args.panel == "main" else "main"
+            peer_panel = panels.get(peer_panel_id)
+            peer_input_name = resolve_panel_input_name(cli, scene, peer_panel) if peer_panel else None
+            if peer_input_name:
+                peer_window_id = cli.get_input_window_id(peer_input_name)
+                if peer_window_id is not None and peer_window_id == window_id:
+                    print(
+                        json.dumps(
+                            {
+                                "status": "error",
+                                "panel": args.panel,
+                                "error": f"window_id {window_id} would duplicate {peer_panel_id}",
+                            }
+                        )
+                    )
+                    return 1
+        ok = cli.set_input_window_capture(resolved_input_name, window_id)
         if not ok:
-            print(json.dumps({"status": "error", "panel": args.panel, "input": panel.input_name, "window_id": args.window_id}))
+            print(json.dumps({"status": "error", "panel": args.panel, "input": resolved_input_name, "window_id": window_id}))
             return 1
         # Optionally, ensure scene item is enabled
         item_ids = find_scene_items_for_panel(cli, scene, panel)
@@ -181,8 +313,8 @@ def cmd_change_channel(args: argparse.Namespace) -> int:
                     "status": "ok",
                     "action": "change-channel",
                     "panel": args.panel,
-                    "input": panel.input_name,
-                    "window_id": args.window_id,
+                    "input": resolved_input_name,
+                    "window_id": window_id,
                     "channel": args.channel or None,
                 }
             )
@@ -268,7 +400,8 @@ def build_arg_parser() -> argparse.ArgumentParser:
 
     ch = sub.add_parser("change-channel", help="Change channel on a panel by rebinding its window capture")
     ch.add_argument("--panel", required=True, choices=["main", "aux_left", "aux_right", "aux_center"], help="Logical panel id")
-    ch.add_argument("--window-id", type=int, required=True, help="Target window id for the new channel")
+    ch.add_argument("--window-id", type=int, help="Target window id for the new channel")
+    ch.add_argument("--pick-window", action="store_true", help="Interactive click-to-pick target window id")
     ch.add_argument("--channel", help="Optional channel id/label for logging only")
     ch.set_defaults(func=cmd_change_channel)
 

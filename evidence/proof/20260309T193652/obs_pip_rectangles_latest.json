@@ -1,0 +1,54 @@
+{
+  "capturedAt": "20260309T193652",
+  "rowRule": "top-edge",
+  "rectangles": [
+    {
+      "sourceName": "PiP Capture",
+      "sceneItemId": 4,
+      "alignment": 5,
+      "boundsType": "OBS_BOUNDS_STRETCH",
+      "left": 0.0,
+      "top": -95.0,
+      "right": 3840.0,
+      "bottom": 2159.0,
+      "width": 3840.0,
+      "height": 2254.0
+    },
+    {
+      "sourceName": "Aux2",
+      "sceneItemId": 8,
+      "alignment": 5,
+      "boundsType": "OBS_BOUNDS_SCALE_OUTER",
+      "left": 20.0,
+      "top": 1421.0,
+      "right": 620.5,
+      "bottom": 1759.0,
+      "width": 600.5,
+      "height": 338.0
+    },
+    {
+      "sourceName": "Aux3LR_1773018462",
+      "sceneItemId": 13,
+      "alignment": 5,
+      "boundsType": "OBS_BOUNDS_SCALE_OUTER",
+      "left": 2699.5,
+      "top": 1421.0,
+      "right": 3300.0,
+      "bottom": 1759.0,
+      "width": 600.5,
+      "height": 338.0
+    },
+    {
+      "sourceName": "Aux4Center_1773019268",
+      "sceneItemId": 14,
+      "alignment": 5,
+      "boundsType": "OBS_BOUNDS_SCALE_OUTER",
+      "left": 1619.5,
+      "top": 1421.0,
+      "right": 2220.0,
+      "bottom": 1759.0,
+      "width": 600.5,
+      "height": 338.0
+    }
+  ]
+}

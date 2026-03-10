@@ -22,6 +22,7 @@ import sys
 from pathlib import Path
 
 import websocket
+from obs_pip_ontology import get_slot_spec
 
 OBS_WS_URL = "ws://127.0.0.1:4455"
 AUX_INPUT_NAME = "Aux Capture"  # default; use --input-name Aux2 for lower-left PiP
@@ -87,6 +88,14 @@ class ObsClient:
         ok = status.get("result", False)
         return ok, status, d.get("responseData", {}) or {}
 
+    def get_input_window_id(self, input_name: str) -> int | None:
+        ok, status, data = self.req("GetInputSettings", {"inputName": input_name})
+        if not ok:
+            raise RuntimeError(f"GetInputSettings failed for '{input_name}': {status}")
+        settings = data.get("inputSettings", {}) or {}
+        wid = settings.get("window")
+        return int(wid) if wid is not None else None
+
 
 def input_exists(cli: ObsClient, name: str) -> bool:
     ok, _, data = cli.req("GetInputList")
@@ -129,6 +138,12 @@ def main() -> int:
     cli = ObsClient(OBS_WS_URL)
     try:
         cli.connect()
+        lower_left_input = get_slot_spec("lowerLeft").input_name
+        main_input = get_slot_spec("main").input_name
+        if input_name == lower_left_input and main_input:
+            main_window_id = cli.get_input_window_id(main_input)
+            if main_window_id is not None and main_window_id == window_id:
+                raise RuntimeError(f"Refusing to bind {input_name} to window {window_id}: duplicates {main_input}")
 
         if input_exists(cli, input_name):
             ok, status, _ = cli.req(

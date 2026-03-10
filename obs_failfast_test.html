@@ -1,0 +1,85 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>OBS Fail-Fast Feed Test</title>
+  <style>
+    body { font-family: system-ui, Arial; background:#111; color:#eee; padding:16px; }
+    .controls { display:flex; gap:12px; align-items:center; margin-bottom:12px; }
+    button { padding:8px 12px; font-size:14px; }
+    video { width:100%; max-width:960px; border:1px solid #333; background:#000; display:block; }
+    #status { color:#bbb; font-size:13px; margin-left:8px; }
+  </style>
+</head>
+<body>
+  <h2>OBS Fail-Fast Feed Test</h2>
+  <div id="status">starting...</div>
+
+  <video id="player" autoplay playsinline muted playsinline></video>
+
+  <script>
+    const status = document.getElementById('status');
+    const player = document.getElementById('player');
+    let activeStream = null;
+
+    function setStatus(s) { status.textContent = s; }
+
+    async function start() {
+      setStatus('requesting permission...');
+      try {
+        // prompt for permission so device labels become available
+        await navigator.mediaDevices.getUserMedia({ video: true, audio: false });
+      } catch (err) {
+        setStatus('permission denied: ' + err.message);
+        return;
+      }
+
+      setStatus('enumerating devices...');
+      const devices = await navigator.mediaDevices.enumerateDevices();
+      const videoInputs = devices.filter(d => d.kind === 'videoinput');
+      // preferred label hints (try to match in order): cowboy, deutsche welle, dw, center, middle
+      const preferred = [/cowboy/i, /deutsche/i, /\bdw\b/i, /center/i, /middle/i];
+      let obsDevice = null;
+      for (const re of preferred) {
+        obsDevice = videoInputs.find(d => re.test(d.label));
+        if (obsDevice) break;
+      }
+      // fallback: any device with OBS in label
+      if (!obsDevice) obsDevice = videoInputs.find(d => /obs/i.test(d.label));
+
+      try {
+        let stream;
+        if (obsDevice) {
+          setStatus('found device: ' + obsDevice.label + ' — opening');
+          stream = await navigator.mediaDevices.getUserMedia({ video: { deviceId: { exact: obsDevice.deviceId } }, audio: false });
+        } else {
+          setStatus('OBS device not found — using default camera');
+          stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: false });
+        }
+        stop(); // stop any previous
+        activeStream = stream;
+        player.srcObject = stream;
+        await player.play().catch(()=>{});
+        setStatus('streaming' + (obsDevice ? ' (selected)' : ' (default)'));
+      } catch (err) {
+        setStatus('failed to open stream: ' + err.message);
+      }
+    }
+
+    function stop() {
+      if (activeStream) {
+        activeStream.getTracks().forEach(t => t.stop());
+        activeStream = null;
+      }
+      player.srcObject = null;
+      setStatus('stopped');
+    }
+
+    // auto-start on load (fail-fast)
+    window.addEventListener('DOMContentLoaded', () => {
+      start().catch(()=>{});
+    });
+  </script>
+</body>
+</html>
+

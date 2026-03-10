@@ -4,7 +4,9 @@ local mods = {"ctrl", "alt", "cmd"}
 local pipKey = "p"
 local obsKey = "o"
 local obsAppName = "OBS"
-local obsProjectorApiCmd = "/Users/lou/.hammerspoon/.venv_obsws/bin/python /Users/lou/.hammerspoon/obs_open_projector.py"
+local obsProjectorApiCmd = "/Users/lou/.hammerspoon/.venv_obsws/bin/python3 /Users/lou/.hammerspoon/obs_open_projector.py"
+local obsApplyCmd = "/Users/lou/.hammerspoon/.venv_obsws/bin/python3 /Users/lou/.hammerspoon/obs_apply_pip_layout.py --no-preview"
+local obsPanelControlCmd = "/Users/lou/.hammerspoon/.venv_obsws/bin/python3 /Users/lou/.hammerspoon/obs_panel_control.py"
 local obsMods = {"alt", "cmd"}
 local obsFallbackMods = {"ctrl", "alt", "cmd"}
 
@@ -15,6 +17,11 @@ end
 local function pulse(text)
   hs.alert.closeAll()
   hs.alert.show(text, 0.8)
+end
+
+local function runCommand(command)
+  local output, ok, _, rc = hs.execute(command, true)
+  return ok, output or "", rc or 0
 end
 
 local function toggleChromePiP()
@@ -199,6 +206,51 @@ local function toggleOBSFloatingWindow()
   end
 end
 
+local function openOBSPreviewProjector()
+  local ok, out = runCommand(obsProjectorApiCmd)
+  if ok and out:find("ok") then
+    pulse("OBS preview opened")
+    notify("OBS Preview", "Preview projector opened.")
+  else
+    notify("OBS Preview", "Failed to open preview projector.\n" .. tostring(out))
+  end
+end
+
+local function bindPanelByClick(panelId, panelLabel)
+  pulse("Click target window for " .. panelLabel)
+  local bindCmd = string.format("%s change-channel --panel %s --pick-window", obsPanelControlCmd, panelId)
+  local okBind, outBind = runCommand(bindCmd)
+  if not okBind then
+    notify("OBS Bind", "Bind failed for " .. panelLabel .. "\n" .. tostring(outBind))
+    return
+  end
+
+  local okApply, outApply = runCommand(obsApplyCmd)
+  if not okApply then
+    notify("OBS Layout", "Rebind succeeded, apply failed.\n" .. tostring(outApply))
+    return
+  end
+
+  local _okPreview, _outPreview = runCommand(obsProjectorApiCmd)
+  notify("OBS Bind", panelLabel .. " rebound + layout applied.")
+end
+
+local panelChooser = hs.chooser.new(function(choice)
+  if not choice then return end
+  bindPanelByClick(choice.panelId, choice.text)
+end)
+
+panelChooser:choices({
+  { text = "Main panel", subText = "Rebind PiP Capture to clicked window", panelId = "main" },
+  { text = "Lower-left panel", subText = "Rebind Aux2 to clicked window", panelId = "aux_left" },
+  { text = "Lower-right panel", subText = "Rebind Aux3* to clicked window", panelId = "aux_right" },
+  { text = "Center panel", subText = "Rebind Aux4* to clicked window", panelId = "aux_center" },
+})
+
+local function choosePanelAndBindWindow()
+  panelChooser:show()
+end
+
 -- Window-under-cursor test: hotkey then click a window to see its identity (e.g. for OBS capture binding).
 local identifyClickTap = nil
 
@@ -252,8 +304,13 @@ local function startIdentifyWindowMode()
 end
 
 hs.hotkey.bind(mods, "w", startIdentifyWindowMode)
+hs.hotkey.bind(mods, "b", choosePanelAndBindWindow)
+hs.hotkey.bind(mods, "v", openOBSPreviewProjector)
 
 hs.hotkey.bind(mods, pipKey, toggleChromePiP)
 hs.hotkey.bind(obsMods, obsKey, toggleOBSFloatingWindow)
 hs.hotkey.bind(obsFallbackMods, obsKey, toggleOBSFloatingWindow)
-notify("Hammerspoon", "Loaded: alt+cmd+o OBS toggle, ctrl+alt+cmd+o OBS fallback, ctrl+alt+cmd+p Chrome PiP, ctrl+alt+cmd+w identify window")
+notify(
+  "Hammerspoon",
+  "Loaded: alt+cmd+o OBS toggle, ctrl+alt+cmd+v open preview, ctrl+alt+cmd+b panel bind chooser, ctrl+alt+cmd+w identify window, ctrl+alt+cmd+p Chrome PiP"
+)

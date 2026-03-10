@@ -1,0 +1,5 @@
+{
+  "rdflib_status": "RDFLIB_PARSE_OK",
+  "shacl_conforms": true,
+  "results_text": "Validation Report\nConforms: True\n"
+}

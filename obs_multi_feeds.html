@@ -1,0 +1,202 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>OBS Multi-Feed Viewer</title>
+  <style>
+    body { margin:0; font-family: system-ui, Arial; background:#111; color:#eee; padding:12px; }
+    h3 { margin:0 0 12px 0; }
+    #grid { display:grid; grid-template-columns: repeat(auto-fit, minmax(300px,1fr)); gap:12px; }
+    .card { background:#0b0b0b; padding:8px; border:1px solid #222; display:flex; flex-direction:column; align-items:center; }
+    img { width:100%; height:auto; background:#000; display:block; }
+    .label { margin-top:8px; font-size:13px; color:#ccc; text-align:center; word-break:break-word; }
+    #status { margin-bottom:8px; color:#9aa; font-size:13px; }
+  </style>
+</head>
+<body>
+  <h3>OBS Multi-Feed Viewer</h3>
+  <div id="status">connecting…</div>
+  <div id="log" style="white-space:pre-wrap;margin-top:8px;color:#f88;font-size:12px;"></div>
+  <div id="grid"></div>
+
+  <script>
+    const WS_URL = "ws://127.0.0.1:4455";
+    const grid = document.getElementById('grid');
+    const status = document.getElementById('status');
+
+    let ws;
+    let reqId = 1;
+    const pending = new Map();
+    const logEl = document.getElementById('log');
+
+    function logError(msg) {
+      console.error(msg);
+      if (logEl) {
+        logEl.textContent = (logEl.textContent ? logEl.textContent + "\\n" : "") + msg;
+      }
+    }
+
+    window.addEventListener('error', (ev) => {
+      logError(`Window error: ${ev.message} @ ${ev.filename}:${ev.lineno}:${ev.colno}`);
+    });
+    window.addEventListener('unhandledrejection', (ev) => {
+      try {
+        const r = ev.reason;
+        logError(`UnhandledRejection: ${(r && r.message) || r}`);
+      } catch (e) { logError('UnhandledRejection (unknown)'); }
+    });
+
+    function sendRequest(requestType, requestData={}) {
+      return new Promise((resolve, reject) => {
+        const id = "r" + (reqId++);
+        pending.set(id, {resolve, reject});
+        const payload = { op: 6, d: { requestType, requestId: id, requestData } };
+        try {
+          if (!ws || ws.readyState !== WebSocket.OPEN) throw new Error('WebSocket not open');
+          ws.send(JSON.stringify(payload));
+        } catch (e) {
+          pending.delete(id);
+          reject(e);
+        }
+      });
+    }
+
+    function handleMessage(msg) {
+      let data;
+      try { data = JSON.parse(msg.data); } catch(e){ logError('invalid JSON from websocket'); return; }
+      const d = data.d || {};
+      // reply to request
+      const rid = d.requestId;
+      if (rid && pending.has(rid)) {
+        const { resolve } = pending.get(rid);
+        pending.delete(rid);
+        const ok = (d.requestStatus || {}).result || false;
+        resolve({ ok, status: d.requestStatus, response: d.responseData });
+        return;
+      }
+      // show unexpected messages for debugging
+      if (data && data.d && data.op !== undefined) {
+        // ignore operational hello (op 0/1) but log others
+        // console.debug('WS message', data);
+      }
+    }
+
+    function createCard(name) {
+      const c = document.createElement('div');
+      c.className = 'card';
+      const img = document.createElement('img');
+      img.alt = name;
+      const lbl = document.createElement('div');
+      lbl.className = 'label';
+      lbl.textContent = name;
+      c.appendChild(img);
+      c.appendChild(lbl);
+      grid.appendChild(c);
+      return img;
+    }
+
+    async function pollScreenshots(sources, ms=Math.floor(1000/60)) {
+      // target ~60 fps by default (ms ~= 16)
+      status.textContent = `streaming ${sources.length} source(s) — ${Math.round(1000/ms)} fps each`;
+      const imgs = sources.map(s => createCard(s));
+
+      async function loop() {
+        // issue parallel requests for all sources to reduce per-source latency
+        const promises = sources.map(name =>
+          sendRequest("GetSourceScreenshot", { sourceName: name, imageFormat: "png", imageWidth: 480 })
+            .then(res => ({ name, ok: res.ok, response: res.response }))
+            .catch(err => ({ name, ok: false, error: err }))
+        );
+
+        const results = await Promise.all(promises);
+        for (let i = 0; i < results.length; i++) {
+          const r = results[i];
+          const name = r.name || sources[i];
+          try {
+            if (r.ok && r.response && r.response.imageData) {
+              const imgData = r.response.imageData;
+              if (typeof imgData === 'string' && imgData.startsWith('data:')) {
+                imgs[i].src = imgData;
+              } else {
+                imgs[i].src = "data:image/png;base64," + imgData;
+              }
+            } else {
+              imgs[i].src = "";
+              if (r.response && r.response.error) logError(`GetSourceScreenshot ${name} returned error: ${JSON.stringify(r.response)}`);
+              if (r.error) logError(`GetSourceScreenshot ${name} failed: ${r.error && (r.error.message || r.error)}`);
+            }
+          } catch (e) {
+            logError(`render error ${name}: ${e && e.message || e}`);
+          }
+        }
+
+        setTimeout(loop, ms);
+      }
+
+      loop();
+    }
+
+    function preferredSourcesFromInputs(inputs) {
+      // look for authoritative names used by PiP layout
+      const names = inputs.map(i => i.inputName || i.name).filter(Boolean);
+      const preferred = [];
+      const pick = (re) => {
+        const found = names.find(n => re.test(n));
+        if (found && !preferred.includes(found)) preferred.push(found);
+      };
+      [ /PiP Capture/i, /\bAux2\b/i, /^Aux3/i, /^Aux4/i, /Deutsche/i, /cowboy/i, /center/i ].forEach(pick);
+      // fill with first available until 4
+      for (const n of names) {
+        if (preferred.length >= 4) break;
+        if (!preferred.includes(n)) preferred.push(n);
+      }
+      return preferred.slice(0,4);
+    }
+
+    function connect() {
+      status.textContent = 'connecting to obs-websocket…';
+      try {
+        ws = new WebSocket(WS_URL);
+      } catch (e) {
+        logError('WebSocket construction failed: ' + e.message);
+        status.textContent = 'websocket failed';
+        return;
+      }
+      ws.addEventListener('message', handleMessage);
+      ws.addEventListener('open', () => {
+        // send identification
+        try { ws.send(JSON.stringify({ op: 1, d: { rpcVersion: 1 } })); } catch(e){ logError('send hello failed: '+e.message); }
+        // give server a moment then enumerate inputs
+        setTimeout(async () => {
+          try {
+            const res = await sendRequest("GetInputList", {});
+            const inputs = (res.response && res.response.inputs) || [];
+            const sources = preferredSourcesFromInputs(inputs);
+            if (!sources.length) {
+              status.textContent = 'no inputs found — trying scene items';
+              const sceneRes = await sendRequest("GetSceneItemList", { sceneName: "PiP" });
+              const items = (sceneRes.response && sceneRes.response.sceneItems) || [];
+              const itemNames = items.map(it => it.sourceName).filter(Boolean);
+              if (itemNames.length) {
+                pollScreenshots(itemNames.slice(0,4));
+              } else {
+                status.textContent = 'no sources discovered';
+              }
+            } else {
+              pollScreenshots(sources);
+            }
+          } catch (e) {
+            status.textContent = 'error discovering sources: ' + (e && e.message);
+            logError(e && e.stack ? e.stack : String(e));
+          }
+        }, 200);
+      });
+      ws.addEventListener('close', (ev) => { status.textContent = 'connection closed'; logError('WebSocket closed: '+JSON.stringify(ev)); });
+      ws.addEventListener('error', (e) => { status.textContent = 'websocket error'; logError('WebSocket error: '+(e && e.message || e)); });
+    }
+
+    connect();
+  </script>
+</body>
+</html>
+

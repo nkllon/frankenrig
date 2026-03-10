@@ -1,0 +1,50 @@
+{
+  "capturedAt": "20260309T193021",
+  "rowRule": "top-edge",
+  "rectangles": [
+    {
+      "sourceName": "PiP Capture",
+      "sceneItemId": 4,
+      "alignment": 5,
+      "left": 0.0,
+      "top": -95.0,
+      "right": 3840.0,
+      "bottom": 2165.0,
+      "width": 3840.0,
+      "height": 2260.0
+    },
+    {
+      "sourceName": "Aux2",
+      "sceneItemId": 8,
+      "alignment": 5,
+      "left": 20.0,
+      "top": 1421.0,
+      "right": 3860.0,
+      "bottom": 3675.0,
+      "width": 3840.0,
+      "height": 2254.0
+    },
+    {
+      "sourceName": "Aux3LR_1773018462",
+      "sceneItemId": 13,
+      "alignment": 5,
+      "left": 2699.5,
+      "top": 1421.0,
+      "right": 6539.5,
+      "bottom": 3675.0,
+      "width": 3840.0,
+      "height": 2254.0
+    },
+    {
+      "sourceName": "Aux4Center_1773019268",
+      "sceneItemId": 14,
+      "alignment": 5,
+      "left": 1619.5,
+      "top": 1421.0,
+      "right": 5459.5,
+      "bottom": 3713.0,
+      "width": 3840.0,
+      "height": 2292.0
+    }
+  ]
+}

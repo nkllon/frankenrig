@@ -1,0 +1,48 @@
+{
+  "inputs": {
+    "main": {
+      "inputName": "PiP Capture",
+      "inputSettings": {
+        "hide_obs": true,
+        "show_empty_names": true,
+        "show_hidden_windows": true,
+        "type": 1,
+        "window": 21552
+      }
+    },
+    "lowerLeft": {
+      "inputName": "Aux2",
+      "inputSettings": {
+        "hide_obs": true,
+        "show_cursor": true,
+        "show_empty_names": true,
+        "show_hidden_windows": true,
+        "type": 1,
+        "window": 39251
+      }
+    },
+    "lowerRight": {
+      "inputName": "Aux3LR_1773018462",
+      "inputSettings": {
+        "hide_obs": true,
+        "show_cursor": true,
+        "show_empty_names": true,
+        "show_hidden_windows": true,
+        "type": 1,
+        "window": 23187
+      }
+    },
+    "center": {
+      "inputName": "Aux4Center_1773019268",
+      "inputSettings": {
+        "hide_obs": true,
+        "show_cursor": true,
+        "show_empty_names": true,
+        "show_hidden_windows": true,
+        "type": 1,
+        "window": 23720
+      }
+    }
+  },
+  "capturedAt": "20260309T193652"
+}

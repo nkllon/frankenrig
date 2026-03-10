@@ -16,4 +16,4 @@ Short clip of the rig running in context (OBS with all panels + control surface 
 
 - **init.lua** — Hammerspoon entry point (hotkeys, OBS triggers).
 - **OBS control scripts** — Python helpers for identify/rewire capture, rebuild PiP, and panel-level control (`obs_panel_control.py`).
-- **evidence/** — Ontology (TTL/SHACL), narrative runbooks, API discovery snapshots, scene geometry, verification prompts, screenshots. Authoritative current state: `evidence/obs_api_discovery_review_now.json` and `evidence/obs_pip_findings.{md,ttl}`.
+- **evidence/** — Ontology (TTL/SHACL), narrative runbooks, API discovery snapshots, scene geometry, verification prompts, screenshots. Authoritative current state/model: `evidence/obs_pip_findings.ttl` + `evidence/obs_pip_findings.shacl.ttl`. JSON files under `evidence/` are derived exports or raw OBS telemetry.

@@ -16,6 +16,8 @@ Usage:
   .venv_obsws/bin/python3 obs_rebuild_pip_arrangement.py --add-fourth-center --window4 ID4   # add fourth window bottom center
   .venv_obsws/bin/python3 obs_rebuild_pip_arrangement.py --fix-aux3   # re-apply lower-right transform
   .venv_obsws/bin/python3 obs_rebuild_pip_arrangement.py --fix-aux4   # re-apply bottom-center transform (alignment 36)
+  .venv_obsws/bin/python3 obs_apply_pip_layout.py   # authoritative only: ontology + mandatory proof bundle (no discovery)
+  .venv_obsws/bin/python3 obs_rebuild_pip_arrangement.py --reset-view # delegates to obs_apply_pip_layout.py
 """
 
 import argparse
@@ -27,6 +29,7 @@ import time
 from pathlib import Path
 
 import websocket
+from obs_pip_ontology import get_layout_payload, load_graph
 
 OBS_WS_URL = "ws://127.0.0.1:4455"
 SCENE = "PiP"
@@ -37,7 +40,7 @@ INPUT_PIP_CENTER_PREFIX = "Aux4Center"  # fourth source, between the two bottom 
 IDENT_SCRIPT = Path("/Users/lou/.hammerspoon/identify_window_click.py")
 IDENT_PY = Path("/Users/lou/.hammerspoon/.venv_obsws/bin/python3")
 
-# Known-good layout from current working arrangement
+# Main transform matches the ontology-backed full-canvas layout.
 TRANSFORM_MAIN = {
     "positionX": 0.0,
     "positionY": -95.0,
@@ -54,76 +57,65 @@ TRANSFORM_MAIN = {
     "cropLeft": 0,
     "cropRight": 0,
 }
-TRANSFORM_PIP = {
-    "positionX": 20.0,   # lower left
-    "positionY": 1421.0,  # up five nudges from 1561, then down one
-    "scaleX": 0.3128255158662796,
-    "scaleY": 0.3127772733569145,
-    "boundsWidth": 1.0,
-    "boundsHeight": 1.0,
-    "boundsType": "OBS_BOUNDS_NONE",
-    "boundsAlignment": 0,
-    "alignment": 5,
-    "rotation": 0.0,
-    "cropTop": 0,
-    "cropBottom": 0,
-    "cropLeft": 0,
-    "cropRight": 0,
-}
-# Scale for small PiPs (same as lower-left); 1.25x from original 0.25 (2026-03-08)
+# Legacy row-math constants are retained for compatibility comments only; runtime
+# transforms now come from the ontology-backed layout payload.
 PIP_SCALE_X = 0.3128255158662796
 PIP_SCALE_Y = 0.3127772733569145
-# Reference canvas for lower-left positionY (2254) so we can scale
+# Reference canvas and single-row layout. All three small PiPs use the same anchor: top-left (alignment 5).
+REF_CANVAS_WIDTH = 3840.0
 REF_CANVAS_HEIGHT = 2254.0
-REF_PIP_POS_Y = 1421.0  # up five nudges from 1561, then down one
+REF_SOURCE_WIDTH = 1920.0   # typical capture size for pip_width in canvas space
+REF_SOURCE_HEIGHT = 1080.0
+REF_PIP_TOP_Y = 1421.0     # top edge of bottom row
+REF_LEFT_MARGIN_X = 20.0
+REF_RIGHT_INSET_X = 540.0  # from right edge of canvas to right edge of right PiP
+# Derived: pip size in canvas space (same for all three)
+PIP_WIDTH_CANVAS = REF_SOURCE_WIDTH * PIP_SCALE_X   # ~600.6
+PIP_HEIGHT_CANVAS = REF_SOURCE_HEIGHT * PIP_SCALE_Y  # ~337.8
 
 
-# Inset from bottom-right corner; after 25% scale-up, right PiP moved left 14 nudges; Y so top aligns with left/center
-PIP_RIGHT_INSET_X = 609.0   # canvas_w - 3231.25
-PIP_RIGHT_INSET_Y = 833.0   # positionY 1773.5 so top edge = 1068.5 (aligned with Aux2/Aux4Center)
+def _pip_row_scale(canvas_height: float) -> float:
+    """Scale factor for Y when canvas height differs from reference."""
+    return canvas_height / REF_CANVAS_HEIGHT
+
+
+def _pip_transform(canvas_width: float, canvas_height: float, position_x: float, position_y: float) -> dict:
+    """Shared transform for all three small PiPs: same scale, same anchor (top-left = 5)."""
+    return {
+        "positionX": position_x,
+        "positionY": position_y,
+        "scaleX": PIP_SCALE_X,
+        "scaleY": PIP_SCALE_Y,
+        "boundsWidth": 1.0,
+        "boundsHeight": 1.0,
+        "boundsType": "OBS_BOUNDS_NONE",
+        "boundsAlignment": 0,
+        "alignment": 5,  # OBS_ALIGN_LEFT | OBS_ALIGN_TOP — same anchor for all three
+        "rotation": 0.0,
+        "cropTop": 0,
+        "cropBottom": 0,
+        "cropLeft": 0,
+        "cropRight": 0,
+    }
+
+
+def _ontology_transforms() -> dict:
+    return get_layout_payload(load_graph())["transforms"]
+
+
+def transform_pip_left(canvas_width: float, canvas_height: float) -> dict:
+    """Lower-left PiP transform from ontology authority."""
+    return dict(_ontology_transforms()["auxLeft"])
 
 
 def transform_pip_right(canvas_width: float, canvas_height: float) -> dict:
-    """Build lower-right transform from actual canvas size so PiP stays on-screen."""
-    # alignment 8 = bottom-right: position is the source's bottom-right corner; inset from corner
-    return {
-        "positionX": canvas_width - PIP_RIGHT_INSET_X,
-        "positionY": canvas_height - PIP_RIGHT_INSET_Y,
-        "scaleX": PIP_SCALE_X,
-        "scaleY": PIP_SCALE_Y,
-        "boundsWidth": 1.0,
-        "boundsHeight": 1.0,
-        "boundsType": "OBS_BOUNDS_NONE",
-        "boundsAlignment": 0,
-        "alignment": 8,  # OBS_ALIGN_RIGHT | OBS_ALIGN_BOTTOM = bottom-right corner
-        "rotation": 0.0,
-        "cropTop": 0,
-        "cropBottom": 0,
-        "cropLeft": 0,
-        "cropRight": 0,
-    }
+    """Lower-right PiP transform from ontology authority."""
+    return dict(_ontology_transforms()["auxRight"])
 
 
 def transform_pip_center(canvas_width: float, canvas_height: float) -> dict:
-    """Fourth PiP: between the two bottom ones (same scale, same Y, center X)."""
-    center_x = canvas_width / 2.0
-    # alignment 36 = center horizontal | center vertical: position is the source's center (not left edge)
-    return {
-        "positionX": center_x,
-        "positionY": REF_PIP_POS_Y * (canvas_height / REF_CANVAS_HEIGHT),
-        "scaleX": PIP_SCALE_X,
-        "scaleY": PIP_SCALE_Y,
-        "boundsWidth": 1.0,
-        "boundsHeight": 1.0,
-        "boundsType": "OBS_BOUNDS_NONE",
-        "boundsAlignment": 0,
-        "alignment": 36,  # OBS_ALIGN_CENTER_HORIZONTAL | OBS_ALIGN_CENTER_VERTICAL
-        "rotation": 0.0,
-        "cropTop": 0,
-        "cropBottom": 0,
-        "cropLeft": 0,
-        "cropRight": 0,
-    }
+    """Bottom-center PiP transform from ontology authority."""
+    return dict(_ontology_transforms()["auxCenter"])
 
 
 def parse_window_id(text: str) -> int:
@@ -266,19 +258,55 @@ class ObsClient:
             raise RuntimeError(f"SetSceneItemTransform: {st}")
 
     def move_scene_item_to_top(self, scene_item_id: int) -> None:
-        """Move scene item to top of stack so it's not hidden behind full-screen source."""
+        """Move scene item to top of stack (higher index = drawn on top)."""
         ok, _, data = self.req("GetSceneItemList", {"sceneName": SCENE})
         if not ok:
             return
         items = data.get("sceneItems", [])
         if not items:
             return
-        # In OBS v5, higher index = drawn on top; use max+1 so this item is above all others
         max_index = max(it.get("sceneItemIndex", 0) for it in items)
-        top_index = max_index + 1
-        ok, st, _ = self.req("SetSceneItemIndex", {"sceneName": SCENE, "sceneItemId": scene_item_id, "sceneItemIndex": top_index})
+        ok, st, _ = self.req("SetSceneItemIndex", {"sceneName": SCENE, "sceneItemId": scene_item_id, "sceneItemIndex": max_index + 1})
         if not ok:
             raise RuntimeError(f"SetSceneItemIndex: {st.get('comment', st)}")
+
+    def move_scene_item_to_bottom(self, scene_item_id: int) -> None:
+        """Move scene item to bottom of stack so it is drawn first (behind others).
+        In OBS, index 0 can mean 'first in list'; draw order may be list order or reverse.
+        We set main to index 0; if the three PiPs still get covered, try last index instead."""
+        ok, st, _ = self.req("SetSceneItemIndex", {"sceneName": SCENE, "sceneItemId": scene_item_id, "sceneItemIndex": 0})
+        if not ok:
+            raise RuntimeError(f"SetSceneItemIndex (to bottom): {st.get('comment', st)}")
+
+    def move_scene_item_to_back_last(self, scene_item_id: int) -> None:
+        """Move scene item to last position in list (max index). Use when list order = draw order and first item is on top."""
+        ok, _, data = self.req("GetSceneItemList", {"sceneName": SCENE})
+        if not ok:
+            return
+        items = data.get("sceneItems", [])
+        if not items:
+            return
+        max_index = max(it.get("sceneItemIndex", 0) for it in items)
+        ok, st, _ = self.req("SetSceneItemIndex", {"sceneName": SCENE, "sceneItemId": scene_item_id, "sceneItemIndex": max_index})
+        if not ok:
+            raise RuntimeError(f"SetSceneItemIndex (to back/last): {st.get('comment', st)}")
+
+    def save_scene_screenshot(self, scene_name: str, file_path: Path) -> None:
+        """Capture scene as PNG via SaveSourceScreenshot; OBS writes file directly."""
+        path_str = str(file_path.resolve())
+        ok, st, _ = self.req(
+            "SaveSourceScreenshot",
+            {
+                "sourceName": scene_name,
+                "imageFilePath": path_str,
+                "imageFormat": "png",
+                "imageCompressionQuality": 90,
+            },
+        )
+        if not ok:
+            raise RuntimeError(f"SaveSourceScreenshot: {st.get('comment', st)}")
+        if not file_path.exists():
+            raise RuntimeError(f"SaveSourceScreenshot did not create {path_str}")
 
 
 def main() -> int:
@@ -292,6 +320,8 @@ def main() -> int:
     ap.add_argument("--diagnose", action="store_true", help="Print PiP scene items and video settings, then exit")
     ap.add_argument("--fix-aux3", action="store_true", help="Re-apply lower-right transform to existing Aux3 and move to top (no click)")
     ap.add_argument("--fix-aux4", action="store_true", help="Re-apply bottom-center transform to existing Aux4 (e.g. after alignment fix)")
+    ap.add_argument("--reset-view", action="store_true", help="Re-apply all four PiP transforms from shared row math (main, Aux2, Aux3, Aux4); fix alignment and ensure lower-left visible")
+    ap.add_argument("--screenshot", type=str, metavar="PATH", help="After applying transforms, save PiP scene screenshot to PATH (use with --reset-view to verify)")
     ap.add_argument("--dry-run", action="store_true", help="Do not apply")
     args = ap.parse_args()
 
@@ -353,6 +383,31 @@ def main() -> int:
             cli.move_scene_item_to_top(id_center)
             cli.req("SetSceneItemEnabled", {"sceneName": SCENE, "sceneItemId": id_center, "sceneItemEnabled": True})
             print(f"status=ok (Aux4 center transform updated, canvas {cw:.0f}x{ch:.0f})")
+        except Exception as e:
+            print(f"error={e}", file=sys.stderr)
+            sys.exit(1)
+        finally:
+            cli.close()
+        return 0
+
+    if args.reset_view:
+        # No discovery here—single source of truth is evidence/obs_pip_layout_authoritative.json
+        apply_script = Path(__file__).resolve().parent / "obs_apply_pip_layout.py"
+        cmd = [str(IDENT_PY.parent / "python3"), str(apply_script)]
+        if args.screenshot:
+            cmd.extend(["--screenshot", args.screenshot])
+        proc = subprocess.run(cmd, cwd=str(apply_script.parent))
+        return proc.returncode
+
+    if args.screenshot and not args.reset_view:
+        cli = ObsClient(OBS_WS_URL)
+        try:
+            cli.connect()
+            out_path = Path(args.screenshot).expanduser().resolve()
+            cli.save_scene_screenshot(SCENE, out_path)
+            print(f"screenshot={out_path}")
+            if out_path.exists():
+                subprocess.run(["open", "-a", "Preview", str(out_path)], check=False)
         except Exception as e:
             print(f"error={e}", file=sys.stderr)
             sys.exit(1)
@@ -435,16 +490,17 @@ def main() -> int:
     cli = ObsClient(OBS_WS_URL)
     try:
         cli.connect()
+        cw, ch = cli.get_canvas_size()
         cli.ensure_input(INPUT_MAIN, args.window1)
         cli.ensure_input(INPUT_PIP, args.window2)
         id_main = cli.ensure_scene_item(INPUT_MAIN)
         id_pip = cli.ensure_scene_item(INPUT_PIP)
         cli.set_transform(id_main, TRANSFORM_MAIN)
-        cli.set_transform(id_pip, TRANSFORM_PIP)
+        cli.set_transform(id_pip, transform_pip_left(cw, ch))
         cli.req("SetSceneItemEnabled", {"sceneName": SCENE, "sceneItemId": id_main, "sceneItemEnabled": True})
         cli.req("SetSceneItemEnabled", {"sceneName": SCENE, "sceneItemId": id_pip, "sceneItemEnabled": True})
+        cli.move_scene_item_to_top(id_pip)
         if args.window3 is not None:
-            cw, ch = cli.get_canvas_size()
             aux3_name = f"{INPUT_PIP_RIGHT_PREFIX}_{int(time.time())}"
             id_right = cli.ensure_input(aux3_name, args.window3)
             if id_right is not None:
