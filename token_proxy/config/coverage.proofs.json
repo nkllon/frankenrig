@@ -1,0 +1,17 @@
+{
+  "proof_by_class": {
+    "proxy_chat_observed": {
+      "positive_proof": "evidence/token_proxy/PROOF_proxy_chat_observed_positive.json",
+      "negative_proof": "evidence/token_proxy/PROOF_proxy_chat_observed_negative.json"
+    },
+    "cursor_routing_exhaust_partial": {
+      "positive_proof": "evidence/token_proxy/PROOF_cursor_routing_exhaust_positive.json",
+      "negative_proof": "evidence/token_proxy/PROOF_cursor_routing_exhaust_negative.json"
+    },
+    "direct_provider_bypass": {
+      "positive_proof": "evidence/token_proxy/PROOF_direct_provider_bypass_positive.json",
+      "negative_proof": "evidence/token_proxy/PROOF_direct_provider_bypass_negative.json"
+    }
+  }
+}
+
