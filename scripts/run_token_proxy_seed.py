@@ -515,7 +515,7 @@ def main() -> int:
             sort_keys=True,
         )
     )
-    return 0
+    return 0 if bool(final_result.get("overall_pass")) else 1
 
 
 if __name__ == "__main__":

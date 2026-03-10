@@ -160,7 +160,7 @@ def ensure_storage(config: dict[str, Any]) -> dict[str, Path]:
               day_utc TEXT NOT NULL,
               provider TEXT NOT NULL,
               model TEXT NOT NULL,
-              client_id TEXT,
+              client_id TEXT NOT NULL DEFAULT '',
               request_count INTEGER NOT NULL,
               prompt_tokens INTEGER NOT NULL,
               completion_tokens INTEGER NOT NULL,
@@ -345,7 +345,7 @@ def build_rollups(config: dict[str, Any]) -> dict[str, Any]:
     try:
         grouped = conn.execute(
             """
-            SELECT day_utc, provider, model, client_id,
+            SELECT day_utc, provider, model, COALESCE(client_id, '') AS client_id,
                    COUNT(*) AS request_count,
                    SUM(prompt_tokens) AS prompt_tokens,
                    SUM(completion_tokens) AS completion_tokens,
@@ -353,7 +353,7 @@ def build_rollups(config: dict[str, Any]) -> dict[str, Any]:
                    SUM(COALESCE(estimated_cost, 0.0)) AS estimated_cost,
                    SUM(CASE WHEN status='error' THEN 1 ELSE 0 END) AS error_count
             FROM events_normalized
-            GROUP BY day_utc, provider, model, client_id
+            GROUP BY day_utc, provider, model, COALESCE(client_id, '')
             """
         ).fetchall()
 
@@ -362,13 +362,21 @@ def build_rollups(config: dict[str, Any]) -> dict[str, Any]:
                 """
                 SELECT latency_ms
                 FROM events_normalized
-                WHERE day_utc=? AND provider=? AND model=? AND client_id IS ?
+                WHERE day_utc=? AND provider=? AND model=? AND COALESCE(client_id, '') = ?
                 ORDER BY latency_ms ASC
                 """,
                 (row["day_utc"], row["provider"], row["model"], row["client_id"]),
             ).fetchall()
             vals = [float(item["latency_ms"]) for item in latencies]
             p = percentiles(vals)
+            if row["client_id"] == "":
+                conn.execute(
+                    """
+                    DELETE FROM daily_rollups
+                    WHERE day_utc=? AND provider=? AND model=? AND client_id IS NULL
+                    """,
+                    (row["day_utc"], row["provider"], row["model"]),
+                )
             conn.execute(
                 """
                 INSERT INTO daily_rollups(
