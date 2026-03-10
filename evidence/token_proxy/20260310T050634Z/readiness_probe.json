@@ -1,0 +1,39 @@
+{
+  "pass": true,
+  "ready_bad": {
+    "body": {
+      "checks": {
+        "config_exists": true,
+        "coverage_matrix_ready": true,
+        "pricing_catalog_ready": false,
+        "storage_db_exists": true,
+        "storage_raw_parent_exists": true,
+        "telemetry_write_ok": true
+      },
+      "ok": false,
+      "ready": false,
+      "reasons": [
+        "pricing_catalog_invalid"
+      ],
+      "timestamp_utc": "2026-03-10T05:06:36Z"
+    },
+    "status": 503
+  },
+  "ready_ok": {
+    "body": {
+      "checks": {
+        "config_exists": true,
+        "coverage_matrix_ready": true,
+        "pricing_catalog_ready": true,
+        "storage_db_exists": true,
+        "storage_raw_parent_exists": true,
+        "telemetry_write_ok": true
+      },
+      "ok": true,
+      "ready": true,
+      "reasons": [],
+      "timestamp_utc": "2026-03-10T05:06:35Z"
+    },
+    "status": 200
+  }
+}

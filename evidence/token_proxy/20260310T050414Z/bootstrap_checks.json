@@ -1,0 +1,29 @@
+{
+  "cc_sdd": {
+    "command": [
+      "cc-sdd",
+      "--version"
+    ],
+    "exit_code": 0,
+    "stderr": "",
+    "stdout": "cc-sdd v2.0.0-alpha.3\n"
+  },
+  "node": {
+    "command": [
+      "node",
+      "-v"
+    ],
+    "exit_code": 0,
+    "stderr": "",
+    "stdout": "v25.6.1\n"
+  },
+  "npm": {
+    "command": [
+      "npm",
+      "-v"
+    ],
+    "exit_code": 0,
+    "stderr": "",
+    "stdout": "11.9.0\n"
+  }
+}

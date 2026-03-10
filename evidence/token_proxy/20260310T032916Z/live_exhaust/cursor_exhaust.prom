@@ -1,0 +1,47 @@
+# HELP cursor_exhaust_snapshot_info Snapshot metadata marker.
+# TYPE cursor_exhaust_snapshot_info gauge
+cursor_exhaust_snapshot_info{schema_version="token-proxy.cursor-exhaust.v1"} 1
+
+# HELP cursor_exhaust_snapshot_captured_unix_seconds Snapshot capture time in unix seconds.
+# TYPE cursor_exhaust_snapshot_captured_unix_seconds gauge
+cursor_exhaust_snapshot_captured_unix_seconds 1773113356
+
+# HELP cursor_exhaust_pairing_sessions_count Pairing session records included.
+# TYPE cursor_exhaust_pairing_sessions_count gauge
+cursor_exhaust_pairing_sessions_count 50
+
+# HELP cursor_exhaust_candidate_models_count Candidate model hints count.
+# TYPE cursor_exhaust_candidate_models_count gauge
+cursor_exhaust_candidate_models_count 5
+
+# HELP cursor_exhaust_extension_windows_count Cursor windows summarized from latest session logs.
+# TYPE cursor_exhaust_extension_windows_count gauge
+cursor_exhaust_extension_windows_count 3
+
+# HELP cursor_exhaust_codex_logs_present_count Windows with Codex logs present.
+# TYPE cursor_exhaust_codex_logs_present_count gauge
+cursor_exhaust_codex_logs_present_count 3
+
+# HELP cursor_exhaust_claude_logs_present_count Windows with Claude logs present.
+# TYPE cursor_exhaust_claude_logs_present_count gauge
+cursor_exhaust_claude_logs_present_count 3
+
+# HELP cursor_exhaust_routing_visibility_status Routing visibility one-hot status.
+# TYPE cursor_exhaust_routing_visibility_status gauge
+cursor_exhaust_routing_visibility_status{status="known"} 0
+cursor_exhaust_routing_visibility_status{status="partially_known"} 1
+cursor_exhaust_routing_visibility_status{status="unknown"} 0
+
+# HELP cursor_exhaust_per_turn_attribution_status Per-turn attribution visibility one-hot status.
+# TYPE cursor_exhaust_per_turn_attribution_status gauge
+cursor_exhaust_per_turn_attribution_status{status="known"} 0
+cursor_exhaust_per_turn_attribution_status{status="partially_known"} 0
+cursor_exhaust_per_turn_attribution_status{status="unknown"} 1
+
+# HELP cursor_exhaust_candidate_model_present Candidate model hint presence.
+# TYPE cursor_exhaust_candidate_model_present gauge
+cursor_exhaust_candidate_model_present{model="default"} 1
+cursor_exhaust_candidate_model_present{model="gemini-3-flash"} 1
+cursor_exhaust_candidate_model_present{model="gpt-5.1-codex"} 1
+cursor_exhaust_candidate_model_present{model="gpt-5.1-codex-max"} 1
+cursor_exhaust_candidate_model_present{model="gpt-5.2"} 1

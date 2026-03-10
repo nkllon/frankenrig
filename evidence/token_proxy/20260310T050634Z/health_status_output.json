@@ -1,0 +1,4 @@
+{
+  "status_stderr": "",
+  "status_stdout": "{\n  \"config_path\": \"/Users/lou/.hammerspoon/evidence/token_proxy/20260310T050634Z/runtime/token-proxy.runtime.config.json\",\n  \"db_path\": \"/Users/lou/.hammerspoon/evidence/token_proxy/20260310T050634Z/runtime/token_proxy.db\",\n  \"health\": {\n    \"ok\": true,\n    \"payload\": {\n      \"ok\": true,\n      \"service\": \"token-proxy\",\n      \"timestamp_utc\": \"2026-03-10T05:06:35Z\"\n    }\n  },\n  \"ok\": true,\n  \"pid\": 42532,\n  \"pricing_version\": \"2026-03-10\",\n  \"raw_events_path\": \"/Users/lou/.hammerspoon/evidence/token_proxy/20260310T050634Z/runtime/events_raw.ndjson\",\n  \"running\": true,\n  \"telemetry_schema_version\": \"token-proxy.event.v1\"\n}\n"
+}

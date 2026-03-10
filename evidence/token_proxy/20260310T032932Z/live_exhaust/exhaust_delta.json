@@ -1,0 +1,35 @@
+{
+  "candidate_models_added": [],
+  "candidate_models_removed": [],
+  "first_capture": "/Users/lou/.hammerspoon/evidence/token_proxy/20260310T032916Z/live_exhaust/cursor_exhaust_snapshot.json",
+  "first_captured_at_utc": "2026-03-10T03:29:16Z",
+  "pairing_ids_added": [],
+  "pairing_ids_removed": [],
+  "per_turn_status_changed": false,
+  "routing_visibility_changed": false,
+  "second_capture": "/Users/lou/.hammerspoon/evidence/token_proxy/20260310T032932Z/live_exhaust/cursor_exhaust_snapshot.json",
+  "second_captured_at_utc": "2026-03-10T03:29:32Z",
+  "window_log_deltas": [
+    {
+      "claude_activation_delta": 0,
+      "claude_line_count_delta": 0,
+      "codex_activation_delta": 0,
+      "codex_line_count_delta": 0,
+      "window": "window1"
+    },
+    {
+      "claude_activation_delta": 0,
+      "claude_line_count_delta": 0,
+      "codex_activation_delta": 0,
+      "codex_line_count_delta": 0,
+      "window": "window2"
+    },
+    {
+      "claude_activation_delta": 0,
+      "claude_line_count_delta": 0,
+      "codex_activation_delta": 0,
+      "codex_line_count_delta": 0,
+      "window": "window3"
+    }
+  ]
+}

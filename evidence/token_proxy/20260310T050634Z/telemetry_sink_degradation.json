@@ -1,0 +1,47 @@
+{
+  "fail_closed_result": {
+    "body": {
+      "correlation_id": "telemetry-sink-closed",
+      "error": "telemetry_sink_failure",
+      "mode": "fail_closed",
+      "model": "gpt-4.1-mini",
+      "ok": false,
+      "provider": "openai_mock",
+      "sink_error": "IsADirectoryError"
+    },
+    "status": 503
+  },
+  "fail_open_result": {
+    "body": {
+      "choices": [
+        {
+          "index": 0,
+          "message": {
+            "content": "openai mock response",
+            "role": "assistant"
+          }
+        }
+      ],
+      "id": "openai_mock-1773119196339",
+      "model": "gpt-4.1-mini",
+      "object": "chat.completion",
+      "provider": "openai_mock",
+      "proxy_telemetry": {
+        "correlation_id": "telemetry-sink-open",
+        "estimated_cost": 0.0006,
+        "event_id": "1bb7bb12-d6b0-4c2f-ade5-8e0a5b02b8fc",
+        "model": "gpt-4.1-mini",
+        "pricing_version": "2026-03-10",
+        "provider": "openai_mock",
+        "telemetry_sink_degraded": true
+      },
+      "usage": {
+        "completion_tokens": 40,
+        "prompt_tokens": 120,
+        "total_tokens": 160
+      }
+    },
+    "status": 200
+  },
+  "pass": true
+}

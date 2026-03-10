@@ -1,0 +1,35 @@
+{
+  "schema_version": "token-proxy.coverage.v1",
+  "traffic_classes": [
+    {
+      "name": "proxy_chat_observed",
+      "description": "Calls sent to /v1/chat/completions through token proxy.",
+      "coverage_level": "definitely_observed",
+      "match": {
+        "endpoint": "/v1/chat/completions"
+      },
+      "expected_event_count_min": 1,
+      "notes": "All required token/cost/latency fields are available for proxied calls."
+    },
+    {
+      "name": "cursor_routing_exhaust_partial",
+      "description": "Cursor routing preference exhaust artifacts with no per-turn attribution.",
+      "coverage_level": "partially_observed",
+      "match": {
+        "source": "cursor_exhaust_snapshot"
+      },
+      "expected_event_count_min": 1,
+      "notes": "Preferences and candidate pool are visible; per-turn provider/model remains advisory."
+    },
+    {
+      "name": "direct_provider_bypass",
+      "description": "Client calls sent directly to upstream provider and not through token proxy.",
+      "coverage_level": "unobservable",
+      "match": {
+        "bypass": true
+      },
+      "expected_event_count_min": 0,
+      "notes": "These requests are intentionally not visible in proxy telemetry."
+    }
+  ]
+}

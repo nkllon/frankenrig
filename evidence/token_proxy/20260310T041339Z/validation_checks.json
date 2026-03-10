@@ -1,0 +1,218 @@
+{
+  "checks": [
+    {
+      "details": {
+        "body": {
+          "checks": {
+            "config_exists": true,
+            "coverage_matrix_ready": true,
+            "pricing_catalog_ready": true,
+            "storage_db_exists": true,
+            "storage_raw_parent_exists": true
+          },
+          "ok": true,
+          "ready": true,
+          "reasons": [],
+          "timestamp_utc": "2026-03-10T04:13:40Z"
+        },
+        "status": 200
+      },
+      "id": "ready_endpoint_reports_actual_readiness",
+      "pass": true
+    },
+    {
+      "details": {
+        "raw_count_after_direct": 3,
+        "raw_count_before_direct": 3
+      },
+      "id": "coverage_direct_bypass_not_logged",
+      "pass": true
+    },
+    {
+      "details": {
+        "normalized_rows_first": 20,
+        "normalized_rows_second": 20,
+        "rollup_rows_first": 5,
+        "rollup_rows_second": 5
+      },
+      "id": "normalize_rollup_idempotent_rerun",
+      "pass": true
+    },
+    {
+      "details": {
+        "secret_found_in_persisted_events": false
+      },
+      "id": "secret_header_injection_non_persistence",
+      "pass": true
+    },
+    {
+      "details": {
+        "fail_closed_result": {
+          "body": {
+            "correlation_id": "telemetry-sink-closed",
+            "error": "telemetry_sink_failure",
+            "mode": "fail_closed",
+            "model": "gpt-4.1-mini",
+            "ok": false,
+            "provider": "openai_mock",
+            "sink_error": "IsADirectoryError"
+          },
+          "status": 503
+        },
+        "fail_open_result": {
+          "body": {
+            "choices": [
+              {
+                "index": 0,
+                "message": {
+                  "content": "openai mock response",
+                  "role": "assistant"
+                }
+              }
+            ],
+            "id": "openai_mock-1773116020997",
+            "model": "gpt-4.1-mini",
+            "object": "chat.completion",
+            "provider": "openai_mock",
+            "proxy_telemetry": {
+              "correlation_id": "telemetry-sink-open",
+              "estimated_cost": 0.0006,
+              "event_id": "817d0c1e-b9cb-4c04-b0fe-2d345c01c719",
+              "model": "gpt-4.1-mini",
+              "pricing_version": "2026-03-10",
+              "provider": "openai_mock",
+              "telemetry_sink_degraded": true
+            },
+            "usage": {
+              "completion_tokens": 40,
+              "prompt_tokens": 120,
+              "total_tokens": 160
+            }
+          },
+          "status": 200
+        }
+      },
+      "id": "telemetry_sink_degradation_fail_open_and_fail_closed",
+      "pass": true
+    },
+    {
+      "details": {
+        "body": {
+          "checks": {
+            "config_exists": true,
+            "coverage_matrix_ready": true,
+            "pricing_catalog_ready": false,
+            "storage_db_exists": true,
+            "storage_raw_parent_exists": true
+          },
+          "ok": false,
+          "ready": false,
+          "reasons": [
+            "pricing_catalog_invalid"
+          ],
+          "timestamp_utc": "2026-03-10T04:13:41Z"
+        },
+        "status": 503
+      },
+      "id": "ready_endpoint_detects_dependency_failure",
+      "pass": true
+    },
+    {
+      "details": {
+        "distinct_provider_models": [
+          "anthropic_mock/claude-3-7-sonnet",
+          "openai_mock/gpt-4.1-mini",
+          "openai_mock/unknown-model-x"
+        ]
+      },
+      "id": "two_distinct_provider_model_calls",
+      "pass": true
+    },
+    {
+      "details": {
+        "mismatches": []
+      },
+      "id": "token_and_cost_accounting",
+      "pass": true
+    },
+    {
+      "details": {
+        "unknown_pricing_count": 1,
+        "unknown_rows": [
+          {
+            "client_id": "seed-runner-unknown",
+            "event_id": "e97798a6-6363-413a-af3a-539a76ff1fa5",
+            "model": "unknown-model-x",
+            "provider": "openai_mock",
+            "timestamp_utc": "2026-03-10T04:13:40Z"
+          }
+        ]
+      },
+      "id": "unknown_pricing_known_and_unknown_behavior",
+      "pass": true
+    },
+    {
+      "details": {
+        "coverage_validation": [
+          {
+            "coverage_level": "definitely_observed",
+            "expected_event_count_min": 1,
+            "matched_event_count": 23,
+            "name": "proxy_chat_observed",
+            "notes": "All required token/cost/latency fields are available for proxied calls.",
+            "pass": true,
+            "proofs": {
+              "negative_proof": true,
+              "positive_proof": true
+            },
+            "reason": "matched expected evidence pattern"
+          },
+          {
+            "coverage_level": "partially_observed",
+            "expected_event_count_min": 0,
+            "matched_event_count": 0,
+            "name": "cursor_routing_exhaust_partial",
+            "notes": "Preferences and candidate pool are visible; per-turn provider/model remains advisory.",
+            "pass": true,
+            "proofs": {
+              "negative_proof": true,
+              "positive_proof": true
+            },
+            "reason": "matched expected evidence pattern"
+          },
+          {
+            "coverage_level": "unobservable",
+            "expected_event_count_min": 0,
+            "matched_event_count": 0,
+            "name": "direct_provider_bypass",
+            "notes": "These requests are intentionally not visible in proxy telemetry.",
+            "pass": true,
+            "proofs": {
+              "negative_proof": true,
+              "positive_proof": true
+            },
+            "reason": "matched expected evidence pattern"
+          }
+        ]
+      },
+      "id": "coverage_matrix_claims_supported",
+      "pass": true
+    },
+    {
+      "details": {
+        "per_turn_status": "unknown"
+      },
+      "id": "cursor_exhaust_no_per_turn_overclaim",
+      "pass": true
+    },
+    {
+      "details": {
+        "error": null
+      },
+      "id": "cursor_exhaust_schema_valid",
+      "pass": true
+    }
+  ],
+  "generated_at_utc": "2026-03-10T04:13:41Z",
+  "overall_pass": true
+}

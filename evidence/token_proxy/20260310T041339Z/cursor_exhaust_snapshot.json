@@ -1,0 +1,285 @@
+{
+  "captured_at_utc": "2026-03-10T04:13:41Z",
+  "cursor_state": {
+    "bestOfNEnsemblePreferences": {
+      "3": [
+        "gpt-5.2",
+        "gemini-3-flash",
+        "gpt-5.1-codex-max"
+      ],
+      "4": [
+        "gpt-5.2",
+        "gemini-3-flash",
+        "gpt-5.1-codex",
+        "gpt-5.1-codex-max"
+      ]
+    },
+    "lastSingleModelPreference": {
+      "background-composer": "default",
+      "composer": "default"
+    },
+    "newChatModelAutoSwitchApplied": null,
+    "openaiChatgptAllowlisted": {
+      "persisted-atom-state": {
+        "composer-auto-context-enabled": true,
+        "has-seen-codex-auto-announcement": true
+      }
+    },
+    "planExecUseChatModel": false
+  },
+  "derived_signals": {
+    "candidate_model_pool": [
+      "default",
+      "gemini-3-flash",
+      "gpt-5.1-codex",
+      "gpt-5.1-codex-max",
+      "gpt-5.2"
+    ],
+    "per_turn_model_attribution": {
+      "reason": "No authoritative per-turn model identifier found in captured local artifacts.",
+      "status": "unknown"
+    },
+    "routing_visibility": "partially_known",
+    "routing_visibility_reason": "Ensemble/single-model preference artifacts are available, but runtime per-turn routing decisions are not."
+  },
+  "extension_runtime": {
+    "latest_session": "20260309T082244",
+    "windows": [
+      {
+        "claude_log": {
+          "activation_line_count": 0,
+          "exists": true,
+          "first_non_empty_line": "2026-03-09 08:22:47.479 [info] Claude code extension is now active?",
+          "last_non_empty_line": "2026-03-09 08:22:47.479 [info] MCP Server running on port 27596 (localhost only)",
+          "line_count": 2,
+          "spawn_or_app_server_line_count": 0
+        },
+        "codex_log": {
+          "activation_line_count": 2,
+          "exists": true,
+          "first_non_empty_line": "2026-03-09 08:22:47.479 [info] Activating Codex extension",
+          "last_non_empty_line": "2026-03-09 11:49:23.774 [warning] [IpcClient] Received broadcast but no handler is configured method=thread-stream-state-changed",
+          "line_count": 8403,
+          "spawn_or_app_server_line_count": 1
+        },
+        "window": "window1"
+      },
+      {
+        "claude_log": {
+          "activation_line_count": 0,
+          "exists": true,
+          "first_non_empty_line": "2026-03-09 11:46:46.112 [info] Claude code extension is now active?",
+          "last_non_empty_line": "2026-03-09 11:46:49.891 [info] MCP Server running on port 50299 (localhost only)",
+          "line_count": 4,
+          "spawn_or_app_server_line_count": 0
+        },
+        "codex_log": {
+          "activation_line_count": 4,
+          "exists": true,
+          "first_non_empty_line": "2026-03-09 11:46:46.111 [info] Activating Codex extension",
+          "last_non_empty_line": "2026-03-09 19:17:24.382 [warning] [IpcClient] Received broadcast but no handler is configured method=thread-stream-state-changed",
+          "line_count": 14865,
+          "spawn_or_app_server_line_count": 2
+        },
+        "window": "window2"
+      },
+      {
+        "claude_log": {
+          "activation_line_count": 0,
+          "exists": true,
+          "first_non_empty_line": "2026-03-09 17:28:37.362 [info] Claude code extension is now active?",
+          "last_non_empty_line": "2026-03-09 19:17:12.917 [info] MCP Server running on port 37417 (localhost only)",
+          "line_count": 4,
+          "spawn_or_app_server_line_count": 0
+        },
+        "codex_log": {
+          "activation_line_count": 4,
+          "exists": true,
+          "first_non_empty_line": "2026-03-09 17:28:37.357 [info] Activating Codex extension",
+          "last_non_empty_line": "2026-03-09 19:17:23.923 [warning] [IpcClient] Received broadcast but no handler is configured method=thread-stream-state-changed",
+          "line_count": 48,
+          "spawn_or_app_server_line_count": 2
+        },
+        "window": "window3"
+      }
+    ]
+  },
+  "pairing_sessions": [
+    {
+      "appName": "Cursor",
+      "file": "Cursor-2cfda1ee-45ff-40cf-90ef-e592a748041f",
+      "id": "Cursor-2cfda1ee-45ff-40cf-90ef-e592a748041f",
+      "timestamp": 1773105432887,
+      "workspaceName": ".hammerspoon"
+    },
+    {
+      "appName": "Cursor",
+      "file": "Cursor-74d93dbe-90cf-43a9-9177-cae3b86e08c2",
+      "id": "Cursor-74d93dbe-90cf-43a9-9177-cae3b86e08c2",
+      "timestamp": 1773098917256,
+      "workspaceName": ".hammerspoon"
+    },
+    {
+      "appName": "Cursor",
+      "file": "Cursor-37ad84b6-dd4a-49e4-b0a8-2658ed98751f",
+      "id": "Cursor-37ad84b6-dd4a-49e4-b0a8-2658ed98751f",
+      "timestamp": 1773098914516,
+      "workspaceName": "Cursor"
+    },
+    {
+      "appName": "Cursor",
+      "file": "Cursor-8338fa0f-5db0-4b09-ade6-719ad905b7a7",
+      "id": "Cursor-8338fa0f-5db0-4b09-ade6-719ad905b7a7",
+      "timestamp": 1773078409857,
+      "workspaceName": "eudorus"
+    },
+    {
+      "appName": "Cursor",
+      "file": "Cursor-8c663b4d-1ccb-46ff-b16d-388a2c1d76e8",
+      "id": "Cursor-8c663b4d-1ccb-46ff-b16d-388a2c1d76e8",
+      "timestamp": 1773078406083,
+      "workspaceName": "Cursor"
+    },
+    {
+      "appName": "Cursor",
+      "file": "Cursor-5f637afb-7696-45c2-8f24-2c3e3a276336",
+      "id": "Cursor-5f637afb-7696-45c2-8f24-2c3e3a276336",
+      "timestamp": 1773066167442,
+      "workspaceName": ".hammerspoon"
+    },
+    {
+      "appName": "Cursor",
+      "file": "Cursor-8bf3c167-9f10-4044-9c9e-33434c145df6",
+      "id": "Cursor-8bf3c167-9f10-4044-9c9e-33434c145df6",
+      "timestamp": 1773021967937,
+      "workspaceName": ".hammerspoon"
+    },
+    {
+      "appName": "Cursor",
+      "file": "Cursor-45236bf1-4eec-4387-a390-ffe586208e03",
+      "id": "Cursor-45236bf1-4eec-4387-a390-ffe586208e03",
+      "timestamp": 1773021964482,
+      "workspaceName": "Cursor"
+    },
+    {
+      "appName": "Cursor",
+      "file": "Cursor-ef2d76f3-2973-4f94-b2f9-c30a9f350b22",
+      "id": "Cursor-ef2d76f3-2973-4f94-b2f9-c30a9f350b22",
+      "timestamp": 1773014676869,
+      "workspaceName": ".hammerspoon"
+    },
+    {
+      "appName": "Cursor",
+      "file": "Cursor-5a9a619e-a055-4342-b523-cf00dba44522",
+      "id": "Cursor-5a9a619e-a055-4342-b523-cf00dba44522",
+      "timestamp": 1773014673842,
+      "workspaceName": "Cursor"
+    },
+    {
+      "appName": "Cursor",
+      "file": "Cursor-a95839df-473a-466a-9baa-76cd576ed8bc",
+      "id": "Cursor-a95839df-473a-466a-9baa-76cd576ed8bc",
+      "timestamp": 1773012645606,
+      "workspaceName": ".hammerspoon"
+    },
+    {
+      "appName": "Cursor",
+      "file": "Cursor-8de0f85c-49f9-4624-a117-b5bc2ccb11d9",
+      "id": "Cursor-8de0f85c-49f9-4624-a117-b5bc2ccb11d9",
+      "timestamp": 1773011969651,
+      "workspaceName": ".hammerspoon"
+    },
+    {
+      "appName": "Cursor",
+      "file": "Cursor-26c1b114-c8a7-4f89-b060-2036df21f344",
+      "id": "Cursor-26c1b114-c8a7-4f89-b060-2036df21f344",
+      "timestamp": 1773011782538,
+      "workspaceName": "eudorus"
+    },
+    {
+      "appName": "Cursor",
+      "file": "Cursor-dc0c7a38-4c58-442a-8cb9-ad86453f2ef6",
+      "id": "Cursor-dc0c7a38-4c58-442a-8cb9-ad86453f2ef6",
+      "timestamp": 1772986011513,
+      "workspaceName": "eudorus"
+    },
+    {
+      "appName": "Cursor",
+      "file": "Cursor-6b2062f7-1bfa-48c6-9f67-b1550c7e59b8",
+      "id": "Cursor-6b2062f7-1bfa-48c6-9f67-b1550c7e59b8",
+      "timestamp": 1772954697027,
+      "workspaceName": "eudorus"
+    },
+    {
+      "appName": "Cursor",
+      "file": "Cursor-8b9b40cb-af99-4998-9eb2-fc3828e3a568",
+      "id": "Cursor-8b9b40cb-af99-4998-9eb2-fc3828e3a568",
+      "timestamp": 1772954693071,
+      "workspaceName": "Cursor"
+    },
+    {
+      "appName": "Cursor",
+      "file": "Cursor-a3287f13-e466-40b3-a697-3e6c45ff0466",
+      "id": "Cursor-a3287f13-e466-40b3-a697-3e6c45ff0466",
+      "timestamp": 1772941835539,
+      "workspaceName": "eudorus"
+    },
+    {
+      "appName": "Cursor",
+      "file": "Cursor-98d0da01-70c5-4e15-8b78-8a872ee63c49",
+      "id": "Cursor-98d0da01-70c5-4e15-8b78-8a872ee63c49",
+      "timestamp": 1772937955173,
+      "workspaceName": "eudorus"
+    },
+    {
+      "appName": "Cursor",
+      "file": "Cursor-fecc5c2d-8424-4361-ab85-41729979309a",
+      "id": "Cursor-fecc5c2d-8424-4361-ab85-41729979309a",
+      "timestamp": 1772597127169,
+      "workspaceName": "eudorus"
+    },
+    {
+      "appName": "Cursor",
+      "file": "Cursor-99c88a6c-e6bc-4795-ac3d-cbf5794d3cc1",
+      "id": "Cursor-99c88a6c-e6bc-4795-ac3d-cbf5794d3cc1",
+      "timestamp": 1772583992754,
+      "workspaceName": "eudorus"
+    },
+    {
+      "appName": "Cursor",
+      "file": "Cursor-53d63f52-e8e3-422b-bff3-30cdb1f466af",
+      "id": "Cursor-53d63f52-e8e3-422b-bff3-30cdb1f466af",
+      "timestamp": 1772335763400,
+      "workspaceName": "eudorus"
+    },
+    {
+      "appName": "Cursor",
+      "file": "Cursor-42040511-57db-4d9e-8716-e6432f529701",
+      "id": "Cursor-42040511-57db-4d9e-8716-e6432f529701",
+      "timestamp": 1772335536761,
+      "workspaceName": "eudorus"
+    },
+    {
+      "appName": "Cursor",
+      "file": "Cursor-a933112b-d5c3-499e-9afc-7fd6b1482cd1",
+      "id": "Cursor-a933112b-d5c3-499e-9afc-7fd6b1482cd1",
+      "timestamp": 1772129427391,
+      "workspaceName": "eudorus"
+    },
+    {
+      "appName": "Cursor",
+      "file": "Cursor-0be8c4d3-df68-4b1f-b793-e469e41a647c",
+      "id": "Cursor-0be8c4d3-df68-4b1f-b793-e469e41a647c",
+      "timestamp": 1771868908558,
+      "workspaceName": "eudorus"
+    },
+    {
+      "appName": "Cursor",
+      "file": "Cursor-81c14e17-1525-4c63-a9eb-ec8b296c93d6",
+      "id": "Cursor-81c14e17-1525-4c63-a9eb-ec8b296c93d6",
+      "timestamp": 1771863063675,
+      "workspaceName": "Cursor"
+    }
+  ],
+  "schema_version": "token-proxy.cursor-exhaust.v1"
+}

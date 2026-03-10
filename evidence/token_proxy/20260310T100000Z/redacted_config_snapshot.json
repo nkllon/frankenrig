@@ -1,0 +1,54 @@
+{
+  "schema_version": "token-proxy.config.v1",
+  "telemetry_schema_version": "token-proxy.event.v1",
+  "proxy": {
+    "host": "127.0.0.1",
+    "port": 4010,
+    "default_provider": "openai_mock",
+    "default_model": "gpt-4.1-mini",
+    "timeout_seconds": 15,
+    "retry_count": 1
+  },
+  "paths": {
+    "db": "token_proxy/data/token_proxy.db",
+    "raw_events": "token_proxy/data/events_raw.ndjson",
+    "pid": "token_proxy/data/token_proxy.pid"
+  },
+  "security": {
+    "payload_sampling": {
+      "enabled": false
+    },
+    "persisted_request_header_allowlist": [
+      "x-token-proxy-client",
+      "x-correlation-id"
+    ]
+  },
+  "reliability": {
+    "default_fail_mode": "fail_open",
+    "fail_mode_by_client": {
+      "obs-automation": "fail_open"
+    }
+  },
+  "providers": {
+    "openai_mock": {
+      "base_url": "http://127.0.0.1:18081",
+      "chat_path": "/v1/chat/completions",
+      "default_model": "gpt-4.1-mini",
+      "auth_env": "<REDACTED>"
+    },
+    "anthropic_mock": {
+      "base_url": "http://127.0.0.1:18082",
+      "chat_path": "/v1/chat/completions",
+      "default_model": "claude-3-7-sonnet",
+      "auth_env": "<REDACTED>"
+    }
+  },
+  "pricing": {
+    "catalog_path": "token_proxy/config/pricing.catalog.json"
+  },
+  "coverage": {
+    "matrix_path": "token_proxy/config/coverage.matrix.json",
+    "proofs_path": "token_proxy/config/coverage.proofs.json"
+  }
+}
+

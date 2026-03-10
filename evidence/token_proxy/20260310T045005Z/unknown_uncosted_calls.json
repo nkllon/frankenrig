@@ -1,0 +1,9 @@
+[
+  {
+    "client_id": "seed-runner-unknown",
+    "event_id": "b30c85ef-48ea-42da-a021-45cd7c70c13f",
+    "model": "unknown-model-x",
+    "provider": "openai_mock",
+    "timestamp_utc": "2026-03-10T04:50:06Z"
+  }
+]

@@ -1,0 +1,27 @@
+{
+  "proof_by_class": {
+    "cursor_routing_exhaust_partial": {
+      "details": {
+        "per_turn_status": "unknown"
+      },
+      "negative_proof": true,
+      "positive_proof": true
+    },
+    "direct_provider_bypass": {
+      "details": {
+        "raw_count_after_direct": 3,
+        "raw_count_before_direct": 3
+      },
+      "negative_proof": true,
+      "positive_proof": true
+    },
+    "proxy_chat_observed": {
+      "details": {
+        "count_after_health": 3,
+        "raw_count_before_direct": 3
+      },
+      "negative_proof": true,
+      "positive_proof": true
+    }
+  }
+}

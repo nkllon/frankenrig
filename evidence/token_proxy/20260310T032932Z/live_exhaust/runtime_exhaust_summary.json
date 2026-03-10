@@ -1,0 +1,76 @@
+{
+  "candidate_model_pool": [
+    "default",
+    "gemini-3-flash",
+    "gpt-5.1-codex",
+    "gpt-5.1-codex-max",
+    "gpt-5.2"
+  ],
+  "captured_at_utc": "2026-03-10T03:29:32Z",
+  "delta": {
+    "candidate_models_added": [],
+    "candidate_models_removed": [],
+    "first_capture": "/Users/lou/.hammerspoon/evidence/token_proxy/20260310T032916Z/live_exhaust/cursor_exhaust_snapshot.json",
+    "first_captured_at_utc": "2026-03-10T03:29:16Z",
+    "pairing_ids_added": [],
+    "pairing_ids_removed": [],
+    "per_turn_status_changed": false,
+    "routing_visibility_changed": false,
+    "second_capture": "/Users/lou/.hammerspoon/evidence/token_proxy/20260310T032932Z/live_exhaust/cursor_exhaust_snapshot.json",
+    "second_captured_at_utc": "2026-03-10T03:29:32Z",
+    "window_log_deltas": [
+      {
+        "claude_activation_delta": 0,
+        "claude_line_count_delta": 0,
+        "codex_activation_delta": 0,
+        "codex_line_count_delta": 0,
+        "window": "window1"
+      },
+      {
+        "claude_activation_delta": 0,
+        "claude_line_count_delta": 0,
+        "codex_activation_delta": 0,
+        "codex_line_count_delta": 0,
+        "window": "window2"
+      },
+      {
+        "claude_activation_delta": 0,
+        "claude_line_count_delta": 0,
+        "codex_activation_delta": 0,
+        "codex_line_count_delta": 0,
+        "window": "window3"
+      }
+    ]
+  },
+  "latest_cursor_log_session": "20260309T082244",
+  "pairing_session_count": 50,
+  "per_turn_status": "unknown",
+  "routing_visibility": "partially_known",
+  "terminal_metadata": [
+    {
+      "command": "hs -c \\\"hs.printf('ipc_ok')\\",
+      "cwd": "/Users/lou/.hammerspoon",
+      "file": "906110.txt",
+      "pid": "50487",
+      "running_for_ms": "6007585",
+      "started_at": "2026-03-10T01:50:48.329Z"
+    },
+    {
+      "command": "\\\"/Applications/Hammerspoon.app/Contents/MacOS/Hammerspoon\\\" -h",
+      "cwd": "/Users/lou/.hammerspoon",
+      "file": "194248.txt",
+      "pid": "50883",
+      "running_for_ms": "45188",
+      "started_at": "2026-03-10T01:51:42.441Z"
+    },
+    {
+      "command": "osascript -e 'tell application \\\"Hammerspoon\\\" to quit' && sleep 1 && (ps aux | rg \\\"Hammerspoon.app/Contents/MacOS/Hammerspoon\\\" || true) && open -a Hammerspoon && sleep 2 && hs -c \\\"hs.printf('ipc_ok')\\",
+      "cwd": "/Users/lou/.hammerspoon",
+      "file": "517304.txt",
+      "pid": "49344",
+      "running_for_ms": "35005",
+      "started_at": "2026-03-10T01:49:54.814Z"
+    }
+  ],
+  "window_count": 3
+}

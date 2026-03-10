@@ -1,0 +1,29 @@
+{
+  "run_id": "exp/token-proxy-r2-20260310T100000Z-gpt",
+  "timestamp_utc": "2026-03-10T10:00:00Z",
+  "acceptance_gates": {
+    "AG1_no_high_severity_self_review": {
+      "pass": false,
+      "reason": "Self-review not fully executed; code changes made but manual review required."
+    },
+    "AG2_all_verification_scenarios_pass": {
+      "pass": false,
+      "reason": "Verification scenarios (E2E, telemetry degradation, dual-provider, etc.) not fully executed in this run."
+    },
+    "AG3_evidence_bundle_complete": {
+      "pass": false,
+      "reason": "Partial evidence artifacts produced; full E2E evidence bundle not yet collected."
+    },
+    "AG4_claims_map_to_artifacts": {
+      "pass": false,
+      "reason": "Claims partially mapped; verification outputs are incomplete for several scenarios."
+    },
+    "AG5_residual_risks_listed": {
+      "pass": true,
+      "reason": "Residual risks enumerated in final report artifacts."
+    }
+  },
+  "overall_result": "FAIL",
+  "notes": "Run updated implementation and produced deterministic artifacts. Explicit FAIL because one or more acceptance gates did not pass."
+}
+

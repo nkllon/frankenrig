@@ -1,0 +1,7 @@
+{
+  "AG1_no_high_severity_findings": true,
+  "AG2_all_required_scenarios_pass": true,
+  "AG3_evidence_bundle_complete": true,
+  "AG4_claims_map_to_artifacts": true,
+  "AG5_residual_risks_listed": true
+}

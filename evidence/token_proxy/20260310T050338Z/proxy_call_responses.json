@@ -1,0 +1,89 @@
+[
+  {
+    "choices": [
+      {
+        "index": 0,
+        "message": {
+          "content": "openai mock response",
+          "role": "assistant"
+        }
+      }
+    ],
+    "id": "openai_mock-1773119018632",
+    "model": "gpt-4.1-mini",
+    "object": "chat.completion",
+    "provider": "openai_mock",
+    "proxy_telemetry": {
+      "correlation_id": "seed-call-openai",
+      "estimated_cost": 0.0006,
+      "event_id": "17542554-cb01-47ad-9ee0-80929063fb53",
+      "model": "gpt-4.1-mini",
+      "pricing_version": "2026-03-10",
+      "provider": "openai_mock",
+      "telemetry_sink_degraded": false
+    },
+    "usage": {
+      "completion_tokens": 40,
+      "prompt_tokens": 120,
+      "total_tokens": 160
+    }
+  },
+  {
+    "choices": [
+      {
+        "index": 0,
+        "message": {
+          "content": "anthropic mock response",
+          "role": "assistant"
+        }
+      }
+    ],
+    "id": "anthropic_mock-1773119018634",
+    "model": "claude-3-7-sonnet",
+    "object": "chat.completion",
+    "provider": "anthropic_mock",
+    "proxy_telemetry": {
+      "correlation_id": "seed-call-anthropic",
+      "estimated_cost": 0.00084,
+      "event_id": "73107f27-3c7a-4f88-b2bb-f9e732a21d6d",
+      "model": "claude-3-7-sonnet",
+      "pricing_version": "2026-03-10",
+      "provider": "anthropic_mock",
+      "telemetry_sink_degraded": false
+    },
+    "usage": {
+      "completion_tokens": 60,
+      "prompt_tokens": 90,
+      "total_tokens": 150
+    }
+  },
+  {
+    "choices": [
+      {
+        "index": 0,
+        "message": {
+          "content": "openai mock response",
+          "role": "assistant"
+        }
+      }
+    ],
+    "id": "openai_mock-1773119018635",
+    "model": "unknown-model-x",
+    "object": "chat.completion",
+    "provider": "openai_mock",
+    "proxy_telemetry": {
+      "correlation_id": "seed-call-unknown-model",
+      "estimated_cost": null,
+      "event_id": "f157f9d0-7b40-4ab6-8587-eadc9e6baf24",
+      "model": "unknown-model-x",
+      "pricing_version": "2026-03-10",
+      "provider": "openai_mock",
+      "telemetry_sink_degraded": false
+    },
+    "usage": {
+      "completion_tokens": 40,
+      "prompt_tokens": 120,
+      "total_tokens": 160
+    }
+  }
+]

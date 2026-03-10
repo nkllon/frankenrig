@@ -1,0 +1,3 @@
+usage: token_proxy.py [-h] [--config CONFIG]
+                      {init,serve,start,stop,status,normalize,rollup,report} ...
+token_proxy.py: error: unrecognized arguments: --config /Users/lou/.hammerspoon/evidence/token_proxy/20260310T023040Z/runtime/token-proxy.runtime.config.json

@@ -1,0 +1,53 @@
+{
+  "coverage": {
+    "matrix_path": "/Users/lou/.hammerspoon/evidence/token_proxy/20260310T050338Z/runtime/coverage.matrix.json",
+    "proofs_path": "/Users/lou/.hammerspoon/evidence/token_proxy/20260310T050338Z/runtime/coverage.proofs.json"
+  },
+  "paths": {
+    "db": "/Users/lou/.hammerspoon/evidence/token_proxy/20260310T050338Z/runtime/token_proxy.db",
+    "pid": "/Users/lou/.hammerspoon/evidence/token_proxy/20260310T050338Z/runtime/token_proxy.pid",
+    "raw_events": "/Users/lou/.hammerspoon/evidence/token_proxy/20260310T050338Z/runtime/events_raw.ndjson"
+  },
+  "pricing": {
+    "catalog_path": "/Users/lou/.hammerspoon/evidence/token_proxy/20260310T050338Z/runtime/pricing.catalog.json"
+  },
+  "providers": {
+    "anthropic_mock": {
+      "auth_env": "",
+      "base_url": "http://127.0.0.1:54691",
+      "chat_path": "/v1/chat/completions",
+      "default_model": "claude-3-7-sonnet"
+    },
+    "openai_mock": {
+      "auth_env": "",
+      "base_url": "http://127.0.0.1:54690",
+      "chat_path": "/v1/chat/completions",
+      "default_model": "gpt-4.1-mini"
+    }
+  },
+  "proxy": {
+    "default_model": "gpt-4.1-mini",
+    "default_provider": "openai_mock",
+    "host": "127.0.0.1",
+    "port": 54692,
+    "retry_count": 1,
+    "timeout_seconds": 15
+  },
+  "reliability": {
+    "default_fail_mode": "fail_open",
+    "fail_mode_by_client": {
+      "obs-automation": "fail_open"
+    }
+  },
+  "schema_version": "token-proxy.config.v1",
+  "security": {
+    "payload_sampling": {
+      "enabled": false
+    },
+    "persisted_request_header_allowlist": [
+      "x-token-proxy-client",
+      "x-correlation-id"
+    ]
+  },
+  "telemetry_schema_version": "token-proxy.event.v1"
+}

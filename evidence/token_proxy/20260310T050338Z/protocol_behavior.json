@@ -1,0 +1,16 @@
+{
+  "unknown_provider_result": {
+    "body": {
+      "error": "unknown_provider",
+      "ok": false
+    },
+    "status": 400
+  },
+  "unsupported_path_result": {
+    "body": {
+      "error": "not_found",
+      "ok": false
+    },
+    "status": 404
+  }
+}

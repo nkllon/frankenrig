@@ -1,0 +1,45 @@
+{
+  "schema_version": "token-proxy.coverage.v1",
+  "traffic_class_count": 3,
+  "validation": [
+    {
+      "coverage_level": "definitely_observed",
+      "expected_event_count_min": 1,
+      "matched_event_count": 23,
+      "name": "proxy_chat_observed",
+      "notes": "All required token/cost/latency fields are available for proxied calls.",
+      "pass": true,
+      "proofs": {
+        "negative_proof": true,
+        "positive_proof": true
+      },
+      "reason": "matched expected evidence pattern"
+    },
+    {
+      "coverage_level": "partially_observed",
+      "expected_event_count_min": 1,
+      "matched_event_count": 0,
+      "name": "cursor_routing_exhaust_partial",
+      "notes": "Preferences and candidate pool are visible; per-turn provider/model remains advisory.",
+      "pass": true,
+      "proofs": {
+        "negative_proof": true,
+        "positive_proof": true
+      },
+      "reason": "validated via external-source proofs"
+    },
+    {
+      "coverage_level": "unobservable",
+      "expected_event_count_min": 0,
+      "matched_event_count": 0,
+      "name": "direct_provider_bypass",
+      "notes": "These requests are intentionally not visible in proxy telemetry.",
+      "pass": true,
+      "proofs": {
+        "negative_proof": true,
+        "positive_proof": true
+      },
+      "reason": "matched expected evidence pattern"
+    }
+  ]
+}

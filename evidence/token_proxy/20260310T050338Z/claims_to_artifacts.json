@@ -1,0 +1,40 @@
+{
+  "claims": [
+    {
+      "artifact": "validation_checks.json",
+      "check_id": "two_distinct_provider_model_calls",
+      "claim_id": "dual_provider_e2e",
+      "pass": true
+    },
+    {
+      "artifact": "validation_checks.json",
+      "check_id": "two_distinct_providers",
+      "claim_id": "dual_provider_count",
+      "pass": true
+    },
+    {
+      "artifact": "validation_checks.json",
+      "check_id": "telemetry_sink_degradation_fail_open_and_fail_closed",
+      "claim_id": "telemetry_degradation_behavior",
+      "pass": true
+    },
+    {
+      "artifact": "validation_checks.json",
+      "check_id": "secret_header_injection_non_persistence",
+      "claim_id": "secret_non_persistence",
+      "pass": true
+    },
+    {
+      "artifact": "validation_checks.json",
+      "check_id": "coverage_matrix_claims_supported",
+      "claim_id": "coverage_truthfulness",
+      "pass": true
+    },
+    {
+      "artifact": "validation_checks.json",
+      "check_id": "cursor_exhaust_no_per_turn_overclaim",
+      "claim_id": "cursor_exhaust_no_overclaim",
+      "pass": true
+    }
+  ]
+}

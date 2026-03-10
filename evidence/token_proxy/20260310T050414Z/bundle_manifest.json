@@ -1,0 +1,12 @@
+{
+  "missing_artifacts": [],
+  "required_artifacts": [
+    "coverage_gaps_report.json",
+    "telemetry_sink_degradation.json",
+    "secret_header_non_persistence.json",
+    "idempotency_rerun_check.json",
+    "verification_report.md",
+    "self_review_findings.json",
+    "claims_to_artifacts.json"
+  ]
+}

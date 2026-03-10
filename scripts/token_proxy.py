@@ -614,28 +614,32 @@ def coverage_report(config: dict[str, Any]) -> dict[str, Any]:
         matched = [event for event in events if event_matches_rule(event, rule)]
         level = item.get("coverage_level")
         expected_min = int(item.get("expected_event_count_min") or 0)
-        passed = True
-        reason = "matched expected evidence pattern"
-
-        if level in ("definitely_observed", "partially_observed"):
-            passed = len(matched) >= expected_min
-            if not passed:
-                reason = "expected observed evidence missing"
-        elif level == "unobservable":
-            passed = len(matched) == 0
-            if not passed:
-                reason = "unexpected proxy telemetry for unobservable class"
-        elif rule.get("source") == "cursor_exhaust_snapshot":
-            passed = False
-            reason = "requires explicit positive+negative proofs"
-
+        source = str(rule.get("source") or "")
+        source_based = source == "cursor_exhaust_snapshot"
         class_name = str(item.get("name") or "")
         class_proofs = ((proofs.get("proof_by_class") or {}).get(class_name) or {})
         pos_ok = bool(class_proofs.get("positive_proof"))
         neg_ok = bool(class_proofs.get("negative_proof"))
-        if not (pos_ok and neg_ok):
-            passed = False
-            reason = "missing positive+negative proofs"
+        proofs_ok = pos_ok and neg_ok
+        passed = True
+        reason = "matched expected evidence pattern"
+
+        # Source-based classes are validated via explicit proofs, not telemetry row counts.
+        if source_based:
+            passed = proofs_ok
+            reason = "validated via external-source proofs" if passed else "missing positive+negative proofs"
+        else:
+            if level in ("definitely_observed", "partially_observed"):
+                passed = len(matched) >= expected_min
+                if not passed:
+                    reason = "expected observed evidence missing"
+            elif level == "unobservable":
+                passed = len(matched) == 0
+                if not passed:
+                    reason = "unexpected proxy telemetry for unobservable class"
+            if not proofs_ok:
+                passed = False
+                reason = "missing positive+negative proofs"
 
         validations.append(
             {
