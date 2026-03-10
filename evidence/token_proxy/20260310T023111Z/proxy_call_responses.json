@@ -1,0 +1,58 @@
+[
+  {
+    "choices": [
+      {
+        "index": 0,
+        "message": {
+          "content": "openai mock response",
+          "role": "assistant"
+        }
+      }
+    ],
+    "id": "openai_mock-1773109871776",
+    "model": "gpt-4.1-mini",
+    "object": "chat.completion",
+    "provider": "openai_mock",
+    "proxy_telemetry": {
+      "correlation_id": "seed-call-openai",
+      "estimated_cost": 0.0006,
+      "event_id": "c768a753-a1a2-4a94-9a51-77853f2781ca",
+      "model": "gpt-4.1-mini",
+      "pricing_version": "2026-03-10",
+      "provider": "openai_mock"
+    },
+    "usage": {
+      "completion_tokens": 40,
+      "prompt_tokens": 120,
+      "total_tokens": 160
+    }
+  },
+  {
+    "choices": [
+      {
+        "index": 0,
+        "message": {
+          "content": "anthropic mock response",
+          "role": "assistant"
+        }
+      }
+    ],
+    "id": "anthropic_mock-1773109871778",
+    "model": "claude-3-7-sonnet",
+    "object": "chat.completion",
+    "provider": "anthropic_mock",
+    "proxy_telemetry": {
+      "correlation_id": "seed-call-anthropic",
+      "estimated_cost": 0.00084,
+      "event_id": "7d07ed49-effb-4d52-a6d0-1093e957693e",
+      "model": "claude-3-7-sonnet",
+      "pricing_version": "2026-03-10",
+      "provider": "anthropic_mock"
+    },
+    "usage": {
+      "completion_tokens": 60,
+      "prompt_tokens": 90,
+      "total_tokens": 150
+    }
+  }
+]

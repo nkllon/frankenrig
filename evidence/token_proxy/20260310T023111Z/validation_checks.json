@@ -1,0 +1,87 @@
+{
+  "checks": [
+    {
+      "details": {
+        "raw_count_after_direct": 2,
+        "raw_count_before_direct": 2
+      },
+      "id": "coverage_direct_bypass_not_logged",
+      "pass": true
+    },
+    {
+      "details": {
+        "distinct_provider_models": [
+          "anthropic_mock/claude-3-7-sonnet",
+          "openai_mock/gpt-4.1-mini"
+        ]
+      },
+      "id": "two_distinct_provider_model_calls",
+      "pass": true
+    },
+    {
+      "details": {
+        "mismatches": []
+      },
+      "id": "token_and_cost_accounting",
+      "pass": true
+    },
+    {
+      "details": {
+        "unknown_pricing_count": 0
+      },
+      "id": "unknown_pricing_none_for_configured_models",
+      "pass": true
+    },
+    {
+      "details": {
+        "coverage_validation": [
+          {
+            "coverage_level": "definitely_observed",
+            "expected_event_count_min": 1,
+            "matched_event_count": 22,
+            "name": "proxy_chat_observed",
+            "notes": "All required token/cost/latency fields are available for proxied calls.",
+            "pass": true,
+            "reason": "matched expected evidence pattern"
+          },
+          {
+            "coverage_level": "partially_observed",
+            "expected_event_count_min": 0,
+            "matched_event_count": 0,
+            "name": "cursor_routing_exhaust_partial",
+            "notes": "Preferences and candidate pool are visible; per-turn provider/model remains advisory.",
+            "pass": true,
+            "reason": "matched expected evidence pattern"
+          },
+          {
+            "coverage_level": "unobservable",
+            "expected_event_count_min": 0,
+            "matched_event_count": 0,
+            "name": "direct_provider_bypass",
+            "notes": "These requests are intentionally not visible in proxy telemetry.",
+            "pass": true,
+            "reason": "matched expected evidence pattern"
+          }
+        ]
+      },
+      "id": "coverage_matrix_claims_supported",
+      "pass": true
+    },
+    {
+      "details": {
+        "per_turn_status": "unknown"
+      },
+      "id": "cursor_exhaust_no_per_turn_overclaim",
+      "pass": true
+    },
+    {
+      "details": {
+        "error": null
+      },
+      "id": "cursor_exhaust_schema_valid",
+      "pass": true
+    }
+  ],
+  "generated_at_utc": "2026-03-10T02:31:12Z",
+  "overall_pass": true
+}

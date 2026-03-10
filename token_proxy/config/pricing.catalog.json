@@ -1,0 +1,19 @@
+{
+  "schema_version": "token-proxy.pricing.v1",
+  "pricing_version": "2026-03-10",
+  "currency": "USD",
+  "entries": [
+    {
+      "provider": "openai_mock",
+      "model": "gpt-4.1-mini",
+      "prompt_per_1k_tokens": 0.003,
+      "completion_per_1k_tokens": 0.006
+    },
+    {
+      "provider": "anthropic_mock",
+      "model": "claude-3-7-sonnet",
+      "prompt_per_1k_tokens": 0.004,
+      "completion_per_1k_tokens": 0.008
+    }
+  ]
+}
